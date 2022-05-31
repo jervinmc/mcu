@@ -134,21 +134,21 @@ export default {
           title: 'Students Information',
           to: '/student/information'
         },
-         {
-          icon: 'mdi-school',
-          title: 'PME result',
-          to: '/student/result'
-        },
-        {
-          icon: 'mdi-school',
-          title: 'Account',
-          to: '/student/account'
-        },
-        {
-          icon: 'mdi-school',
-          title: 'Academics',
-          to: '/student/account'
-        },
+        //  {
+        //   icon: 'mdi-school',
+        //   title: 'PME result',
+        //   to: '/student/result'
+        // },
+        // {
+        //   icon: 'mdi-school',
+        //   title: 'Account',
+        //   to: '/student/account'
+        // },
+        // {
+        //   icon: 'mdi-school',
+        //   title: 'Academics',
+        //   to: '/student/account'
+        // },
   
       ],
       items: [
@@ -163,12 +163,12 @@ export default {
           to: '/head/information'
         },
          {
-          icon: 'mdi-school',
+          icon: 'mdi-account-question',
           title: 'Request',
           to: '/head/request'
         },
           {
-          icon: 'mdi-school',
+          icon: 'mdi-poll',
           title: 'Analytical Report',
           to: '/head/report'
         },
@@ -178,23 +178,23 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'Dashboard',
-          to: '/'
+          to: '/admin/dashboard'
         },
         {
           icon: 'mdi-account',
           title: 'Admin Information',
           to: '/admin/information'
         },
-         {
-          icon: 'mdi-school',
-          title: 'Send OTP',
-          to: '/admin/otp'
-        },
-          {
-          icon: 'mdi-school',
-          title: 'Alumni Accounts',
-          to: '/admin/alumni'
-        },
+        //  {
+        //   icon: 'mdi-school',
+        //   title: 'Send OTP',
+        //   to: '/admin/otp'
+        // },
+        //   {
+        //   icon: 'mdi-school',
+        //   title: 'Alumni Accounts',
+        //   to: '/admin/alumni'
+        // },
   
       ],
       miniVariant: false,

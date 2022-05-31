@@ -35,9 +35,9 @@
     </v-snackbar>
   
 
-    <v-card width="700" class="rounded-xl" elevation="12" >
+    <v-card height="700" style="overflow:scroll" width="700" class="rounded-xl" elevation="12" >
       <div
-        style="background-color: #222f3e; color: white"
+        style="background-color: #7c0ba0; color: white"
         align="center"
         class="pa-5"
       >
@@ -62,9 +62,47 @@
           <v-col>
             <div >Email</div>
             <div>
-              <v-text-field append-icon="mdi-account" outlined v-model="users.email"></v-text-field>
+              <v-text-field  hide-details="" append-icon="mdi-account" outlined v-model="users.email"></v-text-field>
             </div>
           </v-col>
+           <v-col cols="12"  v-if="category=='register'">
+            <div >Student Number</div>
+            <div>
+              <v-text-field  hide-details="" append-icon="mdi-account" outlined v-model="users.e"></v-text-field>
+            </div>
+          </v-col>
+           <v-col cols="12" v-if="category=='register'">
+            <div >Name</div>
+            <div>
+              <v-text-field hide-details="" append-icon="mdi-account" outlined v-model="users.a"></v-text-field>
+            </div>
+          </v-col>
+           <v-col cols="12" v-if="category=='register'">
+            <div >Section</div>
+            <div>
+              <v-text-field  hide-details="" append-icon="mdi-account" outlined v-model="users.b"></v-text-field>
+            </div>
+          </v-col>
+           <v-col cols="12" v-if="category=='register'">
+            <div >Mobile Number</div>
+            <div>
+              <v-text-field  hide-details="" append-icon="mdi-account" outlined v-model="users.c"></v-text-field>
+            </div>
+          </v-col>
+  
+          <div class="pl-4" v-if="category=='register'">
+            Status
+          </div>
+          <v-radio-group v-model="radioGroup" v-if="category=='register'">
+        <v-radio
+          label="Working"
+          value="n"
+        ></v-radio>
+        <v-radio
+          label="Not Working"
+          value="n"
+        ></v-radio>
+      </v-radio-group>
           <v-col cols="12" v-if="category!='forgot-password'">
             <div>Password</div>
             <div>
@@ -84,13 +122,13 @@
         </v-row>
 
         <div align="center" class="pt-10" v-if="category=='login'">
-          <v-btn depressed color="#222f3e" dark @click="login" :loading="isLoaded"> Login </v-btn>
+          <v-btn depressed color="#7c0ba0" dark @click="login" :loading="isLoaded"> Login </v-btn>
         </div>
         <div v-if="category=='forgot-password'" align="center" class="pt-10">
-        <v-btn depressed color="#222f3e" dark @click="login" :loading="isLoaded"> Send </v-btn>
+        <v-btn depressed color="#7c0ba0" dark @click="login" :loading="isLoaded"> Send </v-btn>
         </div>
          <div v-if="category=='register'" align="center" class="pt-10">
-        <v-btn depressed color="#222f3e" dark @click="login" :loading="isLoaded"> Submit </v-btn>
+        <v-btn depressed color="#7c0ba0" dark @click="login" :loading="isLoaded"> Submit </v-btn>
         </div>
         <div v-if="category=='register'" align="center" class="py-10">
             Please wait for Program chairs approval on your account
@@ -127,9 +165,9 @@ export default {
          }
          else{
             localStorage.setItem('account_type','student')
-             window.location.href="/student/information"
+             window.location.href="/student/dashboard"
          }
-         window.location.href="dashboard"
+        //  window.location.href="dashboard"
       this.isLoaded = true;
       var credentials = {
         email: this.users.email,

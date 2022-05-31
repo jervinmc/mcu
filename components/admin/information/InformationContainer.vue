@@ -1,7 +1,7 @@
 <template>
   <div class="pa-10">
     <div class="text-h5 pb-10">
-      <b> Student Information</b>
+      <b>Admin Information</b>
     </div>
     <div>
       <v-row>
@@ -25,7 +25,7 @@
                     <v-row>
                         <v-col>
                             <div>
-                                Student Number:
+                                Faculty ID Number:
                             </div>
                         </v-col>
                         <v-col>
@@ -65,12 +65,11 @@
               <div class="pb-10">
                   123423242
               </div>
-      
-                   <div>
+              <!-- <div>
                   Status:
-              </div>
- 
-               <v-radio-group v-model="radioGroup" >
+              </div> -->
+             <div>
+               <!-- <v-radio-group v-model="radioGroup" >
         <v-radio
           label="Working"
           value="n"
@@ -79,11 +78,13 @@
           label="Not Working"
           value="n"
         ></v-radio>
-      </v-radio-group>
-                <v-icon >
+      </v-radio-group> -->
+             </div>
+               <v-icon >
             mdi-pencil
           </v-icon>
           </v-card>
+         
         </v-col>
       </v-row>
     </div>
