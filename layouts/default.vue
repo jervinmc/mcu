@@ -70,7 +70,7 @@
       <div class="">
             <v-avatar>
         <img
-          src="https://cdn.vuetifyjs.com/images/john.jpg"
+          src="https://scontent.fmnl25-2.fna.fbcdn.net/v/t1.18169-9/10366126_879428475407136_7479389450624595425_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=174925&_nc_eui2=AeE_SbcK1w9bZbMCNqybEY_nWV0jsPJFPiFZXSOw8kU-IeNxZo-jwhD5oVORi4ZjADvjb5kGBKviqWoukux7XTE8&_nc_ohc=_5utJiGpMUwAX_Q9IPE&_nc_ht=scontent.fmnl25-2.fna&oh=00_AT8UJAQbKWN4auwgh289TAriUi_Bx31pcE6PDbslDum7Cw&oe=62BE36CC"
           alt="John"
         >
       </v-avatar>
@@ -130,8 +130,23 @@ export default {
           to: '/student/dashboard'
         },
         {
+          icon: 'mdi-bullhorn',
+          title: 'Announcement',
+          to: '/student/announcement'
+        },
+        {
+          icon: 'mdi-calendar',
+          title: 'Events',
+          to: '/student/events'
+        },
+        {
+          icon: 'mdi-magnify',
+          title: 'Job Posting',
+          to: '/student/job_posting'
+        },
+        {
           icon: 'mdi-account',
-          title: 'Students Information',
+          title: 'Alumni Profiling',
           to: '/student/information'
         },
         //  {
@@ -155,7 +170,22 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'Dashboard',
-          to: '/'
+          to: '/dashboard'
+        },
+        {
+          icon: 'mdi-bullhorn',
+          title: 'Announcement',
+          to: '/head/announcement'
+        },
+        {
+          icon: 'mdi-calendar',
+          title: 'Events',
+          to: '/head/events'
+        },
+        {
+          icon: 'mdi-magnify',
+          title: 'Job Posting',
+          to: '/head/job_posting'
         },
         {
           icon: 'mdi-account',

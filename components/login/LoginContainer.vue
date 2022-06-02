@@ -72,13 +72,25 @@
             </div>
           </v-col>
            <v-col cols="12" v-if="category=='register'">
-            <div >Name</div>
+            <div >Firstname</div>
             <div>
               <v-text-field hide-details="" append-icon="mdi-account" outlined v-model="users.a"></v-text-field>
             </div>
           </v-col>
            <v-col cols="12" v-if="category=='register'">
-            <div >Section</div>
+            <div >Lastname</div>
+            <div>
+              <v-text-field hide-details="" append-icon="mdi-account" outlined v-model="users.a"></v-text-field>
+            </div>
+          </v-col>
+           <v-col cols="12" v-if="category=='register'">
+            <div >Middle Initial</div>
+            <div>
+              <v-text-field hide-details="" append-icon="mdi-account" outlined v-model="users.a"></v-text-field>
+            </div>
+          </v-col>
+           <v-col cols="12" v-if="category=='register'">
+            <div >Last Year Attended and Course</div>
             <div>
               <v-text-field  hide-details="" append-icon="mdi-account" outlined v-model="users.b"></v-text-field>
             </div>
@@ -131,7 +143,7 @@
         <v-btn depressed color="#7c0ba0" dark @click="login" :loading="isLoaded"> Submit </v-btn>
         </div>
         <div v-if="category=='register'" align="center" class="py-10">
-            Please wait for Program chairs approval on your account
+            Please wait for Program head approval on your account
         </div>
       </div>
     </v-card>

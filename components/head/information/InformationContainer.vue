@@ -57,7 +57,7 @@
                   Email:
               </div>
               <div class="pb-10">
-                  unclepepe@rocketmail.com
+                  sample@rocketmail.com
               </div>
               <div>
                   Mobile Number:

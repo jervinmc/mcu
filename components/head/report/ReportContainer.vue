@@ -99,7 +99,7 @@ export default {
         { text: "ID", value: "id" },
         { text: "Date Registered", value: "fullname" },
         { text: "Name", value: "student_number" },
-        { text: "Details", value: "email" },
+        { text: "Email", value: "email" },
    
         ,
       ],

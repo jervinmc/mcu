@@ -11,7 +11,7 @@
               <div class="">
                 <v-avatar height="150" width="150">
                   <img
-                    src="https://cdn.vuetifyjs.com/images/john.jpg"
+                    src="https://scontent.fmnl25-2.fna.fbcdn.net/v/t1.18169-9/10366126_879428475407136_7479389450624595425_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=174925&_nc_eui2=AeE_SbcK1w9bZbMCNqybEY_nWV0jsPJFPiFZXSOw8kU-IeNxZo-jwhD5oVORi4ZjADvjb5kGBKviqWoukux7XTE8&_nc_ohc=_5utJiGpMUwAX_Q9IPE&_nc_ht=scontent.fmnl25-2.fna&oh=00_AT8UJAQbKWN4auwgh289TAriUi_Bx31pcE6PDbslDum7Cw&oe=62BE36CC"
                     alt="John"
                   />
                 </v-avatar>
@@ -57,7 +57,7 @@
                   Email:
               </div>
               <div class="pb-10">
-                  unclepepe@rocketmail.com
+                  sample@rocketmail.com
               </div>
               <div>
                   Mobile Number:

@@ -74,7 +74,7 @@ data(){
         headers: [
         { text: "Fullname", value: "fullname" },
         { text: "Student Number", value: "student_number" },
-        { text: "MCU Email", value: "email" },
+        { text: "Email", value: "email" },
          { text: "Actions", value: "opt" },
         ,
       ],
