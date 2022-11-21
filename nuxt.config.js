@@ -32,7 +32,39 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
   ],
-
+  auth: {
+    strategies: {
+      local: {
+        scheme: "refresh",
+        token: {
+          property: "access",
+          maxAge: 900
+        },
+        refreshToken: {
+          property: "refresh",
+          data: "refresh",
+          maxAge: 1 * 24 * 60 * 60
+        },
+        user: {
+          property: "user"
+          // autoFetch: false
+        },
+        endpoints: {
+          login: { url: "/auth/login/", method: "post",propertyName: 'access' },
+          refresh: { url: "/auth/refresh/", method: "post" },
+          user: { url: "/auth/user/", method: "get" },
+          logout: { url: "/auth/logout/", method: "post" }
+        },
+        autoLogout: false
+      }
+    },
+    redirect: {
+      login: "/route",
+      logout: "/route",
+      callback: "/route",
+      home: "/route"
+    }
+  },
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
@@ -40,11 +72,16 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/auth',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
   ],
+  axios: {
+    baseURL: process.env.BASE_URL_DEV
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

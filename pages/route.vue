@@ -78,15 +78,18 @@
 
 <script>
 export default {
-  
-  name: 'IndexPage',
   created(){
-    // if(this.$auth.loggedIn){
-
-    // }
-    // else{
-    //   location='/login'
-    // }
+    if(this.$auth.loggedIn){
+        if(this.$auth.user.account_type=='Admin'){
+            location="/head/announcement"
+        }
+        else{
+            location="/student/announcement"
+        }
+    }
+    else{
+      location='/login'
+    }
   }
 }
 </script>

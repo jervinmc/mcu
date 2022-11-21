@@ -8,7 +8,7 @@
 import LoginContainer from '../../components/login/LoginContainer.vue'
 export default {
   components: { LoginContainer },
-
+  
 }
 </script>
 

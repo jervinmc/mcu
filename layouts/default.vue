@@ -30,7 +30,7 @@
     >
       <v-list>
         <v-list-item
-          v-for="(item, i) in account_type=='head' ? items : account_type=='admin' ? items_admin : items_student"
+          v-for="(item, i) in $auth.user.account_type=='Admin' ? items : items_student"
           :key="i"
           :to="item.to"
           router
@@ -236,7 +236,7 @@ export default {
   methods:{
     confirm(){
      localStorage.clear();
-    window.location.href="/login"
+     this.$auth.logout()
      this.isOpenLogout=false
    },
   }
