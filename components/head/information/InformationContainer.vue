@@ -1,5 +1,30 @@
 <template>
   <div class="pa-10">
+    <v-dialog v-model="isEdit" width="500">
+      <v-card class="pa-10">
+        <div>
+          <div>
+            Firstname
+          </div>
+          <v-text-field outlined dense v-model="register.firstname" ></v-text-field>
+        </div>
+        <div>
+          <div>
+            Lastname
+          </div>
+          <v-text-field outlined dense v-model="register.lastname" ></v-text-field>
+        </div>
+        <div>
+          <div>
+            Mobile Number
+          </div>
+          <v-text-field outlined dense v-model="register.mobile_number" ></v-text-field>
+        </div>
+        <div align="center">
+          <v-btn color="primary" @click="submitHandler">Save Changes</v-btn>
+        </div>
+      </v-card>
+    </v-dialog>
     <div class="text-h5 pb-10">
       <b>Program Head Information</b>
     </div>
@@ -30,7 +55,7 @@
                         </v-col>
                         <v-col>
                             <div>
-                                1234234523
+                                {{$auth.user.id}}
                             </div>
                         </v-col>
                     </v-row>
@@ -42,7 +67,7 @@
                         </v-col>
                         <v-col>
                             <div>
-                                juandelacruz@email.com
+                                {{$auth.user.email}}
                             </div>
                         </v-col>
                     </v-row>
@@ -57,13 +82,13 @@
                   Email:
               </div>
               <div class="pb-10">
-                  sample@rocketmail.com
+                 {{$auth.user.email}}
               </div>
               <div>
                   Mobile Number:
               </div>
               <div class="pb-10">
-                  123423242
+                  {{$auth.user.mobile_number}}
               </div>
               <!-- <div>
                   Status:
@@ -80,7 +105,7 @@
         ></v-radio>
       </v-radio-group> -->
              </div>
-               <v-icon >
+               <v-icon  @click="isEdit=true">
             mdi-pencil
           </v-icon>
           </v-card>
@@ -92,7 +117,22 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods:{
+    submitHandler(){
+      this.register.id = this.$auth.user.id
+      this.$store.dispatch('users/edit',this.register)
+      alert("Successfully Updated!")
+      this.isEdit = false;
+    }
+  },
+  data(){
+    return{
+      isEdit:false,
+      register:{}
+    }
+  }
+};
 </script>
 
 <style>

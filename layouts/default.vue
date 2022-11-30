@@ -20,7 +20,7 @@
   </v-dialog>
         <!-- v-model="drawer" -->
     <v-navigation-drawer
-      v-if="$route.name!='login'"
+      v-if="$route.name!='login' && $auth.loggedIn"
       :mini-variant="miniVariant"
       :clipped="clipped"
       fixed
@@ -28,7 +28,8 @@
       dark
       color="primary"
     >
-      <v-list>
+      <v-list >
+        <!--eslint-disable-->
         <v-list-item
           v-for="(item, i) in $auth.user.account_type=='Admin' ? items : items_student"
           :key="i"

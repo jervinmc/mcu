@@ -78,15 +78,10 @@
 
 <script>
 export default {
-  
+   
   name: 'IndexPage',
-  created(){
-    // if(this.$auth.loggedIn){
-
-    // }
-    // else{
-    //   location='/login'
-    // }
-  }
+   created(){
+      location="/route"
+    },
 }
 </script>
