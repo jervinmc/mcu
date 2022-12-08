@@ -174,6 +174,7 @@ export default {
       try {
         this.register.account_type='Student'
         this.register.is_active=false
+        alert(this.register.password)
         await this.$store.dispatch("users/add", this.register);
         alert("Successful !");
         location="/login"
