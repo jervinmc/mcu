@@ -136,9 +136,11 @@ export default {
   methods: {
     submitHandler(){
         this.register.account_type='Head'
+        this.register.is_active=true
         this.$store.dispatch('users/addUser',this.register)
         alert("Successfully Added!")
         this.isAdd=false;
+        location.reload()
     }
   },
 };

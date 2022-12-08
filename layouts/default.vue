@@ -31,7 +31,7 @@
       <v-list >
         <!--eslint-disable-->
         <v-list-item
-          v-for="(item, i) in $auth.user.account_type=='Admin' ? items_admin : items_student"
+          v-for="(item, i) in $auth.user.account_type=='Admin' ? items_admin : $auth.user.account_type=='Head' ? items  :  items_student"
           :key="i"
           :to="item.to"
           router

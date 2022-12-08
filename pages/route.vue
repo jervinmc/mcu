@@ -84,7 +84,7 @@ export default {
             location="/admin/dashboard"
         }
         else if(this.$auth.user.account_type=='Head'){
-            location="/head/dashboard"
+            location="/head/announcement"
         }
         else{
             location="/student/announcement"
