@@ -81,7 +81,10 @@ export default {
   created(){
     if(this.$auth.loggedIn){
         if(this.$auth.user.account_type=='Admin'){
-            location="/head/announcement"
+            location="/admin/dashboard"
+        }
+        else if(this.$auth.user.account_type=='Head'){
+            location="/head/dashboard"
         }
         else{
             location="/student/announcement"

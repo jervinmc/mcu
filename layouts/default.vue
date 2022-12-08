@@ -31,7 +31,7 @@
       <v-list >
         <!--eslint-disable-->
         <v-list-item
-          v-for="(item, i) in $auth.user.account_type=='Admin' ? items : items_student"
+          v-for="(item, i) in $auth.user.account_type=='Admin' ? items_admin : items_student"
           :key="i"
           :to="item.to"
           router
@@ -210,6 +210,11 @@ export default {
           icon: 'mdi-apps',
           title: 'Dashboard',
           to: '/admin/dashboard'
+        },
+        {
+          icon: 'mdi-apps',
+          title: 'Program Head',
+          to: '/admin/program_head'
         },
         {
           icon: 'mdi-account',

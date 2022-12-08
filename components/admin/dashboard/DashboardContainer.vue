@@ -11,7 +11,7 @@
     <v-data-table
       class="pa-5"
       :headers="headers"
-      :items="events"
+      :items="users"
       :loading="isLoading"
     >
      <template v-slot:[`item.status`]="{ item }">
@@ -37,7 +37,7 @@
          <template #[`item.image`]="{ item }">
              <v-img :src="item.image" height="150" width="150"></v-img>
       </template>
-      <template #[`item.opt`]="{ item }">
+      <!-- <template #[`item.opt`]="{ item }">
         <v-menu offset-y z-index="1">
           <template v-slot:activator="{ attrs, on }">
             <v-btn icon v-bind="attrs" v-on="on">
@@ -50,32 +50,30 @@
                 <v-list-item-title>Send OTP</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <!-- <v-list-item @click.stop="status(item,'Declined')">
-              <v-list-item-content>
-                <v-list-item-title>Decline</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item> -->
           </v-list>
         </v-menu>
-      </template>
+      </template> -->
     </v-data-table>
   </v-card>
 </template>
 
 <script>
-
+import {mapState} from 'vuex';
 export default {
-  
+  computed:{
+    ...mapState('users',['users'])
+  },
   created() {
-
+    this.$store.dispatch('users/view')
   },
 data(){
     return{
         headers: [
-        { text: "Fullname", value: "fullname" },
+        { text: "Firstname", value: "firstname" },
+        { text: "Lastname", value: "lastname" },
         { text: "Student Number", value: "student_number" },
         { text: "Email", value: "email" },
-         { text: "Actions", value: "opt" },
+        //  { text: "Actions", value: "opt" },
         ,
       ],
       events:[{

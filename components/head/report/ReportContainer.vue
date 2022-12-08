@@ -12,13 +12,15 @@
             >
               <div class="pb-5 white--text">Total Members</div>
               <div class="text-h4 white--text">
-                <b></b>
+                <b>
+                  {{users.length}}
+                </b>
               </div>
             </v-card>
           </v-col>
         </v-row>
          </v-col>
-        <v-col>
+        <!-- <v-col>
            <v-row>
           <v-col cols="12">
             <v-card
@@ -35,12 +37,12 @@
           </v-col>
 
         </v-row>
-        </v-col>
+        </v-col> -->
      </v-row>
             <v-data-table
       class="pa-5"
       :headers="headers"
-      :items="events"
+      :items="users"
       :loading="isLoading"
     >
      <template v-slot:[`item.status`]="{ item }">
@@ -65,6 +67,11 @@
       </template>
          <template #[`item.image`]="{ item }">
              <v-img :src="item.image" height="150" width="150"></v-img>
+      </template>
+      <template #[`item.date_joined`]="{ item }">
+            <div>
+              {{formatDate(item.date_joined)}}
+            </div>
       </template>
       <template #[`item.opt`]="{ item }">
         <v-menu offset-y z-index="1">
@@ -92,18 +99,32 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
+import moment from 'moment';
 export default {
+  computed:{
+    ...mapState('users',['users'])
+  },
+  created(){
+    this.$store.dispatch('users/view')
+  },
   data(){
     return {
        headers: [
         { text: "ID", value: "id" },
-        { text: "Date Registered", value: "fullname" },
-        { text: "Name", value: "student_number" },
+        { text: "Date Registered", value: "date_joined" },
+        { text: "Firstname", value: "firstname" },
+        { text: "Lastname", value: "lastname" },
         { text: "Email", value: "email" },
    
         ,
       ],
     }
+  },
+  methods:{
+    formatDate(item){
+     return moment(item).format('LL')
+    },
   }
 }
 </script>

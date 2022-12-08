@@ -1,8 +1,14 @@
 const actions = {
     async add({ commit },  customer ) {
-        alert()
       const response = await this.$axios.$post(
         "/signup/",
+        customer
+      );
+    //   response.customer = customer;
+    },
+    async addUser({ commit },  customer ) {
+      const response = await this.$axios.$post(
+        "/users/",
         customer
       );
     //   response.customer = customer;
@@ -13,6 +19,13 @@ const actions = {
         customer
       );
       response.customer = customer;
+    },
+    async view({ commit },  customer ) {
+      const response = await this.$axios.$get(
+        `/users/`,
+      );
+      response.customer = customer;
+      commit("SET_EVENT", response);
     },
     async editImage({ commit },  customer ) {
       const response = await this.$axios.$put(

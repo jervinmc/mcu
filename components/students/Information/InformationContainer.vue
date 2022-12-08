@@ -1,5 +1,30 @@
 <template>
   <div class="pa-10">
+    <v-dialog v-model="isEdit" width="500">
+      <v-card class="pa-10">
+        <div>
+          <div>
+            Firstname
+          </div>
+          <v-text-field outlined dense v-model="register.firstname" ></v-text-field>
+        </div>
+        <div>
+          <div>
+            Lastname
+          </div>
+          <v-text-field outlined dense v-model="register.lastname" ></v-text-field>
+        </div>
+        <div>
+          <div>
+            Mobile Number
+          </div>
+          <v-text-field outlined dense v-model="register.mobile_number" ></v-text-field>
+        </div>
+        <div align="center">
+          <v-btn color="primary" @click="submitHandler">Save Changes</v-btn>
+        </div>
+      </v-card>
+    </v-dialog>
     <div class="text-h5 pb-10">
       <b> Juan Dela Cruz</b>
     </div>
@@ -30,7 +55,7 @@
                         </v-col>
                         <v-col>
                             <div>
-                                1234234523
+                                {{$auth.user.student_number}}
                             </div>
                         </v-col>
                     </v-row>
@@ -42,7 +67,7 @@
                         </v-col>
                         <v-col>
                             <div>
-                                juandelacruz@email.com
+                                {{$auth.user.email}}
                             </div>
                         </v-col>
                     </v-row>
@@ -54,7 +79,7 @@
                         </v-col>
                         <v-col>
                             <div>
-                            Juan
+                                {{$auth.user.firstname}}
                             </div>
                         </v-col>
                     </v-row>
@@ -66,7 +91,7 @@
                         </v-col>
                         <v-col>
                             <div>
-                               Delacruz
+                               {{$auth.user.lastname}}
                             </div>
                         </v-col>
                     </v-row>
@@ -78,7 +103,7 @@
                         </v-col>
                         <v-col>
                             <div>
-                              2021 - 2022
+                                {{$auth.last_attended}}
                             </div>
                         </v-col>
                     </v-row>
@@ -90,7 +115,7 @@
                         </v-col>
                         <v-col>
                             <div>
-                              232412312312
+                              {{$auth.user.mobile_number}}
                             </div>
                         </v-col>
                     </v-row>
@@ -122,7 +147,7 @@
                         </v-col>
                         <v-col>
                             <div>
-                                October 1, 1111
+                                {{$auth.user.birthdate}}
                             </div>
                         </v-col>
                     </v-row>
@@ -165,7 +190,7 @@
           value="n"
         ></v-radio>
       </v-radio-group> -->
-                <v-icon >
+                <v-icon @click="isEdit=true">
             mdi-pencil
           </v-icon>
           </v-card>
@@ -176,7 +201,22 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods:{
+    submitHandler(){
+      this.register.id = this.$auth.user.id
+      this.$store.dispatch('users/edit',this.register)
+      alert("Successfully Updated!")
+      this.isEdit = false;
+    }
+  },
+  data(){
+    return{
+      isEdit:false,
+      register:{}
+    }
+  }
+};
 </script>
 
 <style>

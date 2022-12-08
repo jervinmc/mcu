@@ -1,15 +1,50 @@
 <template>
   <v-card elevation="5">
+    <v-dialog v-model="isAdd" width="500">
+      <v-card class="pa-10">
+        <div>Email</div>
+        <div class="pb-4">
+          <v-text-field outlined v-model="register.email" dense></v-text-field>
+        </div>
+        <div>Password</div>
+        <div class="pb-4">
+          <v-text-field
+            type="password"
+            outlined
+            v-model="register.password"
+            dense
+          ></v-text-field>
+        </div>
+        <div align="center">
+          <v-row>
+            <v-col>
+              <v-btn rounded @click="isAdd = false" color="secondary"
+                >Cancel</v-btn
+              >
+            </v-col>
+            <v-col>
+              <v-btn rounded @click="submitHandler" dark color="green"
+                >Submit</v-btn
+              >
+            </v-col>
+          </v-row>
+        </div>
+      </v-card>
+    </v-dialog>
     <v-row>
-      <v-col align="start" class="pa-10 text-h5" cols="auto">
-        <b>Request Management</b>
+      <v-col align="start" class="pa-10 text-h5">
+        <b>Program Head Accounts</b>
       </v-col>
-      <v-spacer></v-spacer>
+      <v-col align-self="center" align="end" class="pr-10">
+        <v-btn rounded @click="isAdd = true" color="secondary"
+          >Add Program Head</v-btn
+        >
+      </v-col>
     </v-row>
     <v-data-table
       class="pa-5"
       :headers="headers"
-      :items="requestList"
+      :items="program"
       :loading="isLoading"
     >
       <template v-slot:[`item.status`]="{ item }">
@@ -35,7 +70,7 @@
       <template #[`item.image`]="{ item }">
         <v-img :src="item.image" height="150" width="150"></v-img>
       </template>
-      <template #[`item.opt`]="{ item }">
+      <!-- <template #[`item.opt`]="{ item }">
         <v-menu offset-y z-index="1">
           <template v-slot:activator="{ attrs, on }">
             <v-btn icon v-bind="attrs" v-on="on">
@@ -43,19 +78,14 @@
             </v-btn>
           </template>
           <v-list dense>
-            <v-list-item @click.stop="status(item, true)">
+            <v-list-item @click.stop="status(item,'Accepted')">
               <v-list-item-content>
-                <v-list-item-title>Approve</v-list-item-title>
+                <v-list-item-title>Send OTP</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <!-- <v-list-item @click.stop="status(item, false)">
-              <v-list-item-content>
-                <v-list-item-title>Decline</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item> -->
           </v-list>
         </v-menu>
-      </template>
+      </template> -->
     </v-data-table>
   </v-card>
 </template>
@@ -65,28 +95,32 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState("users", ["users"]),
-    requestList(){
-      return this.users.filter(data=>!data.is_active)
-    }
+    program() {
+      return this.users.filter((data) => data.account_type == "Head");
+    },
   },
   created() {
     this.$store.dispatch("users/view");
   },
   data() {
     return {
+      register: {
+        email: "",
+        password: "",
+      },
+      isAdd: false,
       headers: [
-        { text: "ID", value: "id" },
         { text: "Firstname", value: "firstname" },
         { text: "Lastname", value: "lastname" },
         { text: "Student Number", value: "student_number" },
         { text: "Email", value: "email" },
-        { text: "Actions", value: "opt" },
+        //  { text: "Actions", value: "opt" },
         ,
       ],
       events: [
         {
           id: "1",
-          Firstname: "Juan Delacruz",
+          fullname: "Juan Delacruz",
           student_number: "201510994",
           email: "juandelacruz@email.com",
         },
@@ -100,10 +134,12 @@ export default {
     };
   },
   methods: {
-    status(item, status) {
-      this.$store.dispatch('users/edit',{"id":item.id,"is_active":status})
-      alert("Successfully Updated!")
-    },
+    submitHandler(){
+        this.register.account_type='Head'
+        this.$store.dispatch('users/addUser',this.register)
+        alert("Successfully Added!")
+        this.isAdd=false;
+    }
   },
 };
 </script>

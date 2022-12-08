@@ -41,7 +41,7 @@
                   />
                 </v-avatar>
                 <div>
-                    Juan Dela Cruz
+                   {{$auth.user.firstname}}  {{$auth.user.lastname}}
                 </div>
                 <div>
                     BSIT 4-1
