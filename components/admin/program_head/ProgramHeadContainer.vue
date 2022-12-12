@@ -1,5 +1,44 @@
 <template>
   <v-card elevation="5">
+    <v-dialog v-model="isDelete" width="500">
+      <v-card class="pa-10">
+        <div align="center" class="py-10">
+          Are you sure you want to delete this item?
+        </div>
+        <div>
+          <v-row>
+            <v-col align="end">
+              <v-btn @click="isDelete=false" outlined>Cancel</v-btn>
+            </v-col>
+            <v-col>
+              <v-btn @click="submitHandlerDelete" color="error" outlined>Delete</v-btn>
+            </v-col>
+          </v-row>
+        </div>
+      </v-card>
+    </v-dialog>
+     <v-dialog v-model="isEdit" width="500">
+      <v-card class="pa-10">
+        <div align="center" class="py-10">
+          <div>
+            <v-text-field dense v-model="register.firstname" outlined placeholder="Firstname"></v-text-field>
+          </div>
+          <div>
+            <v-text-field dense v-model="register.lastname" outlined placeholder="Lastname"></v-text-field>
+          </div>
+        </div>
+        <div>
+          <v-row>
+            <v-col align="end">
+              <v-btn @click="isEdit=false" outlined>Cancel</v-btn>
+            </v-col>
+            <v-col>
+              <v-btn @click="submitHandlerEdit" color="success" outlined>Edit</v-btn>
+            </v-col>
+          </v-row>
+        </div>
+      </v-card>
+    </v-dialog>
     <v-dialog v-model="isAdd" width="500">
       <v-card class="pa-10">
         <div>Email</div>
@@ -70,7 +109,7 @@
       <template #[`item.image`]="{ item }">
         <v-img :src="item.image" height="150" width="150"></v-img>
       </template>
-      <!-- <template #[`item.opt`]="{ item }">
+      <template #[`item.opt`]="{ item }">
         <v-menu offset-y z-index="1">
           <template v-slot:activator="{ attrs, on }">
             <v-btn icon v-bind="attrs" v-on="on">
@@ -78,20 +117,26 @@
             </v-btn>
           </template>
           <v-list dense>
-            <v-list-item @click.stop="status(item,'Accepted')">
+            <v-list-item @click.stop="editItem(item)">
               <v-list-item-content>
-                <v-list-item-title>Send OTP</v-list-item-title>
+                <v-list-item-title>Edit</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item @click.stop="deleteItem(item)">
+              <v-list-item-content>
+                <v-list-item-title>Delete</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list>
         </v-menu>
-      </template> -->
+      </template>
     </v-data-table>
   </v-card>
 </template>
 
 <script>
 import { mapState } from "vuex";
+var cloneDeep = require("lodash.clonedeep");
 export default {
   computed: {
     ...mapState("users", ["users"]),
@@ -104,17 +149,20 @@ export default {
   },
   data() {
     return {
+      selectedItem:{},
+      isDelete:false,
       register: {
         email: "",
         password: "",
       },
       isAdd: false,
+      isEdit:false,
       headers: [
         { text: "Firstname", value: "firstname" },
         { text: "Lastname", value: "lastname" },
-        { text: "Student Number", value: "student_number" },
+        // { text: "Student Number", value: "student_number" },
         { text: "Email", value: "email" },
-        //  { text: "Actions", value: "opt" },
+         { text: "Actions", value: "opt" },
         ,
       ],
       events: [
@@ -134,6 +182,24 @@ export default {
     };
   },
   methods: {
+    editItem(item){
+      this.register = cloneDeep(item);
+      this.isEdit = true;
+    },
+    submitHandlerEdit(){
+      this.$store.dispatch('users/edit',this.register)
+      alert("Successfully Updated!")
+      location.reload()
+    },
+    submitHandlerDelete(){
+      this.$store.dispatch('users/delete',{"id":this.selectedItem.id})
+      alert("Successfully Deleted!")
+      location.reload()
+    },
+    deleteItem(item){
+      this.selectedItem = item
+      this.isDelete = true;
+    },
     submitHandler(){
         this.register.account_type='Head'
         this.register.is_active=true

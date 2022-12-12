@@ -98,7 +98,7 @@
                     <v-row>
                         <v-col>
                             <div>
-                                Last year attended and course:
+                                Last year graduated and course:
                             </div>
                         </v-col>
                         <v-col>

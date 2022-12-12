@@ -25,6 +25,7 @@
       :clipped="clipped"
       fixed
       app
+
       dark
       color="primary"
     >

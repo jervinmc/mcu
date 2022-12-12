@@ -90,7 +90,7 @@
             </div>
           </v-col>
            <v-col cols="12" v-if="category=='register'">
-            <div >Last Year Attended and Course</div>
+            <div >Last Year Graduated and Course</div>
             <div>
               <v-text-field  hide-details="" append-icon="mdi-account" outlined v-model="register.last_attended"></v-text-field>
             </div>
@@ -107,12 +107,16 @@
           </div>
           <v-radio-group v-model="register.work_status" v-if="category=='register'">
         <v-radio
-          label="Working"
-          value="Working"
+          label="Employed"
+          value="Employed"
         ></v-radio>
         <v-radio
-          label="Not Working"
-          value="Not Working"
+          label="Unemployed"
+          value="Unemployed"
+        ></v-radio>
+         <v-radio
+          label="Self Employed"
+          value="Self Employed"
         ></v-radio>
       </v-radio-group>
           <v-col cols="12" v-if="category!='forgot-password'">
