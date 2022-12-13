@@ -71,6 +71,7 @@ export default {
       await this.$store.dispatch("job_posting/add", form_data);
       alert("Successfully Posted!");
       this.loadData();
+       location.reload()
     },
     async loadData() {
       await this.$store.dispatch("job_posting/view");

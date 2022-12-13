@@ -103,6 +103,7 @@ export default {
     status(item, status) {
       this.$store.dispatch('users/edit',{"id":item.id,"is_active":status})
       alert("Successfully Updated!")
+       location.reload()
     },
   },
 };

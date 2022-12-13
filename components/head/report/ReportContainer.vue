@@ -3,7 +3,7 @@
      <v-row>
          <v-col>
            <v-row>
-          <v-col cols="12">
+          <v-col cols="6">
             <v-card
               color="#4747a1"
               height="120"
@@ -14,6 +14,21 @@
               <div class="text-h4 white--text">
                 <b>
                   {{users.length}}
+                </b>
+              </div>
+            </v-card>
+          </v-col>
+            <v-col cols="6">
+            <v-card
+              color="#4747a1"
+              height="120"
+              class="rounded-xl pa-5"
+              elevation="5"
+            >
+              <div class="pb-5 white--text">Active Members</div>
+              <div class="text-h4 white--text">
+                <b>
+                  {{users.filter(data=>data.is_active).length}}
                 </b>
               </div>
             </v-card>

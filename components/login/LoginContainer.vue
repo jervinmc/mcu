@@ -35,7 +35,7 @@
     </v-snackbar>
   
 
-    <v-card height="700" style="overflow:scroll" width="700" class="rounded-xl" elevation="12" >
+    <v-card height="700" :style="category=='register' ? 'overflow:scroll' : ''" width="700" class="rounded-xl" elevation="12" >
       <div
         style="background-color: #7c0ba0; color: white"
         align="center"
@@ -52,7 +52,7 @@
              </v-img>
       </div>
       <div class="pa-5" align="start">
-          <div  v-if="category=='forgot-password'" class="pb-10">
+          <div  v-if="category=='register'" class="pb-10">
               To reset your password, submit your email address below. if we can find you in the database, an email will be sent to your email address, with instructions how to get access again.
               <div class="text-h6 pt-5"> 
                  <b> Search by email address</b>
@@ -103,7 +103,7 @@
           </v-col>
   
           <div class="pl-4" v-if="category=='register'">
-            Status
+           Working Status
           </div>
           <v-radio-group v-model="register.work_status" v-if="category=='register'">
         <v-radio
@@ -178,12 +178,12 @@ export default {
       try {
         this.register.account_type='Student'
         this.register.is_active=false
-        alert(this.register.password)
         await this.$store.dispatch("users/add", this.register);
         alert("Successful !");
         location="/login"
       } catch (error) {
-        alert(error)
+        alert('Please make sure that the password is not related on the user`s details and the passwor must be at least 6 minimum character')
+        // alert(error)
       }
       this.isLoaded = false;
       
@@ -195,7 +195,7 @@ export default {
           data: this.register,
         });
       } catch (error) {
-        alert(error)
+
         alert('Wrong credentials')
         this.isLoaded = false;
       }

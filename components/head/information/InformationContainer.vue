@@ -43,9 +43,9 @@
                 <div>
                    {{$auth.user.firstname}}  {{$auth.user.lastname}}
                 </div>
-                <div>
+                <!-- <div>
                     BSIT 4-1
-                </div>
+                </div> -->
                 <div align="start" class="pt-5">
                     <v-row>
                         <v-col>

@@ -20,6 +20,42 @@
           </div>
           <v-text-field outlined dense v-model="register.mobile_number" ></v-text-field>
         </div>
+         <div>
+          <div>
+            Last year graduated
+          </div>
+          <v-text-field outlined dense v-model="register.last_attended" ></v-text-field>
+        </div>
+          <div>
+          <div>
+          Mobile Number
+          </div>
+          <v-text-field outlined dense v-model="register.mobile_number" ></v-text-field>
+        </div>
+          <div>
+          <div>
+           Age
+          </div>
+          <v-text-field outlined dense v-model="register.age" ></v-text-field>
+        </div>
+          <div>
+          <div>
+            Birthday
+          </div>
+          <v-text-field outlined dense v-model="register.birthdate" ></v-text-field>
+        </div>
+          <div>
+          <div>
+            Address
+          </div>
+          <v-text-field outlined dense v-model="register.address" ></v-text-field>
+        </div>
+          <div>
+          <div>
+            Last year graduated
+          </div>
+          <v-select :items="['Employed','Unemployed','Self Employed']"></v-select>
+        </div>
         <div align="center">
           <v-btn color="primary" @click="submitHandler">Save Changes</v-btn>
         </div>
@@ -41,11 +77,11 @@
                   />
                 </v-avatar> -->
                 <div>
-                    Juan Dela Cruz
+                  {{$auth.user.firstname}} {{$auth.user.lastname}}
                 </div>
-                <div>
+                <!-- <div>
                     BSIT 4-1
-                </div>
+                </div> -->
                 <div align="start" class="pt-5">
                     <v-row>
                         <v-col>
@@ -135,7 +171,7 @@
                         </v-col>
                         <v-col>
                             <div>
-                                juandelacruz@email.com
+                                {{$auth.user.age}}
                             </div>
                         </v-col>
                     </v-row>
@@ -159,7 +195,7 @@
                         </v-col>
                         <v-col>
                             <div>
-                                Philippines
+                                {{$auth.user.address}}
                             </div>
                         </v-col>
                     </v-row>
@@ -171,7 +207,7 @@
                         </v-col>
                         <v-col>
                             <div>
-                                None
+                                {{$auth.user.work_status}}
                             </div>
                         </v-col>
                     </v-row>
@@ -190,7 +226,7 @@
           value="n"
         ></v-radio>
       </v-radio-group> -->
-                <v-icon @click="isEdit=true">
+                <v-icon @click="editItem">
             mdi-pencil
           </v-icon>
           </v-card>
@@ -201,8 +237,15 @@
 </template>
 
 <script>
+var cloneDeep = require("lodash.clonedeep");
 export default {
+  
   methods:{
+    editItem(){
+      this.register = cloneDeep(this.$auth.user)
+      
+      this.isEdit=true
+    },
     submitHandler(){
       this.register.id = this.$auth.user.id
       this.$store.dispatch('users/edit',this.register)

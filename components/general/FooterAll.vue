@@ -28,17 +28,17 @@
         <v-col @click="privacy=true" style="cursor:pointer" class="white--text" align-self="center" align="center">
             <v-row>
                 <v-col>
-                    <v-icon>
+                    <v-icon @click="links('https://www.facebook.com/MCU1904')">
                         mdi-facebook
                     </v-icon>
                 </v-col>
                  <v-col>
-                    <v-icon>
+                    <v-icon @click="links('https://twitter.com/MCU1904')">
                         mdi-twitter
                     </v-icon>
                 </v-col>
                  <v-col>
-                    <v-icon>
+                    <v-icon @click="links('https://www.instagram.com/mcu1904/')">
                         mdi-instagram
                     </v-icon>
                 </v-col>
@@ -50,7 +50,13 @@
 </template>
 
 <script>
-
+export default{
+    methods:{
+        links(item){
+            location=`${item}`
+        }
+    }
+}
    
 </script>
 

@@ -3,7 +3,7 @@
     
     <v-row>
       <v-col align="start" class="pa-10 text-h5" cols="auto">
-        <b>Alumni Accounts</b>
+        <b>Alumni Counts</b>
       </v-col>
       <v-spacer></v-spacer>
  
@@ -11,7 +11,7 @@
     <v-data-table
       class="pa-5"
       :headers="headers"
-      :items="users"
+      :items="alumni"
       :loading="isLoading"
     >
      <template v-slot:[`item.status`]="{ item }">
@@ -61,7 +61,10 @@
 import {mapState} from 'vuex';
 export default {
   computed:{
-    ...mapState('users',['users'])
+    ...mapState('users',['users']),
+    alumni(){
+      return this.users.filter(data=>data.account_type!='Head')
+    }
   },
   created() {
     this.$store.dispatch('users/view')
