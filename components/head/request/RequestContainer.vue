@@ -77,6 +77,7 @@ export default {
       headers: [
         { text: "ID", value: "id" },
         { text: "Firstname", value: "firstname" },
+         { text: "Middlename", value: "middlename" },
         { text: "Lastname", value: "lastname" },
         { text: "Student Number", value: "student_number" },
         { text: "Email", value: "email" },

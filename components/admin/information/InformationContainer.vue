@@ -41,12 +41,26 @@
           <v-card elevation="5" class="rounded-xl pa-10" height="400">
             <div align="center">
               <div class="">
-                <v-avatar height="150" width="150">
-                  <img
-                    src="https://scontent.fmnl25-2.fna.fbcdn.net/v/t1.18169-9/10366126_879428475407136_7479389450624595425_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=174925&_nc_eui2=AeE_SbcK1w9bZbMCNqybEY_nWV0jsPJFPiFZXSOw8kU-IeNxZo-jwhD5oVORi4ZjADvjb5kGBKviqWoukux7XTE8&_nc_ohc=_5utJiGpMUwAX_Q9IPE&_nc_ht=scontent.fmnl25-2.fna&oh=00_AT8UJAQbKWN4auwgh289TAriUi_Bx31pcE6PDbslDum7Cw&oe=62BE36CC"
-                    alt="John"
-                  />
-                </v-avatar>
+                   <v-avatar
+            
+              size="100"
+              color="grey"
+              class="white--text pointer"
+              @click="$refs.file.click()"
+              >
+                  <v-img :src="$auth.user.image">
+
+                  </v-img>
+              </v-avatar
+            >
+            <input
+              class="d-none"
+              type="file"
+              id="fileInput"
+              ref="file"
+              accept="image/png, image/jpeg"
+              @change="onFileUpload"
+            />
                 <div>
                     {{$auth.user.firstname}} {{$auth.user.lastname}}
                 </div>
@@ -134,6 +148,30 @@ export default {
     }
   },
   methods:{
+    onFileUpload(e) {
+      this.file = e;
+      e = e.target.files[0];
+      this.url =URL.createObjectURL(e);
+      if (e["name"].length > 100) {
+        alert("255 characters exceeded filename.");
+        return;
+      }
+      try {
+        if (e.size > 16000000) {
+          alert("Only 15mb file can be accepted.");
+          return;
+        }
+       let users = new FormData();
+        
+        users.append('id',this.$auth.user.id)
+        users.append('image',e)
+        this.$store.dispatch('users/editUserImage',users)
+      } catch (error) {
+        alert(error);
+        return;
+      }
+      this.file = e;
+    },
     submitHandler(){
       this.$store.dispatch('users/edit',this.register)
       alert('Successfully Updated!')

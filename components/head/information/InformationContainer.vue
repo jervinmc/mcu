@@ -33,13 +33,27 @@
         <v-col>
           <v-card elevation="5" class="rounded-xl pa-10" height="400">
             <div align="center">
-              <div class="">
-                <v-avatar height="150" width="150">
-                  <img
-                    src="https://cdn.vuetifyjs.com/images/john.jpg"
-                    alt="John"
-                  />
-                </v-avatar>
+              <div class="pointer">
+                   <v-avatar
+              
+              size="100"
+              color="grey"
+              class="white--text pointer"
+              @click="$refs.file.click()"
+              >
+                  <v-img :src="$auth.user.image">
+
+                  </v-img>
+              </v-avatar
+            >
+            <input
+              class="d-none"
+              type="file"
+              id="fileInput"
+              ref="file"
+              accept="image/png, image/jpeg"
+              @change="onFileUpload"
+            />
                 <div>
                    {{$auth.user.firstname}}  {{$auth.user.lastname}}
                 </div>
@@ -78,12 +92,12 @@
         </v-col>
         <v-col>
           <v-card elevation="5" class="rounded-xl pa-10" height="400"> 
-              <div>
+              <!-- <div>
                   Email:
               </div>
               <div class="pb-10">
                  {{$auth.user.email}}
-              </div>
+              </div> -->
               <div>
                   Mobile Number:
               </div>
@@ -119,6 +133,30 @@
 <script>
 export default {
   methods:{
+     onFileUpload(e) {
+      this.file = e;
+      e = e.target.files[0];
+      this.url =URL.createObjectURL(e);
+      if (e["name"].length > 100) {
+        alert("255 characters exceeded filename.");
+        return;
+      }
+      try {
+        if (e.size > 16000000) {
+          alert("Only 15mb file can be accepted.");
+          return;
+        }
+       let users = new FormData();
+        
+        users.append('id',this.$auth.user.id)
+        users.append('image',e)
+        this.$store.dispatch('users/editUserImage',users)
+      } catch (error) {
+        alert(error);
+        return;
+      }
+      this.file = e;
+    },
     submitHandler(){
       this.register.id = this.$auth.user.id
       this.$store.dispatch('users/edit',this.register)

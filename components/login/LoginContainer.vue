@@ -90,7 +90,7 @@
             </div>
           </v-col>
            <v-col cols="12" v-if="category=='register'">
-            <div >Last Year Graduated and Course</div>
+            <div >Year Graduated</div>
             <div>
               <v-text-field  hide-details="" append-icon="mdi-account" outlined v-model="register.last_attended"></v-text-field>
             </div>
@@ -122,7 +122,10 @@
           <v-col cols="12" v-if="category!='forgot-password'">
             <div>Password</div>
             <div>
-              <v-text-field append-icon="mdi-lock" outlined v-model="register.password" type="password"></v-text-field>
+              <v-text-field 
+               :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+               @click:append="show1 = !show1"
+               outlined v-model="register.password" :type="show1 ? 'text' : 'password'"></v-text-field>
             </div>
             <div >
                 <v-row v-if="category=='login'">
@@ -158,6 +161,7 @@
 export default {
   data() {
     return {
+      show1:false,
       category:'login',
       snackbar:false,
       img_holder: 'image_placeholder.png',
@@ -182,7 +186,7 @@ export default {
         alert("Successful !");
         location="/login"
       } catch (error) {
-        alert('Please make sure that the password is not related on the user`s details and the passwor must be at least 6 minimum character')
+        alert('Please make sure that the password is not related on the user`s details and the password must be at least 6 minimum character')
         // alert(error)
       }
       this.isLoaded = false;
