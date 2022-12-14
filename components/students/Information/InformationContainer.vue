@@ -272,7 +272,9 @@ export default {
         
         users.append('id',this.$auth.user.id)
         users.append('image',e)
-        this.$store.dispatch('users/editUserImage',users)
+        this.$store.dispatch('users/editUserImage',users).then((res)=>{
+          location.reload()
+        })
       } catch (error) {
         alert(error);
         return;

@@ -1,5 +1,17 @@
 <template>
   <v-app dark>
+    <v-dialog v-model="isEdit">
+      <v-card class="pa-5">
+        <div>
+          Year and Semester
+        </div>
+        <div>
+          <v-text-field outlined dense v-model="register.semester"></v-text-field>
+        </div>
+        <div align="center" @click="submitHandler">
+        </div>
+      </v-card>
+    </v-dialog>
       <v-dialog v-model="isOpenLogout" width="500" persistent>
     <v-card class="pa-10 rounded-xl" >
     <div align="center" class="text-h6">Logout User</div>
@@ -66,8 +78,8 @@
     <div></div>
       <!-- <v-app-bar-nav-icon dark @click.stop="drawer = !drawer" /> -->
       <v-spacer></v-spacer>
-      <div class="white--text mr-5">
-          1st semester S.Y., 2022-2023
+      <div class="white--text mr-5" >
+          1st semester S.Y., 2022-2023 <v-icon class="pl-5" color="white" v-if="$auth.user.account_type=='Admin'">mdi-pencil</v-icon>
       </div>
       <div class="">
             <v-avatar>
@@ -120,6 +132,7 @@ export default {
   },
   data () {
     return {
+      register:{},
       account_type:'',
       isOpenLogout:false,
       clipped: false,
@@ -213,7 +226,7 @@ export default {
           to: '/admin/dashboard'
         },
         {
-          icon: 'mdi-apps',
+          icon: 'mdi-account',
           title: 'Program Head',
           to: '/admin/program_head'
         },

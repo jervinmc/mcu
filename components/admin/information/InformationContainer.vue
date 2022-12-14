@@ -1,6 +1,6 @@
 <template>
   <div class="pa-10">
-    <v-dialog v-model="isEdit">
+    <v-dialog v-model="isEdit" width="600">
       <v-card class="pa-10">
           <div>
             Firstname
@@ -99,9 +99,9 @@
         </v-col>
         <v-col>
           <v-card elevation="5" class="rounded-xl pa-10" height="400"> 
-              <div>
+              <!-- <div>
                   Email:
-              </div>
+              </div> -->
               <!-- <div class="pb-10">
                   sample@rocketmail.com
               </div> -->
@@ -165,7 +165,9 @@ export default {
         
         users.append('id',this.$auth.user.id)
         users.append('image',e)
-        this.$store.dispatch('users/editUserImage',users)
+        this.$store.dispatch('users/editUserImage',users).then((res)=>{
+          location.reload()
+        })
       } catch (error) {
         alert(error);
         return;
@@ -176,6 +178,7 @@ export default {
       this.$store.dispatch('users/edit',this.register)
       alert('Successfully Updated!')
       this.isEdit = false;
+      location.reload()
     }
   }
 };
