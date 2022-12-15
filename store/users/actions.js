@@ -20,6 +20,13 @@ const actions = {
       );
       response.customer = customer;
     },
+    async reset_password({ commit },  customer ) {
+      const response = await this.$axios.$post(
+        `/reset-password/`,
+        customer
+      );
+      response.customer = customer;
+    },
     async editUserImage({ commit },  customer ) {
       const response = await this.$axios.$put(
         `/users/${customer.get('id')}/`,

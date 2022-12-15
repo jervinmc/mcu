@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <v-dialog v-model="isEdit">
+    <v-dialog v-model="isEdit" width="500">
       <v-card class="pa-5">
         <div>
           Year and Semester
@@ -8,7 +8,17 @@
         <div>
           <v-text-field outlined dense v-model="register.semester"></v-text-field>
         </div>
-        <div align="center" @click="submitHandler">
+        <div align="center">
+          <v-row>
+             <v-col>
+              <v-btn @click="isEdit=false">
+                Cancel
+              </v-btn>
+            </v-col>
+            <v-col>
+              <v-btn  @click="submitHandler" color="">Save Changes</v-btn>
+            </v-col>
+          </v-row>
         </div>
       </v-card>
     </v-dialog>
@@ -78,8 +88,11 @@
     <div></div>
       <!-- <v-app-bar-nav-icon dark @click.stop="drawer = !drawer" /> -->
       <v-spacer></v-spacer>
+      <div v-if="settings_data.length>0" class="white--text">
+          {{settings_data[0].semester}}
+      </div>
       <div class="white--text mr-5" >
-          1st semester S.Y., 2022-2023 <v-icon class="pl-5" color="white" v-if="$auth.user.account_type=='Admin'">mdi-pencil</v-icon>
+         <v-icon class="pl-5" color="white" v-if="$auth.user.account_type=='Admin'" @click="isEdit=true">mdi-pencil</v-icon>
       </div>
       <div class="">
             <v-avatar>
@@ -125,13 +138,19 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
 export default {
+  computed:{
+    ...mapState('settings',['settings_data']),
+  },
   name: 'DefaultLayout',
   created(){
+    this.$store.dispatch("settings/view")
     this.account_type = localStorage.getItem('account_type')
   },
   data () {
     return {
+      isEdit:false,
       register:{},
       account_type:'',
       isOpenLogout:false,
@@ -254,6 +273,15 @@ export default {
     }
   },
   methods:{
+    submitHandler(){
+      if(this.settings_data.length>0){
+        this.$store.dispatch("settings/edit",{id:this.settings_data[0].id,semester:this.register.semester})
+      }
+      else{
+         this.$store.dispatch("settings/add",this.register)
+      }
+      location.reload()
+    },
     confirm(){
      localStorage.clear();
      this.$auth.logout()

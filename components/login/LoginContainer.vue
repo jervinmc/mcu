@@ -144,7 +144,7 @@
           <v-btn depressed color="#7c0ba0" dark @click="submitHandler" :loading="isLoaded"> Login </v-btn>
         </div>
         <div v-if="category=='forgot-password'" align="center" class="pt-10">
-        <v-btn depressed color="#7c0ba0" dark @click="login" :loading="isLoaded"> Send </v-btn>
+        <v-btn depressed color="#7c0ba0" dark @click="resetPass" :loading="isLoaded"> Send </v-btn>
         </div>
          <div v-if="category=='register'" align="center" class="pt-10">
         <v-btn depressed color="#7c0ba0" dark @click="submitHandlerRegister" :loading="isLoaded"> Submit </v-btn>
@@ -174,6 +174,12 @@ export default {
     }
   },
   methods: {
+    resetPass(){
+      this.$store.dispatch('users/reset_password',{email:this.register.email}).then((res)=>{
+       
+      })
+       alert('Successfully Sent!')
+    },
       async submitHandlerRegister() {
       this.isLoaded = true;
       // this.$refs.form.validate();
