@@ -69,6 +69,7 @@ export default {
       }
       form_data.append("content", this.register.content);
       await this.$store.dispatch("events/add", form_data);
+      this.$store.dispatch("job_posting/notify",{})
       alert("Successfully Posted!");
       this.loadData();
       location.reload()

@@ -62,6 +62,7 @@ export default {
     ...mapState("events", ["event_data"]),
   },
   created() {
+    this.$store.dispatch('report/event_view',{})
     this.loadData();
   },
   methods: {

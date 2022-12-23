@@ -1,9 +1,9 @@
 <template>
   <div class="px-15 pt-5">
-     <v-row>
-         <v-col>
-           <v-row>
-          <v-col cols="6">
+    <v-row>
+      <v-col>
+        <v-row>
+          <v-col cols="3">
             <v-card
               color="#4747a1"
               height="120"
@@ -13,12 +13,12 @@
               <div class="pb-5 white--text">Total Members</div>
               <div class="text-h4 white--text">
                 <b>
-                  {{users.length}}
+                  {{ users.length }}
                 </b>
               </div>
             </v-card>
           </v-col>
-            <v-col cols="6">
+          <v-col cols="3">
             <v-card
               color="#4747a1"
               height="120"
@@ -28,14 +28,44 @@
               <div class="pb-5 white--text">Active Members</div>
               <div class="text-h4 white--text">
                 <b>
-                  {{users.filter(data=>data.is_active).length}}
+                  {{ users.filter((data) => data.is_active).length }}
+                </b>
+              </div>
+            </v-card>
+          </v-col>
+          <v-col cols="3" v-if="report_data.length != 0">
+            <v-card
+              color="#4747a1"
+              height="120"
+              class="rounded-xl pa-5"
+              elevation="5"
+            >
+              <div class="pb-5 white--text">No. of Event Views</div>
+              <div class="text-h4 white--text">
+                <b>
+                  {{ report_data[0].event_views }}
+                </b>
+              </div>
+            </v-card>
+          </v-col>
+          <v-col cols="3" v-if="report_data.length != 0">
+            <v-card
+              color="#4747a1"
+              height="120"
+              class="rounded-xl pa-5"
+              elevation="5"
+            >
+              <div class="pb-5 white--text">No. Announcement Views</div>
+              <div class="text-h4 white--text">
+                <b>
+                  {{ report_data[0].announcement_views }}
                 </b>
               </div>
             </v-card>
           </v-col>
         </v-row>
-         </v-col>
-        <!-- <v-col>
+      </v-col>
+      <!-- <v-col>
            <v-row>
           <v-col cols="12">
             <v-card
@@ -53,24 +83,24 @@
 
         </v-row>
         </v-col> -->
-     </v-row>
-            <v-data-table
+    </v-row>
+    <v-data-table
       class="pa-5"
       :headers="headers"
       :items="users"
       :loading="isLoading"
     >
-     <template v-slot:[`item.status`]="{ item }">
+      <template v-slot:[`item.status`]="{ item }">
         <div>
           <v-chip align="center" :style="getColorStatus(item.status)"
             ><span>{{ item.status }} </span></v-chip
           >
         </div>
       </template>
-     <template #[`item.price`]="{ item }">
-          <div>
-            {{formatPrice(item.price)}}
-          </div>
+      <template #[`item.price`]="{ item }">
+        <div>
+          {{ formatPrice(item.price) }}
+        </div>
       </template>
       <template v-slot:loading>
         <v-skeleton-loader
@@ -80,13 +110,13 @@
           class="my-2"
         ></v-skeleton-loader>
       </template>
-         <template #[`item.image`]="{ item }">
-             <v-img :src="item.image" height="150" width="150"></v-img>
+      <template #[`item.image`]="{ item }">
+        <v-img :src="item.image" height="150" width="150"></v-img>
       </template>
       <template #[`item.date_joined`]="{ item }">
-            <div>
-              {{formatDate(item.date_joined)}}
-            </div>
+        <div>
+          {{ formatDate(item.date_joined) }}
+        </div>
       </template>
       <template #[`item.opt`]="{ item }">
         <v-menu offset-y z-index="1">
@@ -96,12 +126,12 @@
             </v-btn>
           </template>
           <v-list dense>
-            <v-list-item @click.stop="status(item,'Accepted')">
+            <v-list-item @click.stop="status(item, 'Accepted')">
               <v-list-item-content>
                 <v-list-item-title>Approve</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item @click.stop="status(item,'Declined')">
+            <v-list-item @click.stop="status(item, 'Declined')">
               <v-list-item-content>
                 <v-list-item-title>Decline</v-list-item-title>
               </v-list-item-content>
@@ -114,36 +144,37 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
-import moment from 'moment';
+import { mapState } from "vuex";
+import moment from "moment";
 export default {
-  computed:{
-    ...mapState('users',['users'])
+  computed: {
+    ...mapState("users", ["users"]),
+    ...mapState("report", ["report_data"]),
   },
-  created(){
-    this.$store.dispatch('users/view')
+  created() {
+    this.$store.dispatch("report/view", {});
+    this.$store.dispatch("users/view");
   },
-  data(){
+  data() {
     return {
-       headers: [
+      headers: [
         { text: "ID", value: "id" },
         { text: "Date Registered", value: "date_joined" },
         { text: "Firstname", value: "firstname" },
         { text: "Lastname", value: "lastname" },
         { text: "Email", value: "email" },
-   
+
         ,
       ],
-    }
+    };
   },
-  methods:{
-    formatDate(item){
-     return moment(item).format('LL')
+  methods: {
+    formatDate(item) {
+      return moment(item).format("LL");
     },
-  }
-}
+  },
+};
 </script>
 
 <style>
-
 </style>

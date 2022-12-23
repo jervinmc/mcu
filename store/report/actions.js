@@ -1,28 +1,35 @@
 const actions = {
     async add({ commit },  data ) {
       const response = await this.$axios.$post(
-        "/job_posting/",
+        "/report/",
         data
       );
       response.data = data;
     },
+    async announcement_view({ commit },  data ) {
+        const response = await this.$axios.$post(
+          "/announcement-view/",
+          {}
+        );
+        response.data = data;
+      },
+      async event_view({ commit },  data ) {
+        const response = await this.$axios.$post(
+          "/event-view/",
+          {}
+        );
+        response.data = data;
+      },
     async edit({ commit },  data ) {
       const response = await this.$axios.$put(
-        `/job_posting/${data.id}/`,
+        `/report/${data.id}/`,
         data
       );
       response.data = data;
     },
     async view({ commit }, ) {
         const response = await this.$axios.$get(
-          "/job_posting/"
-        );
-        commit("SET_EVENT", response);
-      },
-      async notify({ commit }, ) {
-        const response = await this.$axios.$post(
-          "/notify/",
-          {}
+          "/report/"
         );
         commit("SET_EVENT", response);
       },

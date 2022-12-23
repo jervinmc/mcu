@@ -62,7 +62,7 @@
       </v-card>
     </v-dialog>
     <div class="text-h5 pb-10">
-      <b> Juan Dela Cruz</b>
+      <b>Alumni Profiling</b>
     </div>
     <div>
       <v-row>
