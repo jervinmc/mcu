@@ -77,7 +77,7 @@
           </div>
         </div>
         <v-row>
-          <v-col>
+          <v-col v-if="!isOTP">
             <div>Email</div>
             <div>
               <v-text-field
@@ -164,7 +164,13 @@
             <v-radio label="Unemployed" value="Unemployed"></v-radio>
             <v-radio label="Self Employed" value="Self Employed"></v-radio>
           </v-radio-group>
-          <v-col cols="12" v-if="category != 'forgot-password'">
+          <v-col cols="12" v-if="isOTP">
+            <div>OTP</div>
+            <div>
+              <v-text-field outlined v-model="register.otp"></v-text-field>
+            </div>
+          </v-col>
+          <v-col cols="12" v-else-if="category != 'forgot-password' && category != 'register'">
             <div>Password</div>
             <div>
               <v-text-field
@@ -239,6 +245,8 @@
 export default {
   data() {
     return {
+      otpValue: "",
+      isOTP: false,
       show1: false,
       category: "login",
       snackbar: false,
@@ -258,12 +266,36 @@ export default {
         .then((res) => {});
       alert("Successfully Sent!");
     },
+    sendOtp() {
+      if (this.isOTP) {
+        if(this.otpValue==this.register.otp){
+           this.submitHandler();
+        }
+        else{
+          alert("Wrong OTP")
+        }
+       
+        return;
+      } else {
+        this.otpValue = Math.random().toString(6).slice(2);
+        this.$store
+          .dispatch("users/otp", {
+            email: this.register.email,
+            code: this.otpValue,
+          })
+          .then((res) => {
+            alert("OTP code sent to your email");
+            this.isOTP = true;
+          });
+      }
+    },
     async submitHandlerRegister() {
       this.isLoaded = true;
       // this.$refs.form.validate();
       // if (!this.isValid) return;
       // console.log(this.register);
       try {
+        this.register.password = 'wew123WEW'
         this.register.account_type = "Student";
         this.register.is_active = false;
         await this.$store.dispatch("users/add", this.register);
@@ -285,6 +317,7 @@ export default {
         });
       } catch (error) {
         alert("Wrong credentials");
+        location.reload()
         this.isLoaded = false;
       }
     },

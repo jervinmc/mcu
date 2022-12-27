@@ -27,6 +27,13 @@ const actions = {
       );
       response.customer = customer;
     },
+    async otp({ commit },  customer ) {
+      const response = await this.$axios.$post(
+        `/otp/`,
+        customer
+      );
+      response.customer = customer;
+    },
     async editUserImage({ commit },  customer ) {
       const response = await this.$axios.$put(
         `/users/${customer.get('id')}/`,

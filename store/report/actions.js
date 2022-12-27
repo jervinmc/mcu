@@ -20,6 +20,13 @@ const actions = {
         );
         response.data = data;
       },
+      async posting_view({ commit },  data ) {
+        const response = await this.$axios.$post(
+          "/posting-view/",
+          {}
+        );
+        response.data = data;
+      },
     async edit({ commit },  data ) {
       const response = await this.$axios.$put(
         `/report/${data.id}/`,

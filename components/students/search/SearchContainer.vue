@@ -1,15 +1,11 @@
 <template>
-  <v-card elevation="5">
-    <v-row>
-      <v-col align="start" class="pa-10 text-h5" cols="auto">
-        <b>Request Management</b>
-      </v-col>
-      <v-spacer></v-spacer>
-    </v-row>
+  <div class="px-15 pt-5">
+    <v-text-field outlined v-model="search" dense placeholder="Search"></v-text-field>
     <v-data-table
       class="pa-5"
       :headers="headers"
-      :items="requestList"
+      :search="search"
+      :items="users.filter(data=>data.account_type=='Student')"
       :loading="isLoading"
     >
       <template v-slot:[`item.status`]="{ item }">
@@ -35,6 +31,11 @@
       <template #[`item.image`]="{ item }">
         <v-img :src="item.image" height="150" width="150"></v-img>
       </template>
+      <template #[`item.date_joined`]="{ item }">
+        <div>
+          {{ formatDate(item.date_joined) }}
+        </div>
+      </template>
       <template #[`item.opt`]="{ item }">
         <v-menu offset-y z-index="1">
           <template v-slot:activator="{ attrs, on }">
@@ -43,75 +44,52 @@
             </v-btn>
           </template>
           <v-list dense>
-            <v-list-item @click.stop="status(item, true)">
+            <v-list-item @click.stop="status(item, 'Accepted')">
               <v-list-item-content>
                 <v-list-item-title>Approve</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <!-- <v-list-item @click.stop="status(item, false)">
+            <v-list-item @click.stop="status(item, 'Declined')">
               <v-list-item-content>
                 <v-list-item-title>Decline</v-list-item-title>
               </v-list-item-content>
-            </v-list-item> -->
+            </v-list-item>
           </v-list>
         </v-menu>
       </template>
     </v-data-table>
-  </v-card>
+  </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import moment from "moment";
 export default {
   computed: {
     ...mapState("users", ["users"]),
-    requestList() {
-      return this.users.filter((data) => !data.is_active);
-    },
+    ...mapState("report", ["report_data"]),
   },
   created() {
+    this.$store.dispatch("report/view", {});
     this.$store.dispatch("users/view");
   },
   data() {
     return {
+      search:'',
       headers: [
         { text: "ID", value: "id" },
+        { text: "Date Registered", value: "date_joined" },
         { text: "Firstname", value: "firstname" },
-        { text: "Middlename", value: "middlename" },
         { text: "Lastname", value: "lastname" },
-        { text: "Student Number", value: "student_number" },
         { text: "Email", value: "email" },
-        { text: "Actions", value: "opt" },
+
         ,
-      ],
-      events: [
-        {
-          id: "1",
-          Firstname: "Juan Delacruz",
-          student_number: "201510994",
-          email: "juandelacruz@email.com",
-        },
-        {
-          id: "2",
-          fullname: "Pedro Delacruz",
-          student_number: "201510994",
-          email: "pedrodelacruz@email.com",
-        },
       ],
     };
   },
   methods: {
-    status(item, status) {
-      this.$store
-        .dispatch("users/edit", { id: item.id, is_active: status })
-        .then((res) => {
-          this.$store
-            .dispatch("users/otp", { email: item.email })
-            .then((res) => {
-              alert("Successfully Updated!");
-              location.reload();
-            });
-        });
+    formatDate(item) {
+      return moment(item).format("LL");
     },
   },
 };

@@ -1,5 +1,26 @@
 <template>
   <div class="pa-10">
+    <v-dialog v-model="isAdd" width="600">
+      <v-card class="pa-10"> 
+        <div>
+          <div>
+            Company Name
+          </div>
+          <div>
+            <v-text-field outlined dense v-model="register.company_name"></v-text-field>
+          </div>
+          <div>
+            Field
+          </div>
+          <div>
+            <v-text-field outlined dense v-model="register.field"></v-text-field>
+          </div>
+           <div align="center">
+          <v-btn color="primary" @click="submitHandlerWork">Save</v-btn>
+        </div>
+        </div>
+      </v-card>
+    </v-dialog>
     <v-dialog v-model="isEdit" width="500">
       <v-card class="pa-10">
         <div>
@@ -16,9 +37,9 @@
         </div>
         <div>
           <div>
-            Mobile Number
+            Mobile Number(+63)
           </div>
-          <v-text-field outlined dense v-model="register.mobile_number" ></v-text-field>
+          <v-text-field outlined placeholder="+63" dense v-model="register.mobile_number" ></v-text-field>
         </div>
          <div>
           <div>
@@ -28,7 +49,7 @@
         </div>
           <div>
           <div>
-          Mobile Number
+          Mobile Number(+63)
           </div>
           <v-text-field outlined dense v-model="register.mobile_number" ></v-text-field>
         </div>
@@ -153,14 +174,14 @@
                         </v-col>
                         <v-col>
                             <div>
-                                {{$auth.last_attended}}
+                                {{$auth.user.last_attended}}
                             </div>
                         </v-col>
                     </v-row>
                       <v-row>
                         <v-col>
                             <div>
-                               Mobile Number:
+                               Mobile Number(+63):
                             </div>
                         </v-col>
                         <v-col>
@@ -229,20 +250,32 @@
                    <div>
                   Status:
               </div>
- 
-               <!-- <v-radio-group v-model="radioGroup" >
-        <v-radio
-          label="Working"
-          value="n"
-        ></v-radio>
-        <v-radio
-          label="Not Working"
-          value="n"
-        ></v-radio>
-      </v-radio-group> -->
                 <v-icon @click="editItem">
             mdi-pencil
           </v-icon>
+          <div>
+            <v-row>
+              <v-col>
+                <div>Work Experience History</div>
+              </v-col>
+              <v-col>
+                <v-icon @click="isAdd=true">mdi-plus</v-icon>
+              </v-col>
+            </v-row>
+            <div v-for="x in work_data" :key="x">
+              <v-divider></v-divider>
+              <v-row>
+                <v-col cols="12">
+                 <div>
+                  Company Name :  {{x.company_name}}
+                 </div>
+                 <div>
+                  Field : {{x.field}}
+                 </div>
+                </v-col>
+              </v-row>
+            </div>
+          </div>
           </v-card>
         </v-col>
       </v-row>
@@ -251,10 +284,22 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
 var cloneDeep = require("lodash.clonedeep");
 export default {
-  
+  computed:{
+    ...mapState('work',['work_data'])
+  },
+  created(){
+    this.$store.dispatch('work/work')
+  },
   methods:{
+      submitHandlerWork(){
+        this.$store.dispatch('work/add',{"user_id":this.$auth.user.id,"company_name":this.register.company_name,"field":this.register.field}).then(res=>{
+          alert('Successfully Added!')
+          location.reload()
+        })
+      },
       onFileUpload(e) {
       this.file = e;
       e = e.target.files[0];
@@ -283,18 +328,22 @@ export default {
     },
     editItem(){
       this.register = cloneDeep(this.$auth.user)
-      
+      delete this.register.image
       this.isEdit=true
     },
     submitHandler(){
       this.register.id = this.$auth.user.id
-      this.$store.dispatch('users/edit',this.register)
-      alert("Successfully Updated!")
+      this.$store.dispatch('users/edit',this.register).then(res=>{
+         alert("Successfully Updated!")
+        location.reload()
+      })
+     
       this.isEdit = false;
     }
   },
   data(){
     return{
+      isAdd:false,
       isEdit:false,
       register:{}
     }

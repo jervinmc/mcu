@@ -1,36 +1,27 @@
 const actions = {
     async add({ commit },  data ) {
       const response = await this.$axios.$post(
-        "/job_posting/",
-        data, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        "/work/",
+        data
       );
       response.data = data;
     },
     async edit({ commit },  data ) {
       const response = await this.$axios.$put(
-        `/job_posting/${data.get('id')}/`,
-        data, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        `/work/${data.id}/`,
+        data
       );
       response.data = data;
     },
     async view({ commit }, ) {
         const response = await this.$axios.$get(
-          "/job_posting/"
+          "/work/"
         );
         commit("SET_EVENT", response);
       },
-      async notify({ commit }, ) {
-        const response = await this.$axios.$post(
-          "/notify/",
-          {}
+      async work({ commit }, ) {
+        const response = await this.$axios.$get(
+          "/work-user/"
         );
         commit("SET_EVENT", response);
       },

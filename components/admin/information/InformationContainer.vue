@@ -10,17 +10,32 @@
         <div>
           <v-text-field outlined v-model="register.lastname"></v-text-field>
         </div>
-        <div>Mobile Number</div>
+        <div>Mobile Number(+63)</div>
         <div>
           <v-text-field
             outlined
+            placeholder="+63"
             v-model="register.mobile_number"
           ></v-text-field>
         </div>
-        <div>Faculty ID Number</div>
+         <div>Age</div>
+        <div>
+          <v-text-field
+            outlined
+            v-model="register.age"
+          ></v-text-field>
+        </div>
+         <div>Address</div>
+        <div>
+          <v-text-field
+            outlined
+            v-model="register.address"
+          ></v-text-field>
+        </div>
+        <!-- <div>Faculty ID Number</div>
         <div>
           <v-text-field outlined v-model="register.student_number"></v-text-field>
-        </div>
+        </div> -->
         <div class="py-10">
           <v-row>
             <v-col align="end">
@@ -62,12 +77,12 @@
                 <div></div>
                 <div align="start" class="pt-5">
                   <v-row>
-                    <v-col>
+                    <!-- <v-col>
                       <div>Faculty ID Number:</div>
                     </v-col>
                     <v-col>
                       <div>{{$auth.user.student_number}}</div>
-                    </v-col>
+                    </v-col> -->
                   </v-row>
                   <v-row>
                     <v-col>
@@ -108,9 +123,17 @@
           <v-card elevation="5" class="rounded-xl pa-10" height="400">
             <div>Email:</div>
             <div class="pb-10">sample@rocketmail.com</div>
-            <div>Mobile Number:</div>
+            <div>Mobile Number(+63):</div>
             <div class="pb-10"> 
               {{ $auth.user.mobile_number }}
+            </div>
+             <div>Age:</div>
+              <div class="pb-10"> 
+              {{ $auth.user.age }}
+            </div>
+             <div>Address:</div>
+              <div class="pb-10"> 
+              {{ $auth.user.address }}
             </div>
             <!-- <div>Status:</div>
             <div>
@@ -119,7 +142,7 @@
                 <v-radio label="Not Working" value="n"></v-radio>
               </v-radio-group>
             </div> -->
-            <v-icon @click="isEdit = true"> mdi-pencil </v-icon>
+            <v-icon @click="editItem"> mdi-pencil </v-icon>
           </v-card>
         </v-col>
       </v-row>
@@ -128,6 +151,7 @@
 </template>
 
 <script>
+var cloneDeep = require("lodash.clonedeep");
 export default {
   data() {
     return {
@@ -138,6 +162,11 @@ export default {
     };
   },
   methods: {
+    editItem(){
+      this.register = cloneDeep(this.$auth.user)
+      delete this.register.image
+      this.isEdit = true
+    },
     onFileUpload(e) {
       this.file = e;
       e = e.target.files[0];

@@ -51,7 +51,7 @@
       dark
       color="primary"
     >
-      <v-list >
+      <v-list v-if="this.$auth.loggedIn">
         <!--eslint-disable-->
         <v-list-item
           v-for="(item, i) in $auth.user.account_type=='Admin' ? items_admin : $auth.user.account_type=='Head' ? items  :  items_student"
@@ -79,7 +79,7 @@
     </v-navigation-drawer>
     <v-app-bar
       color="primary"
-      v-if="$route.name!='login'"
+      v-if="$route.name!='login' && $auth.loggedIn"
       :clipped-left="clipped"
       fixed
       app
@@ -91,7 +91,7 @@
       <div v-if="settings_data.length>0" class="white--text">
           {{settings_data[0].semester}}
       </div>
-      <div class="white--text mr-5" >
+      <div class="white--text mr-5"  v-if="$auth.loggedIn">
          <v-icon class="pl-5" color="white" v-if="$auth.user.account_type=='Admin'" @click="isEdit=true">mdi-pencil</v-icon>
       </div>
       <div class="">
@@ -182,6 +182,11 @@ export default {
           icon: 'mdi-account',
           title: 'Alumni Profiling',
           to: '/student/information'
+        },
+        {
+          icon: 'mdi-magnify',
+          title: 'Search',
+          to: '/student/search'
         },
         //  {
         //   icon: 'mdi-school',

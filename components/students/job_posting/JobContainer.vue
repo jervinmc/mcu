@@ -60,6 +60,7 @@ export default {
   },
   created() {
     this.loadData();
+    this.$store.dispatch('report/posting_view',{})
   },
   methods: {
     async submitHandlerRegister() {

@@ -2,14 +2,22 @@ const actions = {
     async add({ commit },  data ) {
       const response = await this.$axios.$post(
         "/events/",
-        data
+        data, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       response.data = data;
     },
     async edit({ commit },  data ) {
       const response = await this.$axios.$put(
-        `/events/${data.id}/`,
-        data
+        `/events/${data.get('id')}/`,
+        data, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       response.data = data;
     },

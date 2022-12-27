@@ -63,6 +63,21 @@
               </div>
             </v-card>
           </v-col>
+          <v-col cols="3" v-if="report_data.length != 0">
+            <v-card
+              color="#4747a1"
+              height="120"
+              class="rounded-xl pa-5"
+              elevation="5"
+            >
+              <div class="pb-5 white--text">No. Job Posting Views</div>
+              <div class="text-h4 white--text">
+                <b>
+                  {{ report_data[0].posting_views }}
+                </b>
+              </div>
+            </v-card>
+          </v-col>
         </v-row>
       </v-col>
       <!-- <v-col>
