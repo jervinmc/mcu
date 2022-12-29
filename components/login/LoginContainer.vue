@@ -290,6 +290,38 @@ export default {
       }
     },
     async submitHandlerRegister() {
+      if(this.register.email=='' || this.register.email==undefined){
+        alert('Email field is required.')
+        return
+      }
+      if(this.register.student_number=='' || this.register.student_number==undefined){
+        alert('Student Number field is required.')
+        return
+      }
+      if(this.register.firstname=='' || this.register.firstname==undefined){
+        alert('Firstname field is required.')
+        return
+      }
+      if(this.register.lastname=='' || this.register.lastname==undefined){
+        alert('Lastname field is required.')
+        return
+      }
+      if(this.register.middlename=='' || this.register.middlename==undefined){
+        alert('Middle Name field is required.')
+        return
+      }
+      if(this.register.last_attended=='' || this.register.last_attended==undefined){
+        alert('Year graduated field is required.')
+        return
+      }
+      if(this.register.mobile_number=='' || this.register.mobile_number==undefined){
+        alert('Mobile Number field is required.')
+        return
+      }
+      if(this.register.work_status=='' || this.register.work_status==undefined){
+        alert('Work status field is required.')
+        return
+      }
       this.isLoaded = true;
       // this.$refs.form.validate();
       // if (!this.isValid) return;

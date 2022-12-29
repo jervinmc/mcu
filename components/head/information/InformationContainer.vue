@@ -53,9 +53,9 @@
     <div>
       <v-row>
         <v-col>
-          <v-card elevation="5" class="rounded-xl pa-10" height="400">
+          <v-card elevation="5" class="rounded-xl pa-10" >
             <div align="center">
-              <div class="pointer">
+              <div >
                 <v-avatar
                   size="100"
                   color="grey"

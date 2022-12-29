@@ -35,15 +35,24 @@
     </v-row> -->
     <div class="pt-5 py-5">
       <div v-for="x in job_posting_data" :key="x" class="py-5">
-        <v-card  class="rounded-xl pa-5" elevation="6">
+        <v-card class="rounded-xl pa-5" elevation="6">
+          <div align="end">
+            <v-icon @click="editItem(x)">mdi-pencil</v-icon>
+          </div>
           <v-row>
-            <v-col cols="6">
+            <v-col cols="12">
+              <div class="text-h5">
+                <b> {{ x.content }} </b>
+                <!-- <div>
+                  <i>{{x.date_created}}</i>
+                </div> -->
+              </div>
               <div>
-                {{ x.content }}
+                {{x.description}}
               </div>
             </v-col>
-            <v-col align="center" cols="6">
-                <v-img :src="x.image" height="200" width="200"></v-img>
+            <v-col align="start" cols="12">
+              <v-img :src="x.image" max-height="600" max-width="500"></v-img>
             </v-col>
           </v-row>
         </v-card>

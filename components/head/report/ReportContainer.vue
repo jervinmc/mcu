@@ -1,81 +1,111 @@
 <template>
-  <div class="px-15 pt-5">
+  <div class="px-5 pt-5">
     <v-row>
       <v-col>
         <v-row>
-          <v-col cols="3">
+          <v-col cols="12">
             <v-card
               color="#4747a1"
-              height="120"
+              height="70"
               class="rounded-xl pa-5"
               elevation="5"
             >
-              <div class="pb-5 white--text">Total Members</div>
-              <div class="text-h4 white--text">
-                <b>
-                  {{ users.length }}
-                </b>
-              </div>
+              <v-row>
+                <v-col>
+                  <div class="pb-5 white--text">Total Members</div>
+                </v-col>
+                <v-col align="end" class="pt-2">
+                  <div class="text-h4 white--text">
+                    <b>
+                      {{ users.length }}
+                    </b>
+                  </div>
+                </v-col>
+              </v-row>
             </v-card>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="12" class="pt-0">
             <v-card
               color="#4747a1"
-              height="120"
+              height="70"
               class="rounded-xl pa-5"
               elevation="5"
             >
-              <div class="pb-5 white--text">Active Members</div>
-              <div class="text-h4 white--text">
-                <b>
-                  {{ users.filter((data) => data.is_active).length }}
-                </b>
-              </div>
+              <v-row>
+                <v-col>
+                  <div class="pb-5 white--text">Active Members</div>
+                </v-col>
+                <v-col class="pt-2" align="end">
+                  <div class="text-h4 white--text">
+                    <b>
+                      {{ users.filter((data) => data.is_active).length }}
+                    </b>
+                  </div>
+                </v-col>
+              </v-row>
             </v-card>
           </v-col>
-          <v-col cols="3" v-if="report_data.length != 0">
+          <v-col cols="12" v-if="report_data.length != 0" class="pt-0">
             <v-card
               color="#4747a1"
-              height="120"
+              height="70"
               class="rounded-xl pa-5"
               elevation="5"
             >
-              <div class="pb-5 white--text">No. of Event Views</div>
-              <div class="text-h4 white--text">
-                <b>
-                  {{ report_data[0].event_views }}
-                </b>
-              </div>
+              <v-row>
+                <v-col align-self="center">
+                  <div class="pb-5 white--text">No. of Event Views</div>
+                </v-col>
+                <v-col align="end" align-self="center">
+                  <div class="text-h4 white--text">
+                    <b>
+                      {{ report_data[0].event_views }}
+                    </b>
+                  </div>
+                </v-col>
+              </v-row>
             </v-card>
           </v-col>
-          <v-col cols="3" v-if="report_data.length != 0">
+          <v-col cols="12" v-if="report_data.length != 0" class="pt-0">
             <v-card
               color="#4747a1"
-              height="120"
+              height="70"
               class="rounded-xl pa-5"
               elevation="5"
             >
-              <div class="pb-5 white--text">No. Announcement Views</div>
-              <div class="text-h4 white--text">
-                <b>
-                  {{ report_data[0].announcement_views }}
-                </b>
-              </div>
+              <v-row>
+                <v-col>
+                  <div class="pb-5 white--text">No. Announcement Views</div>
+                </v-col>
+                <v-col align="end">
+                  <div class="text-h4 white--text">
+                    <b>
+                      {{ report_data[0].announcement_views }}
+                    </b>
+                  </div>
+                </v-col>
+              </v-row>
             </v-card>
           </v-col>
-          <v-col cols="3" v-if="report_data.length != 0">
+          <v-col cols="12" v-if="report_data.length != 0" class="pt-0">
             <v-card
               color="#4747a1"
-              height="120"
+              height="70"
               class="rounded-xl pa-5"
               elevation="5"
             >
-              <div class="pb-5 white--text">No. Job Posting Views</div>
-              <div class="text-h4 white--text">
-                <b>
-                  {{ report_data[0].posting_views }}
-                </b>
-              </div>
+              <v-row>
+                <v-col>
+                  <div class="pb-5 white--text">No. Job Posting Views</div>
+                </v-col>
+                <v-col align="end">
+                  <div class="text-h4 white--text">
+                    <b>
+                      {{ report_data[0].posting_views }}
+                    </b>
+                  </div>
+                </v-col>
+              </v-row>
             </v-card>
           </v-col>
         </v-row>

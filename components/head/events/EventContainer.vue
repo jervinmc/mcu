@@ -125,6 +125,7 @@ export default {
       if (this.file != "" && this.file != undefined) {
         form_data.append("image", this.file);
       }
+      form_data.append("description", this.register.description);
       form_data.append("content", this.register.content);
       await this.$store.dispatch("events/add", form_data);
       this.$store.dispatch("job_posting/notify",{})
