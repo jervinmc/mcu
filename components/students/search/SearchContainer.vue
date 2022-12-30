@@ -77,7 +77,7 @@ export default {
     return {
       search:'',
       headers: [
-        { text: "ID", value: "id" },
+        { text: "Student Number", value: "student_number" },
         { text: "Date Registered", value: "date_joined" },
         { text: "Firstname", value: "firstname" },
         { text: "Lastname", value: "lastname" },

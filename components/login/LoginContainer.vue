@@ -69,9 +69,7 @@
       </div>
       <div class="pa-5" align="start">
         <div v-if="category == 'register'" class="pb-10">
-          To reset your password, submit your email address below. if we can
-          find you in the database, an email will be sent to your email address,
-          with instructions how to get access again.
+          To continue with your registration, kindly complete the form.
           <div class="text-h6 pt-5">
             <b> Search by email address</b>
           </div>
@@ -147,6 +145,7 @@
             <div>Mobile Number</div>
             <div>
               <v-text-field
+                type="number"
                 hide-details=""
                 append-icon="mdi-account"
                 outlined
@@ -170,7 +169,10 @@
               <v-text-field outlined v-model="register.otp"></v-text-field>
             </div>
           </v-col>
-          <v-col cols="12" v-else-if="category != 'forgot-password' && category != 'register'">
+          <v-col
+            cols="12"
+            v-else-if="category != 'forgot-password' && category != 'register'"
+          >
             <div>Password</div>
             <div>
               <v-text-field
@@ -268,13 +270,12 @@ export default {
     },
     sendOtp() {
       if (this.isOTP) {
-        if(this.otpValue==this.register.otp){
-           this.submitHandler();
+        if (this.otpValue == this.register.otp) {
+          this.submitHandler();
+        } else {
+          alert("Wrong OTP");
         }
-        else{
-          alert("Wrong OTP")
-        }
-       
+
         return;
       } else {
         this.otpValue = Math.random().toString(6).slice(2);
@@ -290,44 +291,62 @@ export default {
       }
     },
     async submitHandlerRegister() {
-      if(this.register.email=='' || this.register.email==undefined){
-        alert('Email field is required.')
-        return
+      if (this.register.email == "" || this.register.email == undefined) {
+        alert("Email field is required.");
+        return;
       }
-      if(this.register.student_number=='' || this.register.student_number==undefined){
-        alert('Student Number field is required.')
-        return
+      if (
+        this.register.student_number == "" ||
+        this.register.student_number == undefined
+      ) {
+        alert("Student Number field is required.");
+        return;
       }
-      if(this.register.firstname=='' || this.register.firstname==undefined){
-        alert('Firstname field is required.')
-        return
+      if (
+        this.register.firstname == "" ||
+        this.register.firstname == undefined
+      ) {
+        alert("Firstname field is required.");
+        return;
       }
-      if(this.register.lastname=='' || this.register.lastname==undefined){
-        alert('Lastname field is required.')
-        return
+      if (this.register.lastname == "" || this.register.lastname == undefined) {
+        alert("Lastname field is required.");
+        return;
       }
-      if(this.register.middlename=='' || this.register.middlename==undefined){
-        alert('Middle Name field is required.')
-        return
+      if (
+        this.register.middlename == "" ||
+        this.register.middlename == undefined
+      ) {
+        alert("Middle Name field is required.");
+        return;
       }
-      if(this.register.last_attended=='' || this.register.last_attended==undefined){
-        alert('Year graduated field is required.')
-        return
+      if (
+        this.register.last_attended == "" ||
+        this.register.last_attended == undefined
+      ) {
+        alert("Year graduated field is required.");
+        return;
       }
-      if(this.register.mobile_number=='' || this.register.mobile_number==undefined){
-        alert('Mobile Number field is required.')
-        return
+      if (
+        this.register.mobile_number == "" ||
+        this.register.mobile_number == undefined
+      ) {
+        alert("Mobile Number field is required.");
+        return;
       }
-      if(this.register.work_status=='' || this.register.work_status==undefined){
-        alert('Work status field is required.')
-        return
+      if (
+        this.register.work_status == "" ||
+        this.register.work_status == undefined
+      ) {
+        alert("Work status field is required.");
+        return;
       }
       this.isLoaded = true;
       // this.$refs.form.validate();
       // if (!this.isValid) return;
       // console.log(this.register);
       try {
-        this.register.password = 'wew123WEW'
+        this.register.password = "wew123WEW";
         this.register.account_type = "Student";
         this.register.is_active = false;
         await this.$store.dispatch("users/add", this.register);
@@ -349,7 +368,7 @@ export default {
         });
       } catch (error) {
         alert("Wrong credentials");
-        location.reload()
+        location.reload();
         this.isLoaded = false;
       }
     },

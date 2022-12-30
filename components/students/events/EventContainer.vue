@@ -38,7 +38,7 @@
     </v-row> -->
     <div class="pt-5 py-5">
       <div v-for="x in event_data" :key="x" class="py-5">
-       <v-card class="rounded-xl pa-5" elevation="6">
+        <v-card class="rounded-xl pa-5" elevation="6">
           <div align="end">
             <v-icon @click="editItem(x)">mdi-pencil</v-icon>
           </div>
@@ -50,12 +50,14 @@
                   <i>{{x.date_created}}</i>
                 </div> -->
               </div>
-              <div>
-                {{x.description}}
-              </div>
             </v-col>
-            <v-col align="start" cols="12">
-              <v-img :src="x.image" max-height="600" max-width="500"></v-img>
+            <v-col align="start" cols="6">
+              <v-img :src="x.image" max-height="600" max-width="400"></v-img>
+            </v-col>
+            <v-col>
+              <div align="start">
+                {{ x.description }}
+              </div>
             </v-col>
           </v-row>
         </v-card>
@@ -71,7 +73,7 @@ export default {
     ...mapState("events", ["event_data"]),
   },
   created() {
-    this.$store.dispatch('report/event_view',{})
+    this.$store.dispatch("report/event_view", {});
     this.loadData();
   },
   methods: {

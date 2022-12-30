@@ -26,11 +26,28 @@
             v-model="register.address"
           ></v-text-field>
         </div>
+        <div>
+          <div>Faculty ID</div>
+          <v-text-field
+            outlined
+            dense
+            v-model="register.student_number"
+          ></v-text-field>
+        </div>
+        <div>
+          <div>Year graduated</div>
+          <v-text-field
+            outlined
+            dense
+            v-model="register.last_attended"
+          ></v-text-field>
+        </div>
          <div>
           <div>Age</div>
           <v-text-field
             outlined
             dense
+            type="number"
             v-model="register.age"
           ></v-text-field>
         </div>
@@ -39,6 +56,7 @@
           <v-text-field
             outlined
             dense
+            type="number"
             v-model="register.mobile_number"
           ></v-text-field>
         </div>

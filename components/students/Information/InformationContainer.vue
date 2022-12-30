@@ -93,6 +93,7 @@
           <div>Mobile Number(+63)</div>
           <v-text-field
             outlined
+            type="number"
             placeholder="+63"
             dense
             v-model="register.mobile_number"
@@ -107,16 +108,8 @@
           ></v-text-field>
         </div>
         <div>
-          <div>Mobile Number(+63)</div>
-          <v-text-field
-            outlined
-            dense
-            v-model="register.mobile_number"
-          ></v-text-field>
-        </div>
-        <div>
           <div>Age</div>
-          <v-text-field outlined dense v-model="register.age"></v-text-field>
+          <v-text-field outlined dense type="number" v-model="register.age"></v-text-field>
         </div>
         <div>
           <div>Birthday</div>
@@ -291,13 +284,18 @@
                   <div>Work Experience History</div>
                 </v-col>
                 <v-col>
-                  <v-icon @click="isAdd = true">mdi-plus</v-icon>
+                  <v-icon @click="addWork">mdi-plus</v-icon>
                 </v-col>
               </v-row>
               <div v-for="x in work_data" :key="x">
                 <v-divider></v-divider>
                 <v-row>
                   <v-col cols="12">
+                    <div>
+                      <v-icon @click="editWork(x)">
+                        mdi-pencil
+                      </v-icon>
+                    </div>
                     <div>Company Name : {{ x.company_name }}</div>
                     <div>Field : {{ x.field }}</div>
                     <div>Position : {{ x.position }}</div>
@@ -325,20 +323,48 @@ export default {
     this.$store.dispatch("work/work");
   },
   methods: {
+    addWork(){
+      this.register = {}
+      this.isAdd = true
+      this.isEditWork = false
+    },
+    editWork(item){
+      this.register = cloneDeep(item)
+      this.isAdd = true
+      this.isEditWork = true
+    },
     formatDate(item) {
       return moment(item).format("LL");
     },
     submitHandlerWork() {
-      this.$store
+      if(this.isEditWork){
+          this.$store
         .dispatch("work/add", {
           user_id: this.$auth.user.id,
           company_name: this.register.company_name,
           field: this.register.field,
+          position: this.register.position,
+          id:this.register.id
         })
         .then((res) => {
           alert("Successfully Added!");
           location.reload();
         });
+        location.reload()
+        return
+      }
+      this.$store
+        .dispatch("work/add", {
+          user_id: this.$auth.user.id,
+          company_name: this.register.company_name,
+          field: this.register.field,
+          position: this.register.position,
+        })
+        .then((res) => {
+          alert("Successfully Added!");
+          location.reload();
+        });
+
     },
     onFileUpload(e) {
       this.file = e;
@@ -383,6 +409,7 @@ export default {
   },
   data() {
     return {
+      isEditWork:false,
       departMenu:false,
       isAdd: false,
       isEdit: false,

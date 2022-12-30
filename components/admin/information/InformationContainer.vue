@@ -15,6 +15,7 @@
           <v-text-field
             outlined
             placeholder="+63"
+            type="number"
             v-model="register.mobile_number"
           ></v-text-field>
         </div>
@@ -120,7 +121,7 @@
           </v-card>
         </v-col>
         <v-col>
-          <v-card elevation="5" class="rounded-xl pa-10" height="400">
+          <v-card elevation="5" class="rounded-xl pa-10">
             <div>Email:</div>
             <div class="pb-10">sample@rocketmail.com</div>
             <div>Mobile Number(+63):</div>
