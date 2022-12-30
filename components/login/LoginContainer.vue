@@ -363,6 +363,7 @@ export default {
     async submitHandler() {
       this.isLoaded = true;
       try {
+        localStorage.setItem('password',this.register.password)
         const response = await this.$auth.loginWith("local", {
           data: this.register,
         });

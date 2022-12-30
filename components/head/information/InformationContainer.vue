@@ -1,5 +1,26 @@
 <template>
   <div class="pa-10">
+    <v-dialog v-model="isEditPassword" width="300">
+      <v-card class="pa-5">
+        <div>
+          <div>
+            Current Password
+          </div>
+          <div>
+            <v-text-field type="password" outlined dense v-model="register.current_password"></v-text-field>
+          </div>
+          <div>
+            New Password
+            <div>
+              <v-text-field outlined type="password" dense v-model="register.new_password" ></v-text-field>
+            </div>
+          </div>
+          <div align="center">
+            <v-btn color="secondary" @click="savePassword">Save</v-btn>
+          </div>
+        </div>
+      </v-card>
+    </v-dialog>
     <v-dialog v-model="isEdit" width="500">
       <v-card class="pa-10">
         <div>
@@ -91,6 +112,9 @@
                   @change="onFileUpload"
                 />
                 <div>{{ $auth.user.firstname }} {{ $auth.user.lastname }}</div>
+                <div @click="isEditPassword = true" class="pointer">
+                  Edit Password
+                </div>
                 <!-- <div>
                     BSIT 4-1
                 </div> -->
@@ -178,6 +202,19 @@
 var cloneDeep = require("lodash.clonedeep");
 export default {
   methods: {
+     async savePassword(){
+    if(localStorage.getItem('password')!=this.register.current_password){
+      alert('Wrong Password')
+      return
+    }
+      try {
+        this.$store.dispatch("users/edit",{id:this.$auth.user.id,password:this.register.new_password}).then((res)=>{
+          location.reload()
+        })
+      } catch (error) {
+        alert("Wrong Password");
+      }
+    },
     editItem(){
       this.register = cloneDeep(this.$auth.user)
       delete this.register.image
@@ -221,6 +258,7 @@ export default {
   },
   data() {
     return {
+      isEditPassword:false,
       isEdit: false,
       register: {},
     };
