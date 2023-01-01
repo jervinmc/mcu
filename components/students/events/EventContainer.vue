@@ -54,7 +54,7 @@
             <v-col align="start" cols="6">
               <v-img :src="x.image" max-height="600" max-width="400"></v-img>
             </v-col>
-            <v-col>
+           <v-col cols="6">
               <div align="start">
                 {{ x.description }}
               </div>

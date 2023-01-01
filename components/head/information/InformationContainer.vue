@@ -72,6 +72,14 @@
             v-model="register.age"
           ></v-text-field>
         </div>
+         <div>
+          <div>Birthday</div>
+          <v-text-field
+            outlined
+            dense
+            v-model="register.birthdate"
+          ></v-text-field>
+        </div>
         <div>
           <div>Mobile Number</div>
           <v-text-field
@@ -125,7 +133,7 @@
                     </v-col>
                     <v-col>
                       <div>
-                        {{ $auth.user.id }}
+                        {{ $auth.user.student_number }}
                       </div>
                     </v-col>
                   </v-row>
@@ -146,6 +154,16 @@
                     <v-col>
                       <div>
                         {{ $auth.user.firstname }}
+                      </div>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <div>Year Graduated:</div>
+                    </v-col>
+                    <v-col>
+                      <div>
+                        {{ $auth.user.last_attended }}
                       </div>
                     </v-col>
                   </v-row>
@@ -180,6 +198,10 @@
             <div class="pb-10">
               {{ $auth.user.age }}
             </div>
+             <div>Birthdate:</div>
+            <div class="pb-10">
+              {{ $auth.user.birthdate }}
+            </div>
              <!-- <div>Birthdate:</div>
             <div class="pb-10">
               {{ $auth.user.birthdate }}
@@ -190,7 +212,9 @@
             </div>
             <div>
             </div>
-            <v-icon @click="editItem"> mdi-pencil </v-icon>
+            <div align="end">
+              <v-icon @click="editItem"> mdi-pencil </v-icon>
+            </div>
           </v-card>
         </v-col>
       </v-row>

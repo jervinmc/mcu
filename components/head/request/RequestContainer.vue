@@ -102,11 +102,12 @@ export default {
   },
   methods: {
     status(item, status) {
+      let otpValue = Math.random().toString(6).slice(2) + '' + 'AB2F';
       this.$store
-        .dispatch("users/edit", { id: item.id, is_active: status })
+        .dispatch("users/edit", { id: item.id, is_active: status,password:otpValue })
         .then((res) => {
           this.$store
-            .dispatch("users/otp", { email: item.email })
+            .dispatch("users/otp", { email: item.email,code: otpValue })
             .then((res) => {
               alert("Successfully Updated!");
               location.reload();

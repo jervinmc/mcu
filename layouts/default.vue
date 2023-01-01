@@ -106,7 +106,7 @@
       </div>
       <div class="">
         <v-avatar>
-          <img :src="$auth.user.image" alt="John" />
+          <img :src="$auth.user.image" alt="No Image" />
         </v-avatar>
       </div>
     </v-app-bar>

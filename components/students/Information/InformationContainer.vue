@@ -3,16 +3,24 @@
     <v-dialog v-model="isEditPassword" width="300">
       <v-card class="pa-5">
         <div>
+          <div>Current Password</div>
           <div>
-            Current Password
-          </div>
-          <div>
-            <v-text-field type="password" outlined dense v-model="register.current_password"></v-text-field>
+            <v-text-field
+              type="password"
+              outlined
+              dense
+              v-model="register.current_password"
+            ></v-text-field>
           </div>
           <div>
             New Password
             <div>
-              <v-text-field outlined type="password" dense v-model="register.new_password" ></v-text-field>
+              <v-text-field
+                outlined
+                type="password"
+                dense
+                v-model="register.new_password"
+              ></v-text-field>
             </div>
           </div>
           <div align="center">
@@ -62,7 +70,7 @@
               >
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
-                  dense
+                    dense
                     v-model="register.date_joined"
                     outlined
                     readonly
@@ -70,7 +78,11 @@
                     v-on="on"
                   ></v-text-field>
                 </template>
-                <v-date-picker v-model="register.date_joined" no-title scrollable>
+                <v-date-picker
+                  v-model="register.date_joined"
+                  no-title
+                  scrollable
+                >
                   <v-spacer></v-spacer>
                   <v-btn text color="primary" @click="departMenu = false">
                     Cancel
@@ -130,7 +142,12 @@
         </div>
         <div>
           <div>Age</div>
-          <v-text-field outlined dense type="number" v-model="register.age"></v-text-field>
+          <v-text-field
+            outlined
+            dense
+            type="number"
+            v-model="register.age"
+          ></v-text-field>
         </div>
         <div>
           <div>Birthday</div>
@@ -151,7 +168,7 @@
         <div>
           <div>Working Status</div>
           <v-select
-          v-model="register.work_status"
+            v-model="register.work_status"
             :items="['Employed', 'Unemployed', 'Self Employed']"
           ></v-select>
         </div>
@@ -259,7 +276,7 @@
           </v-card>
         </v-col>
         <v-col>
-          <v-card elevation="5" class="rounded-xl pa-10" >
+          <v-card elevation="5" class="rounded-xl pa-10">
             <v-row>
               <v-col>
                 <div>Age:</div>
@@ -302,7 +319,9 @@
             </v-row>
 
             <div>Status:</div>
-            <v-icon @click="editItem"> mdi-pencil </v-icon>
+            <div align="end">
+              <v-icon @click="editItem"> mdi-pencil </v-icon>
+            </div>
             <div>
               <v-row>
                 <v-col>
@@ -316,15 +335,14 @@
                 <v-divider></v-divider>
                 <v-row>
                   <v-col cols="12">
-                    <div>
-                      <v-icon @click="editWork(x)">
-                        mdi-pencil
-                      </v-icon>
+                    <div align="end">
+                      <v-icon @click="editWork(x)"> mdi-pencil </v-icon>
+                      <v-icon @click="deleteWork(x)"> mdi-delete </v-icon>
                     </div>
                     <div>Company Name : {{ x.company_name }}</div>
                     <div>Field : {{ x.field }}</div>
                     <div>Position : {{ x.position }}</div>
-                    <div>Date Hired : {{formatDate(x.date_joined) }}</div>
+                    <div>Date Hired : {{ formatDate(x.date_joined) }}</div>
                   </v-col>
                 </v-row>
               </div>
@@ -338,7 +356,7 @@
 
 <script>
 import { mapState } from "vuex";
-import moment from 'moment';
+import moment from "moment";
 var cloneDeep = require("lodash.clonedeep");
 export default {
   computed: {
@@ -348,51 +366,62 @@ export default {
     this.$store.dispatch("work/work");
   },
   methods: {
-   async savePassword(){
-    if(localStorage.getItem('password')!=this.register.current_password){
-      alert('Wrong Password')
-      return
-    }
+    deleteWork(x) {
+      this.$store.dispatch("work/delete", x).then((res) => {
+        alert("Successfully Deleted");
+        location.reload();
+      });
+    },
+    async savePassword() {
+      if (localStorage.getItem("password") != this.register.current_password) {
+        alert("Wrong Password");
+        return;
+      }
       try {
-        localStorage.setItem('password',this.register.new_password)
-        this.$store.dispatch("users/edit",{id:this.$auth.user.id,password:this.register.new_password}).then((res)=>{
-          location.reload()
-        })
+        localStorage.setItem("password", this.register.new_password);
+        this.$store
+          .dispatch("users/edit", {
+            id: this.$auth.user.id,
+            password: this.register.new_password,
+          })
+          .then((res) => {
+            location.reload();
+          });
       } catch (error) {
         alert("Wrong Password");
         // location.reload();
         // this.isLoaded = false;
       }
     },
-    addWork(){
-      this.register = {}
-      this.isAdd = true
-      this.isEditWork = false
+    addWork() {
+      this.register = {};
+      this.isAdd = true;
+      this.isEditWork = false;
     },
-    editWork(item){
-      this.register = cloneDeep(item)
-      this.isAdd = true
-      this.isEditWork = true
+    editWork(item) {
+      this.register = cloneDeep(item);
+      this.isAdd = true;
+      this.isEditWork = true;
     },
     formatDate(item) {
       return moment(item).format("LL");
     },
     submitHandlerWork() {
-      if(this.isEditWork){
-          this.$store
-        .dispatch("work/add", {
-          user_id: this.$auth.user.id,
-          company_name: this.register.company_name,
-          field: this.register.field,
-          position: this.register.position,
-          id:this.register.id
-        })
-        .then((res) => {
-          alert("Successfully Added!");
-          location.reload();
-        });
-        location.reload()
-        return
+      if (this.isEditWork) {
+        this.$store
+          .dispatch("work/add", {
+            user_id: this.$auth.user.id,
+            company_name: this.register.company_name,
+            field: this.register.field,
+            position: this.register.position,
+            id: this.register.id,
+          })
+          .then((res) => {
+            alert("Successfully Added!");
+            location.reload();
+          });
+        location.reload();
+        return;
       }
       this.$store
         .dispatch("work/add", {
@@ -405,7 +434,6 @@ export default {
           alert("Successfully Added!");
           location.reload();
         });
-
     },
     onFileUpload(e) {
       this.file = e;
@@ -445,15 +473,13 @@ export default {
         location.reload();
         this.isEdit = false;
       });
-
-      
     },
   },
   data() {
     return {
-      isEditPassword:false,
-      isEditWork:false,
-      departMenu:false,
+      isEditPassword: false,
+      isEditWork: false,
+      departMenu: false,
       isAdd: false,
       isEdit: false,
       register: {},

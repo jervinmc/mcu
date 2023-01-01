@@ -122,8 +122,6 @@
         </v-col>
         <v-col>
           <v-card elevation="5" class="rounded-xl pa-10">
-            <div>Email:</div>
-            <div class="pb-10">sample@rocketmail.com</div>
             <div>Mobile Number(+63):</div>
             <div class="pb-10"> 
               {{ $auth.user.mobile_number }}
@@ -143,7 +141,9 @@
                 <v-radio label="Not Working" value="n"></v-radio>
               </v-radio-group>
             </div> -->
-            <v-icon @click="editItem"> mdi-pencil </v-icon>
+            <div>
+              <v-icon @click="editItem"> mdi-pencil </v-icon>
+            </div>
           </v-card>
         </v-col>
       </v-row>
