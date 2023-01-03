@@ -21,11 +21,11 @@
       <v-card class="pa-10">
         <div align="center" class="py-10">
           <div>
-            <v-text-field dense v-model="register.firstname" outlined placeholder="Firstname"></v-text-field>
+            <v-text-field dense v-model="register.email" outlined placeholder="Email"></v-text-field>
           </div>
-          <div>
+          <!-- <div>
             <v-text-field dense v-model="register.lastname" outlined placeholder="Lastname"></v-text-field>
-          </div>
+          </div> -->
         </div>
         <div>
           <v-row>
@@ -187,9 +187,11 @@ export default {
       this.isEdit = true;
     },
     submitHandlerEdit(){
-      this.$store.dispatch('users/edit',this.register)
-      alert("Successfully Updated!")
-      location.reload()
+      this.$store.dispatch('users/edit',{email:this.register.email,id:this.register.id}).then((res)=>{
+        alert("Successfully Updated!")
+        location.reload()
+      })
+     
     },
     submitHandlerDelete(){
       this.$store.dispatch('users/delete',{"id":this.selectedItem.id})

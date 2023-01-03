@@ -171,7 +171,7 @@
           </v-col>
           <v-col
             cols="12"
-            v-else-if="category != 'forgot-password' && category != 'register'"
+            v-else-if="category != 'forgot-password' "
           >
             <div>Password</div>
             <div>
@@ -264,9 +264,11 @@ export default {
   methods: {
     resetPass() {
       this.$store
-        .dispatch("users/reset_password", { email: this.register.email })
-        .then((res) => {});
-      alert("Successfully Sent!");
+        .dispatch("reset/add", { email: this.register.email })
+        .then((res) => {
+           alert("Successfully Sent!");
+        });
+     
     },
     sendOtp() {
       if (this.isOTP) {
@@ -346,7 +348,7 @@ export default {
       // if (!this.isValid) return;
       // console.log(this.register);
       try {
-        this.register.password = "wew123WEW";
+        // this.register.password = "wew123WEW";
         this.register.account_type = "Student";
         this.register.is_active = false;
         await this.$store.dispatch("users/add", this.register);

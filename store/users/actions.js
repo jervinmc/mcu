@@ -34,6 +34,13 @@ const actions = {
       );
       response.customer = customer;
     },
+    async approval_otp({ commit },  customer ) {
+      const response = await this.$axios.$post(
+        `/approval-otp/`,
+        customer
+      );
+      response.customer = customer;
+    },
     async editUserImage({ commit },  customer ) {
       const response = await this.$axios.$put(
         `/users/${customer.get('id')}/`,

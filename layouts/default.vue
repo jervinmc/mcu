@@ -246,16 +246,21 @@ export default {
           title: "Program Head",
           to: "/admin/program_head",
         },
+        // {
+        //   icon: "mdi-account",
+        //   title: "Request Reset Password",
+        //   to: "/admin/reset",
+        // },
         {
           icon: "mdi-account",
           title: "Admin Information",
           to: "/admin/information",
         },
-        //  {
-        //   icon: 'mdi-school',
-        //   title: 'Send OTP',
-        //   to: '/admin/otp'
-        // },
+         {
+          icon: 'mdi-school',
+          title: 'Send OTP',
+          to: '/admin/otp'
+        },
         //   {
         //   icon: 'mdi-school',
         //   title: 'Alumni Accounts',

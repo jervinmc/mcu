@@ -75,7 +75,7 @@ export default {
   data() {
     return {
       headers: [
-        { text: "ID", value: "id" },
+        { text: "Student Number", value: "student_number" },
         { text: "Firstname", value: "firstname" },
         { text: "Middlename", value: "middlename" },
         { text: "Lastname", value: "lastname" },
@@ -101,13 +101,29 @@ export default {
     };
   },
   methods: {
+    generateString(length) {
+      const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let result = " ";
+      const charactersLength = characters.length;
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+
+      return result;
+    },
     status(item, status) {
-      let otpValue = Math.random().toString(6).slice(2) + '' + 'AB2F';
+      let otpValue = this.generateString(8)
       this.$store
-        .dispatch("users/edit", { id: item.id, is_active: status,password:otpValue })
+        .dispatch("users/edit", {
+          id: item.id,
+          is_active: status,
+          // password: otpValue,
+        })
         .then((res) => {
           this.$store
-            .dispatch("users/otp", { email: item.email,code: otpValue })
+            .dispatch("users/approval_otp", { email: item.email, code: otpValue })
             .then((res) => {
               alert("Successfully Updated!");
               location.reload();

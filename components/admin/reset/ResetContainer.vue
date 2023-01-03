@@ -3,7 +3,7 @@
     
     <v-row>
       <v-col align="start" class="pa-10 text-h5" cols="auto">
-        <b>OTP Management</b>
+        <b>Reset Request Password</b>
       </v-col>
       <v-spacer></v-spacer>
  
@@ -11,7 +11,7 @@
     <v-data-table
       class="pa-5"
       :headers="headers"
-      :items="reset_data"
+      :items="events"
       :loading="isLoading"
     >
      <template v-slot:[`item.status`]="{ item }">
@@ -63,60 +63,38 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+
 export default {
-    computed:{
-      ...mapState('reset',['reset_data']),
-      ...mapState('users',['users'])
-    },
-  created() { 
-    this.$store.dispatch('users/view')
-    this.$store.dispatch('reset/view')
+  
+  created() {
+
   },
 data(){
     return{
         headers: [
         { text: "ID", value: "id" },
+        // { text: "Fullname", value: "fullname" },
+        // { text: "Student Number", value: "student_number" },
         { text: "Email", value: "email" },
          { text: "Actions", value: "opt" },
         ,
       ],
-      events:[
+      events:[{
+          "id":"1",
+          "fullname":"Juan Delacruz",
+          "student_number":"201510994",
+          "email":"juandelacruz@email.com",
+      },
+      {
+          "id":"2",
+          "fullname":"Pedro Delacruz",
+          "student_number":"201510994",
+          "email":"pedrodelacruz@email.com",
+      }
       ],
     }
 },
 methods:{
-  generateString(length) {
-      const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let result = " ";
-      const charactersLength = characters.length;
-      for (let i = 0; i < length; i++) {
-        result += characters.charAt(
-          Math.floor(Math.random() * charactersLength)
-        );
-      }
-
-      return result;
-    },
-     sendOTP(item){
-        var a =  this.users.filter(data=>data.email==item.email)
-        let otpValue = this.generateString(8)
-        this.$store.dispatch('users/edit',
-        {
-            id: a[0].id,
-            email:item.email,
-            password: otpValue,
-        }
-        ).then(res=>{
-         this.$store
-            .dispatch("users/otp", { email: item.email, code: otpValue })
-            .then((res) => {
-              alert("Successfully Updated!");
-              location.reload();
-            });
-        })
-    }
-
 }
 };
 </script>
