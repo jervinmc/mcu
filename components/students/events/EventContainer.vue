@@ -39,9 +39,9 @@
     <div class="pt-5 py-5">
       <div v-for="x in event_data" :key="x" class="py-5">
         <v-card class="rounded-xl pa-5" elevation="6">
-          <div align="end">
+          <!-- <div align="end">
             <v-icon @click="editItem(x)">mdi-pencil</v-icon>
-          </div>
+          </div> -->
           <v-row>
             <v-col cols="12">
               <div class="text-h5">

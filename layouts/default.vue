@@ -67,9 +67,12 @@
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
+            <v-badge  content="5" color="red" overlap v-if="item.to=='/student/announcement' || item.to=='/student/events' || item.to=='/student/job_posting'">
+              {{item.title}}
+            </v-badge>
+            <div v-else>
+              {{item.title}}
+            </div>
         </v-list-item>
         <v-list-item
           color="white"
