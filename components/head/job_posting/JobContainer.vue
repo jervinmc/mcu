@@ -130,7 +130,7 @@ export default {
       form_data.append("content", this.register.content);
       form_data.append("description", this.register.description);
       await this.$store.dispatch("job_posting/add", form_data);
-      this.$store.dispatch("job_posting/notify",{})
+      this.$store.dispatch("job_posting/notify", {"category":'job'});
       alert("Successfully Posted!");
       this.loadData();
        location.reload()

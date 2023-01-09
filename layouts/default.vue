@@ -67,10 +67,15 @@
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
-            <v-badge  content="5" color="red" overlap v-if="item.to=='/student/announcement' || item.to=='/student/events' || item.to=='/student/job_posting'">
+            <!-- <div v-if="item.title =='Announcement' ? $auth.user.notification_announcement!=0 : item.title =='Job Posting' ? $auth.user.notification_job!=0 : $auth.user.notification_event!=0   ">
+              <v-badge  :content="item.title =='Announcement' ? $auth.user.notification_announcement : item.title == 'Events' ? $auth.user.notification_event : $auth.user.notification_job" color="red" overlap v-if="item.to=='/student/announcement' || item.to=='/student/events' || item.to=='/student/job_posting'">
               {{item.title}}
             </v-badge>
+            </div>
             <div v-else>
+              {{item.title}}
+            </div> -->
+            <div>
               {{item.title}}
             </div>
         </v-list-item>

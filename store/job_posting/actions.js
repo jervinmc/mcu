@@ -27,10 +27,10 @@ const actions = {
         );
         commit("SET_EVENT", response);
       },
-      async notify({ commit }, ) {
+      async notify({ commit }, data) {
         const response = await this.$axios.$post(
           "/notify/",
-          {}
+          data
         );
         commit("SET_EVENT", response);
       },
