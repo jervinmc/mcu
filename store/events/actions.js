@@ -21,6 +21,11 @@ const actions = {
       );
       response.data = data;
     },
+    async delete({ commit },  data ) {
+      const response = await this.$axios.$delete(
+        `/events/${data.id}/`,
+      );
+    },
     async view({ commit }, ) {
         const response = await this.$axios.$get(
           "/events/"

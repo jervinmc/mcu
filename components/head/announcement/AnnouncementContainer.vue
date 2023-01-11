@@ -1,5 +1,22 @@
 <template>
   <div class="pa-10">
+     <v-dialog v-model="isDelete" width="500">
+      <v-card class="pa-10">
+        <div align="center" class="py-10">
+          Are you sure you want to delete this item?
+        </div>
+        <div>
+          <v-row>
+            <v-col align="end">
+              <v-btn @click="isDelete=false" outlined>Cancel</v-btn>
+            </v-col>
+            <v-col>
+              <v-btn @click="submitHandlerDelete" color="error" outlined>Delete</v-btn>
+            </v-col>
+          </v-row>
+        </div>
+      </v-card>
+    </v-dialog>
     <v-dialog v-model="isEdit" width="500">
       <v-card class="pa-10">
         <div>
@@ -73,6 +90,9 @@
          <v-card class="rounded-xl pa-5" elevation="6">
           <div align="end">
             <v-icon @click="editItem(x)">mdi-pencil</v-icon>
+             <v-icon @click="deleteItem(x)">
+              mdi-delete
+            </v-icon>
           </div>
           <v-row>
             <v-col cols="12">
@@ -109,6 +129,16 @@ export default {
     this.loadData();
   },
   methods: {
+    deleteItem(item){
+      this.register = cloneDeep(item)
+      this.isDelete = true
+    },
+    submitHandlerDelete(){
+      this.$store.dispatch('announcement/delete',this.register).then(res=>{
+        alert("Successfully Deleted!")
+        location.reload()
+      })
+    },
     editItem(item) {
       this.register = cloneDeep(item);
       this.isEdit = true;
@@ -160,6 +190,7 @@ export default {
   },
   data() {
     return {
+      isDelete:false,
       isEdit: false,
       selectedItem: {},
       register: {},

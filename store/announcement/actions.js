@@ -10,6 +10,11 @@ const actions = {
       );
       response.data = data;
     },
+    async delete({ commit },  data ) {
+      const response = await this.$axios.$delete(
+        `/announcement/${data.id}/`,
+      );
+    },
     async edit({ commit },  data ) {
       const response = await this.$axios.$put(
         `/announcement/${data.get('id')}/`,
