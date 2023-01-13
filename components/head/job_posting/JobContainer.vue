@@ -8,10 +8,12 @@
         <div>
           <v-row>
             <v-col align="end">
-              <v-btn @click="isDelete=false" outlined>Cancel</v-btn>
+              <v-btn @click="isDelete = false" outlined>Cancel</v-btn>
             </v-col>
             <v-col>
-              <v-btn @click="submitHandlerDelete" color="error" outlined>Delete</v-btn>
+              <v-btn @click="submitHandlerDelete" color="error" outlined
+                >Delete</v-btn
+              >
             </v-col>
           </v-row>
         </div>
@@ -27,7 +29,7 @@
             v-model="register.content"
           ></v-text-field>
         </div>
-         <div>
+        <div>
           <v-textarea
             label="Description..."
             append-icon="mdi-post"
@@ -35,6 +37,22 @@
             v-model="register.description"
           ></v-textarea>
         </div>
+         <v-col>
+              <v-text-field
+                label="Position"
+                append-icon="mdi-post"
+                outlined
+                v-model="register.position"
+              ></v-text-field>
+            </v-col>
+            <v-col>
+              <v-text-field
+                label="Department"
+                append-icon="mdi-post"
+                outlined
+                v-model="register.department"
+              ></v-text-field>
+            </v-col>
         <div>
           <v-col>
             <div align="end">
@@ -49,20 +67,54 @@
     <div class="text-h5 pb-10">
       <b>Job Posting</b>
     </div>
-    <div>
-      <v-text-field
-        label="Post Something..."
-        append-icon="mdi-post"
-        outlined
-        v-model="register.content"
-      ></v-text-field>
-    </div>
-      <v-textarea
-            label="Description..."
+    <v-row>
+      <v-col>
+        <div>
+          <v-text-field
+            label="Post Something..."
             append-icon="mdi-post"
             outlined
-            v-model="register.description"
-          ></v-textarea>
+            v-model="register.content"
+          ></v-text-field>
+        </div>
+        <div>
+          <v-row>
+            <v-col>
+              <v-text-field
+                label="Position"
+                append-icon="mdi-post"
+                outlined
+                v-model="register.position"
+              ></v-text-field>
+            </v-col>
+            <v-col>
+              <v-text-field
+                label="Department"
+                append-icon="mdi-post"
+                outlined
+                v-model="register.department"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </div>
+      </v-col>
+      <v-col>
+         <v-textarea
+      label="Qualification"
+      append-icon="mdi-post"
+      outlined
+      v-model="register.qualification"
+    ></v-textarea>
+     <v-textarea
+      label="Description..."
+      append-icon="mdi-post"
+      outlined
+      v-model="register.description"
+    ></v-textarea>
+         </v-col>
+    </v-row>
+
+   
     <v-row>
       <v-col>
         <div>
@@ -87,20 +139,58 @@
     </v-row>
     <div class="pt-5 py-5">
       <div v-for="x in job_posting_data" :key="x" class="py-5">
-         <v-card class="rounded-xl pa-5" elevation="6">
+        <v-card class="rounded-xl pa-5" elevation="6">
           <div align="end">
             <v-icon @click="editItem(x)">mdi-pencil</v-icon>
-            <v-icon @click="deleteItem(x)">
-              mdi-delete
-            </v-icon>
+            <v-icon @click="deleteItem(x)"> mdi-delete </v-icon>
+          </div>
+            <div>
+            Date Posted : {{formatDate(x.date_created)}}
           </div>
           <v-row>
+            <v-col>
+              <div>
+                <div class="text-h6">
+                  <b>Title</b>
+                </div>
+                <div>
+                  {{x.content}}
+                </div>
+                <div class="text-h6">
+                 <b> Position </b>
+                </div>
+                <div>
+                  {{x.position}}
+                </div>
+                <div class="text-h6">
+                 <b> Department</b>
+                </div>
+                <div>
+                  {{x.department}}
+                </div>
+              </div>
+            </v-col>
+            <v-col>
+              <div>
+                  <div class="text-h6">
+                  <b>Qualification</b>
+                </div>
+                <div>
+                  {{x.qualification}}
+                </div>
+                  <div class="text-h6">
+                  Description
+                </div>
+                <div>
+                  {{x.description}}
+                </div>
+              </div>
+            </v-col>
+          </v-row>
+          <!-- <v-row>
             <v-col cols="12">
               <div class="text-h5">
                 <b> {{ x.content }} </b>
-                <!-- <div>
-                  <i>{{x.date_created}}</i>
-                </div> -->
               </div>
             </v-col>
             <v-col align="start" cols="6">
@@ -111,7 +201,7 @@
                 {{ x.description }}
               </div>
             </v-col>
-          </v-row>
+          </v-row> -->
         </v-card>
       </div>
     </div>
@@ -119,6 +209,7 @@
 </template>
 
 <script>
+import moment from "moment";
 import { mapState } from "vuex";
 var cloneDeep = require("lodash.clonedeep");
 export default {
@@ -129,15 +220,18 @@ export default {
     this.loadData();
   },
   methods: {
-     deleteItem(item){
-      this.register = cloneDeep(item)
-      this.isDelete = true
+      formatDate(item) {
+      return moment(item).format("LL");
     },
-    submitHandlerDelete(){
-      this.$store.dispatch('job_posting/delete',this.register).then(res=>{
-        alert("Successfully Deleted!")
-        location.reload()
-      })
+    deleteItem(item) {
+      this.register = cloneDeep(item);
+      this.isDelete = true;
+    },
+    submitHandlerDelete() {
+      this.$store.dispatch("job_posting/delete", this.register).then((res) => {
+        alert("Successfully Deleted!");
+        location.reload();
+      });
     },
     editItem(item) {
       this.register = cloneDeep(item);
@@ -147,6 +241,9 @@ export default {
       let form_data = new FormData();
       if (this.isEdit) {
         form_data.append("content", this.register.content);
+        form_data.append("qualification", this.register.qualification);
+        form_data.append("position", this.register.position);
+        form_data.append("department", this.register.department);
         form_data.append("description", this.register.description);
         form_data.append("id", this.register.id);
         await this.$store.dispatch("job_posting/edit", form_data);
@@ -158,12 +255,15 @@ export default {
         form_data.append("image", this.file);
       }
       form_data.append("content", this.register.content);
+      form_data.append("department", this.register.department);
+      form_data.append("qualification", this.register.qualification);
+      form_data.append("position", this.register.position);
       form_data.append("description", this.register.description);
       await this.$store.dispatch("job_posting/add", form_data);
-      this.$store.dispatch("job_posting/notify", {"category":'job'});
+      this.$store.dispatch("job_posting/notify", { category: "job" });
       alert("Successfully Posted!");
       this.loadData();
-       location.reload()
+      location.reload();
     },
     async loadData() {
       await this.$store.dispatch("job_posting/view");
@@ -189,7 +289,7 @@ export default {
   },
   data() {
     return {
-      isDelete:false,
+      isDelete: false,
       isEdit: false,
       register: {},
       file: "",

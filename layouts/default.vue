@@ -100,6 +100,9 @@
       <div></div>
       <v-app-bar-nav-icon dark @click.stop="drawer = !drawer" />
       <v-spacer></v-spacer>
+      <div class="pr-4 white--text">
+        {{today}}
+      </div>
       <div v-if="settings_data.length > 0" class="white--text">
         {{ settings_data[0].semester }}
       </div>
@@ -144,6 +147,11 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState("settings", ["settings_data"]),
+    today(){
+      const current = new Date();
+        const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+        return date;
+    }
   },
   name: "DefaultLayout",
   created() {

@@ -36,6 +36,9 @@
     <div class="pt-5 py-5">
       <div v-for="x in announcement_data" :key="x" class="py-5">
         <v-card class="rounded-xl pa-5" elevation="6">
+          <div>
+            Date Posted : {{formatDate(x.date_created)}}
+          </div>
           <!-- <div align="end">
             <v-icon @click="editItem(x)">mdi-pencil</v-icon>
           </div> -->
@@ -64,6 +67,7 @@
 </template>
 
 <script>
+import moment from "moment";
 import { mapState } from "vuex";
 export default {
   computed: {
@@ -75,6 +79,9 @@ export default {
     this.$store.dispatch("report/view", {});
   },
   methods: {
+     formatDate(item) {
+      return moment(item).format("LL");
+    },
     async submitHandlerRegister() {
       let form_data = new FormData();
       if (this.file != "" && this.file != undefined) {

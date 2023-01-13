@@ -94,6 +94,9 @@
               mdi-delete
             </v-icon>
           </div>
+             <div>
+            Date Posted : {{formatDate(x.date_created)}}
+          </div>
           <v-row>
             <v-col cols="12">
               <div class="text-h5">
@@ -119,6 +122,7 @@
 </template>
 
 <script>
+import moment from "moment";
 import { mapState } from "vuex";
 var cloneDeep = require("lodash.clonedeep");
 export default {
@@ -129,6 +133,9 @@ export default {
     this.loadData();
   },
   methods: {
+     formatDate(item) {
+      return moment(item).format("LL");
+    },
     deleteItem(item){
       this.register = cloneDeep(item)
       this.isDelete = true

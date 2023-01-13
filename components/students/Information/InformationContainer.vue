@@ -40,7 +40,7 @@
               v-model="register.company_name"
             ></v-text-field>
           </div>
-          <div>Field</div>
+          <div>Department</div>
           <div>
             <v-text-field
               outlined
@@ -123,14 +123,34 @@
           ></v-text-field>
         </div>
         <div>
-          <div>Mobile Number(+63)</div>
-          <v-text-field
-            outlined
-            type="number"
-            placeholder="+63"
-            dense
-            v-model="register.mobile_number"
-          ></v-text-field>
+          <v-row>
+            <v-col cols="auto">
+              <div>Mobile Number</div>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="auto" class="pr-0">
+             <div style="width:80px">
+               <v-select 
+                outlined
+                dense
+                hide-details=""
+                v-model="register.coutry_code"
+                :items="['+93', '+355','213','1684','376','244','1264','672','64','1268','54','374','297','247','61','43','994','1242','973','880','1246','375','32','501','229','1441','975','591','387','267','55','1284','673','359','226','95','257','855','237','1','238','1345','236','235','56','86','61','57','269','242','682']"
+              >
+              </v-select>
+             </div>
+            </v-col>
+            <v-col>
+              <v-text-field
+                outlined
+                type="number"
+                placeholder="+63"
+                dense
+                v-model="register.mobile_number"
+              ></v-text-field>
+            </v-col>
+          </v-row>
         </div>
         <div>
           <div>Year graduated</div>
@@ -150,12 +170,43 @@
           ></v-text-field>
         </div>
         <div>
-          <div>Birthday</div>
-          <v-text-field
-            outlined
-            dense
-            v-model="register.birthdate"
-          ></v-text-field>
+          <div>
+            Birthday
+            <div class="text-h5">
+              <v-menu
+                ref="departMenu"
+                v-model="departMenu"
+                :close-on-content-click="false"
+                :return-value.sync="register.depart"
+                transition="scale-transition"
+                offset-y
+                min-width="auto"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="register.birthdate"
+                    outlined
+                    readonly
+                    v-bind="attrs"
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-date-picker v-model="register.birthdate" no-title scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn text color="primary" @click="departMenu = false">
+                    Cancel
+                  </v-btn>
+                  <v-btn
+                    text
+                    color="primary"
+                    @click="$refs.departMenu.save(register.birthdate)"
+                  >
+                    OK
+                  </v-btn>
+                </v-date-picker>
+              </v-menu>
+            </div>
+          </div>
         </div>
         <div>
           <div>Address</div>
@@ -477,6 +528,7 @@ export default {
   },
   data() {
     return {
+      departMenu: false,
       isEditPassword: false,
       isEditWork: false,
       departMenu: false,

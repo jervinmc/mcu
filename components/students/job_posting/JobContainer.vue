@@ -35,17 +35,54 @@
     </v-row> -->
     <div class="pt-5 py-5">
       <div v-for="x in job_posting_data" :key="x" class="py-5">
-         <v-card class="rounded-xl pa-5" elevation="6">
-          <!-- <div align="end">
-            <v-icon @click="editItem(x)">mdi-pencil</v-icon>
-          </div> -->
+          <v-card class="rounded-xl pa-5" elevation="6">
+            <div>
+              Date Posted : {{formatDate(x.date_created)}}
+            </div>
           <v-row>
+            <v-col>
+              <div>
+                <div class="text-h6">
+                  <b>Title</b>
+                </div>
+                <div>
+                  {{x.content}}
+                </div>
+                <div class="text-h6">
+                 <b> Position </b>
+                </div>
+                <div>
+                  {{x.position}}
+                </div>
+                <div class="text-h6">
+                 <b> Department</b>
+                </div>
+                <div>
+                  {{x.department}}
+                </div>
+              </div>
+            </v-col>
+            <v-col>
+              <div>
+                  <div class="text-h6">
+                  <b>Qualification</b>
+                </div>
+                <div>
+                  {{x.qualification}}
+                </div>
+                  <div class="text-h6">
+                  Description
+                </div>
+                <div>
+                  {{x.description}}
+                </div>
+              </div>
+            </v-col>
+          </v-row>
+          <!-- <v-row>
             <v-col cols="12">
               <div class="text-h5">
                 <b> {{ x.content }} </b>
-                <!-- <div>
-                  <i>{{x.date_created}}</i>
-                </div> -->
               </div>
             </v-col>
             <v-col align="start" cols="6">
@@ -56,7 +93,7 @@
                 {{ x.description }}
               </div>
             </v-col>
-          </v-row>
+          </v-row> -->
         </v-card>
       </div>
     </div>
@@ -64,6 +101,7 @@
 </template>
 
 <script>
+import moment from "moment";
 import { mapState } from "vuex";
 export default {
   computed: {
@@ -74,6 +112,9 @@ export default {
     this.$store.dispatch('report/posting_view',{})
   },
   methods: {
+    formatDate(item) {
+      return moment(item).format("LL");
+    },
     async submitHandlerRegister() {
       let form_data = new FormData();
       if (this.file != "" && this.file != undefined) {

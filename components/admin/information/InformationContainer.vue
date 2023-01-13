@@ -10,14 +10,37 @@
         <div>
           <v-text-field outlined v-model="register.lastname"></v-text-field>
         </div>
-        <div>Mobile Number(+63)</div>
         <div>
-          <v-text-field
-            outlined
-            placeholder="+63"
-            type="number"
-            v-model="register.mobile_number"
-          ></v-text-field>
+          <v-row>
+            <v-col cols="auto">
+              <div>Mobile Number </div>
+            </v-col>
+          </v-row>
+        </div>
+        <div>
+        <v-row>
+            <v-col cols="auto" class="pr-0">
+             <div style="width:80px">
+               <v-select 
+                outlined
+                dense
+                hide-details=""
+                v-model="register.coutry_code"
+                :items="['+93', '+355','213','1684','376','244','1264','672','64','1268','54','374','297','247','61','43','994','1242','973','880','1246','375','32','501','229','1441','975','591','387','267','55','1284','673','359','226','95','257','855','237','1','238','1345','236','235','56','86','61','57','269','242','682']"
+              >
+              </v-select>
+             </div>
+            </v-col>
+            <v-col>
+              <v-text-field
+                outlined
+                type="number"
+                placeholder="+63"
+                dense
+                v-model="register.mobile_number"
+              ></v-text-field>
+            </v-col>
+          </v-row>
         </div>
          <div>Age</div>
         <div>
