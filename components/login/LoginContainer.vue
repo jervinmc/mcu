@@ -2,16 +2,16 @@
   <div>
     <v-dialog v-model="isTerms" width="800">
       <v-card class="pa-10">
+        <p></p>
         <p>
-        </p>
-        <!-- <p>
+          Terms of Service of http://13.115.99.64/login
           MCU-IMPACTS&nbsp;(&quot;Us&quot; or &quot;We&quot;) provides
           the&nbsp;http://13.115.99.64/login/&nbsp;website and various related
           services (collectively, the &quot;Website&quot;) to you, the User,
           subject to your compliance with all the terms, conditions, and notices
           contained or referenced herein (the &quot;Terms of Service&quot;), as
           well as any other written agreement between us and you.
-        </p> -->
+        </p>
         <p>
           In addition, when using particular services or materials on this
           Website, Users shall be subject to any posted rules applicable to such
@@ -215,26 +215,32 @@
           these Terms of Service or the Website shall be instituted exclusively
           in the federal courts of ph.
         </p>
-         <v-btn
-            depressed
-            color="black"
-            dark
-            @click="isTerms=false"
-            :loading="isLoaded"
-          >
-            Cancel
-          </v-btn>
-        <div>
-           <v-btn
-            depressed
-            color="#7c0ba0"
-            dark
-            @click="submitHandlerRegister"
-            :loading="isLoaded"
-          >
-            Submit
-          </v-btn>
-        </div>
+        <v-row>
+          <v-col>
+            <v-btn
+              depressed
+              color="black"
+              dark
+              @click="cancelTerm"
+              :loading="isLoaded"
+            >
+              Cancel
+            </v-btn>
+          </v-col>
+          <v-col>
+            <div>
+              <v-btn
+                depressed
+                color="#7c0ba0"
+                dark
+                @click="submitHandlerRegister"
+                :loading="isLoaded"
+              >
+                Submit
+              </v-btn>
+            </div>
+          </v-col>
+        </v-row>
       </v-card>
     </v-dialog>
     <v-snackbar
@@ -381,29 +387,82 @@
           <v-col cols="12" v-if="category == 'register'">
             <div>Mobile Number</div>
             <div>
-               <v-row>
-            <v-col cols="auto" class="pr-0">
-             <div style="width:80px">
-               <v-select 
-                outlined
-                dense
-                hide-details=""
-                v-model="register.coutry_code"
-                :items="['+93', '+355','213','1684','376','244','1264','672','64','1268','54','374','297','247','61','43','994','1242','973','880','1246','375','32','501','229','1441','975','591','387','267','55','1284','673','359','226','95','257','855','237','1','238','1345','236','235','56','86','61','57','269','242','682']"
-              >
-              </v-select>
-             </div>
-            </v-col>
-            <v-col>
-              <v-text-field
-                outlined
-                type="number"
-                placeholder="+63"
-                dense
-                v-model="register.mobile_number"
-              ></v-text-field>
-            </v-col>
-          </v-row>
+              <v-row>
+                <v-col cols="auto" class="pr-0">
+                  <div style="width: 120px">
+                    <v-select
+                      outlined
+                      dense
+                      hide-details=""
+                      v-model="register.coutry_code"
+                      :items="[
+                        '+63',
+                        '+93',
+                        '+355',
+                        '+213',
+                        '+1684',
+                        '+376',
+                        '+244',
+                        '+1264',
+                        '+672',
+                        '+64',
+                        '+1268',
+                        '+54',
+                        '+374',
+                        '+297',
+                        '+247',
+                        '+61',
+                        '+43',
+                        '+994',
+                        '+1242',
+                        '+973',
+                        '+880',
+                        '+1246',
+                        '+375',
+                        '+32',
+                        '+501',
+                        '+229',
+                        '+1441',
+                        '+975',
+                        '+591',
+                        '+387',
+                        '+267',
+                        '+55',
+                        '+1284',
+                        '+673',
+                        '+359',
+                        '+226',
+                        '+95',
+                        '+257',
+                        '+855',
+                        '+237',
+                        '+1',
+                        '+238',
+                        '+1345',
+                        '+236',
+                        '+235',
+                        '+56',
+                        '+86',
+                        '+61',
+                        '+57',
+                        '+269',
+                        '+242',
+                        '+682',
+                      ]"
+                    >
+                    </v-select>
+                  </div>
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    outlined
+                    type="number"
+                    placeholder=""
+                    dense
+                    v-model="register.mobile_number"
+                  ></v-text-field>
+                </v-col>
+              </v-row>
             </div>
           </v-col>
 
@@ -480,7 +539,7 @@
             depressed
             color="#7c0ba0"
             dark
-            @click="isTerms=true"
+            @click="isTerms = true"
             :loading="isLoaded"
           >
             Submit
@@ -514,6 +573,9 @@ export default {
     };
   },
   methods: {
+    cancelTerm() {
+      location.reload();
+    },
     resetPass() {
       this.$store
         .dispatch("reset/add", { email: this.register.email })

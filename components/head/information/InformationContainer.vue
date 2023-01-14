@@ -63,7 +63,7 @@
             v-model="register.last_attended"
           ></v-text-field>
         </div>
-         <div>
+         <!-- <div>
           <div>Age</div>
           <v-text-field
             outlined
@@ -71,7 +71,7 @@
             type="number"
             v-model="register.age"
           ></v-text-field>
-        </div>
+        </div> -->
          <div>
             Birthday
             <div class="text-h5">
@@ -86,6 +86,7 @@
               >
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
+                  dense
                     v-model="register.birthdate"
                     outlined
                     readonly
@@ -113,13 +114,13 @@
           <div>Mobile Number</div>
           <v-row>
             <v-col cols="auto" class="pr-0">
-             <div style="width:80px">
+             <div style="width:120px">
                <v-select 
                 outlined
                 dense
                 hide-details=""
                 v-model="register.coutry_code"
-                :items="['+93', '+355','213','1684','376','244','1264','672','64','1268','54','374','297','247','61','43','994','1242','973','880','1246','375','32','501','229','1441','975','591','387','267','55','1284','673','359','226','95','257','855','237','1','238','1345','236','235','56','86','61','57','269','242','682']"
+                :items="['+63','+93', '+355','+213','+1684','+376','+244','+1264','+672','+64','+1268','+54','+374','+297','+247','+61','+43','+994','+1242','+973','+880','+1246','+375','+32','+501','+229','+1441','+975','+591','+387','+267','+55','+1284','+673','+359','+226','+95','+257','+855','+237','+1','+238','+1345','+236','+235','+56','+86','+61','+57','+269','+242','+682']"
               >
               </v-select>
              </div>
@@ -128,7 +129,7 @@
               <v-text-field
                 outlined
                 type="number"
-                placeholder="+63"
+                placeholder=""
                 dense
                 v-model="register.mobile_number"
               ></v-text-field>
@@ -242,7 +243,7 @@
           <v-card elevation="5" class="rounded-xl pa-10" height="400">
             <div>Age:</div>
             <div class="pb-10">
-              {{ $auth.user.age }}
+              {{calculateAge }}
             </div>
              <div>Birthdate:</div>
             <div class="pb-10">
@@ -271,6 +272,15 @@
 <script>
 var cloneDeep = require("lodash.clonedeep");
 export default {
+  computed:{
+    calculateAge: function () {
+      let currentDate = new Date();
+      let birthDate = new Date(`${this.$auth.user.id}`);
+      let difference = currentDate - birthDate;
+      let age = Math.floor(difference / 31557600000);
+      return age;
+    },
+  },
   methods: {
      async savePassword(){
     if(localStorage.getItem('password')!=this.register.current_password){
@@ -287,6 +297,7 @@ export default {
     },
     editItem(){
       this.register = cloneDeep(this.$auth.user)
+      this.register.birthdate = ''
       delete this.register.image
       this.isEdit = true
     },
@@ -317,6 +328,7 @@ export default {
       this.file = e;
     },
     submitHandler() {
+      this.register.mobile_number = this.register.coutry_code +''+this.register.mobile_number
       this.register.id = this.$auth.user.id;
       this.$store.dispatch("users/edit", this.register).then((res) => {
         alert("Successfully Updated!");

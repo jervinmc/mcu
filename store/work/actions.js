@@ -17,7 +17,6 @@ const actions = {
       const response = await this.$axios.$delete(
         `/work/${data.id}/`
       );
-      response.data = data;
     },
     async view({ commit }, ) {
         const response = await this.$axios.$get(

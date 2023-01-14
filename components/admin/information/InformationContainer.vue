@@ -1,6 +1,6 @@
 <template>
   <div class="pa-10">
-    <v-dialog v-model="isEdit" width="600">
+    <v-dialog v-model="isEdit" width="700">
       <v-card class="pa-10">
         <div>Firstname</div>
         <div>
@@ -20,7 +20,7 @@
         <div>
         <v-row>
             <v-col cols="auto" class="pr-0">
-             <div style="width:80px">
+             <div style="width:120px">
                <v-select 
                 outlined
                 dense
@@ -35,20 +35,20 @@
               <v-text-field
                 outlined
                 type="number"
-                placeholder="+63"
+                placeholder=""
                 dense
                 v-model="register.mobile_number"
               ></v-text-field>
             </v-col>
           </v-row>
         </div>
-         <div>Age</div>
+         <!-- <div>Age</div>
         <div>
           <v-text-field
             outlined
             v-model="register.age"
           ></v-text-field>
-        </div>
+        </div> -->
          <div>Address</div>
         <div>
           <v-text-field
@@ -145,7 +145,7 @@
         </v-col>
         <v-col>
           <v-card elevation="5" class="rounded-xl pa-10">
-            <div>Mobile Number(+63):</div>
+            <div>Mobile Number</div>
             <div class="pb-10"> 
               {{ $auth.user.mobile_number }}
             </div>
