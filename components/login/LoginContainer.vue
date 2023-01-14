@@ -3,6 +3,9 @@
     <v-dialog v-model="isTerms" width="800">
       <v-card class="pa-10">
         <p></p>
+        <div align="center" class="text-h5 py-5">
+          Terms of Services
+        </div>
         <p>
           Terms of Service of http://13.115.99.64/login
           MCU-IMPACTS&nbsp;(&quot;Us&quot; or &quot;We&quot;) provides
@@ -216,7 +219,7 @@
           in the federal courts of ph.
         </p>
         <v-row>
-          <v-col>
+          <v-col align="end">
             <v-btn
               depressed
               color="black"
@@ -394,7 +397,7 @@
                       outlined
                       dense
                       hide-details=""
-                      v-model="register.coutry_code"
+                      v-model="register.country_code"
                       :items="[
                         '+63',
                         '+93',

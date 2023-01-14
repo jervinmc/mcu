@@ -116,7 +116,7 @@
 
    
     <v-row>
-      <v-col>
+      <!-- <v-col>
         <div>
           <div>
             Upload Photo
@@ -128,7 +128,7 @@
             />
           </div>
         </div>
-      </v-col>
+      </v-col> -->
       <v-col>
         <div align="end">
           <v-btn outlined @click="submitHandlerRegister" color="secondary"

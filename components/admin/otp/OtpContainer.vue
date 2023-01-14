@@ -1,6 +1,22 @@
 <template>
   <v-card elevation="5">
-    
+    <v-dialog v-model="isDelete" width="500">
+      <v-card class="pa-10">
+        <div align="center" class="py-10">
+          Are you sure you want to delete this item?
+        </div>
+        <div>
+          <v-row>
+            <v-col align="end">
+              <v-btn @click="isDelete=false" outlined>Cancel</v-btn>
+            </v-col>
+            <v-col>
+              <v-btn @click="submitHandlerDelete" color="error" outlined>Delete</v-btn>
+            </v-col>
+          </v-row>
+        </div>
+      </v-card>
+    </v-dialog>
     <v-row>
       <v-col align="start" class="pa-10 text-h5" cols="auto">
         <b>OTP Management</b>
@@ -50,11 +66,11 @@
                 <v-list-item-title>Send OTP</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <!-- <v-list-item @click.stop="status(item,'Declined')">
+            <v-list-item @click.stop="deleteItem(item)">
               <v-list-item-content>
-                <v-list-item-title>Decline</v-list-item-title>
+                <v-list-item-title>Delete</v-list-item-title>
               </v-list-item-content>
-            </v-list-item> -->
+            </v-list-item>
           </v-list>
         </v-menu>
       </template>
@@ -75,6 +91,7 @@ export default {
   },
 data(){
     return{
+      isDelete:false,
         headers: [
         { text: "ID", value: "id" },
         { text: "Email", value: "email" },
@@ -86,6 +103,12 @@ data(){
     }
 },
 methods:{
+  deleteItem(item){
+    this.$store.dispatch('reset/delete',item).then(res=>{
+      alert('Successfully Deleted!')
+      location.reload()
+    })
+  },
   generateString(length) {
       const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       let result = " ";

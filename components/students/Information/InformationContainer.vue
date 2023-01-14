@@ -143,7 +143,7 @@
                   outlined
                   dense
                   hide-details=""
-                  v-model="register.coutry_code"
+                  v-model="register.country_code"
                   :items="['+63','+93', '+355','+213','+1684','+376','+244','+1264','+672','+64','+1268','+54','+374','+297','+247','+61','+43','+994','+1242','+973','+880','+1246','+375','+32','+501','+229','+1441','+975','+591','+387','+267','+55','+1284','+673','+359','+226','+95','+257','+855','+237','+1','+238','+1345','+236','+235','+56','+86','+61','+57','+269','+242','+682']"
                 >
                 </v-select>
@@ -326,7 +326,7 @@
                     </v-col>
                     <v-col>
                       <div>
-                        {{ $auth.user.mobile_number }}
+                        {{$auth.user.country_code}} {{ $auth.user.mobile_number }}
                       </div>
                     </v-col>
                   </v-row>
@@ -476,7 +476,7 @@ export default {
     },
     submitHandlerWork() {
       if (this.isEditWork) {
-        this.$store
+        this.$storez
           .dispatch("work/edit", {
             user_id: this.$auth.user.id,
             company_name: this.register.company_name,
@@ -538,6 +538,10 @@ export default {
     },
     submitHandler() {
       this.register.id = this.$auth.user.id;
+      if(this.register.birthdate==''){
+         delete this.register.birthdate
+      }
+     
       this.$store.dispatch("users/edit", this.register).then((res) => {
         alert("Successfully Updated!");
         location.reload();
