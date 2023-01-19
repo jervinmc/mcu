@@ -45,6 +45,14 @@
                 v-model="register.position"
               ></v-text-field>
             </v-col>
+             <v-col>
+              <v-text-field
+                label="Qualification"
+                append-icon="mdi-post"
+                outlined
+                v-model="register.qualification"
+              ></v-text-field>
+            </v-col>
             <v-col>
               <v-text-field
                 label="Department"
@@ -148,7 +156,7 @@
             Date Posted : {{formatDate(x.date_created)}}
           </div>
           <v-row>
-            <v-col>
+            <v-col cols="6">
               <div>
                 <div class="text-h6">
                   <b>Title</b>
@@ -170,7 +178,7 @@
                 </div>
               </div>
             </v-col>
-            <v-col>
+            <v-col cols="6">
               <div>
                   <div class="text-h6">
                   <b>Qualification</b>

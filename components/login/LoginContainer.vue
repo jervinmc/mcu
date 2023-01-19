@@ -381,6 +381,7 @@
             <div>
               <v-text-field
                 hide-details=""
+                type="number"
                 append-icon="mdi-account"
                 outlined
                 v-model="register.last_attended"
@@ -577,7 +578,8 @@ export default {
   },
   methods: {
     cancelTerm() {
-      location.reload();
+      this.isTerms = false
+      // location.reload();
     },
     resetPass() {
       this.$store

@@ -165,6 +165,7 @@
           <v-text-field
             outlined
             dense
+            type="number"
             v-model="register.last_attended"
           ></v-text-field>
         </div>

@@ -275,7 +275,7 @@ export default {
   computed:{
     calculateAge: function () {
       let currentDate = new Date();
-      let birthDate = new Date(`${this.$auth.user.id}`);
+      let birthDate = new Date(`${this.$auth.user.birthdate}`);
       let difference = currentDate - birthDate;
       let age = Math.floor(difference / 31557600000);
       return age;
