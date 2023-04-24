@@ -112,6 +112,32 @@
         </div>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="isAddSkill" width="700">
+      <v-card class="pa-10">
+        <div>
+          <div>Skills</div>
+          <div>
+            <v-text-field
+              outlined
+              dense
+              v-model="register.skill"
+            ></v-text-field>
+          </div>
+          <div>Proficiency</div>
+          <div>
+            <v-select
+              :items="['5','4','3','2','1']"
+              outlined
+              dense
+              v-model="register.proficiency"
+            ></v-select>
+          </div>
+          <div align="center">
+            <v-btn color="primary" @click="submitHandlerSkills">Save</v-btn>
+          </div>
+        </div>
+      </v-card>
+    </v-dialog>
     <v-dialog v-model="isEdit" width="500">
       <v-card class="pa-10">
         <div>
@@ -243,7 +269,7 @@
     </div>
     <div>
       <v-row>
-        <v-col>
+        <v-col cols="12" xl="6" md="6" lg="6">
           <v-card elevation="5" class="rounded-xl pa-10">
             <div align="center">
               <div class="">
@@ -298,6 +324,16 @@
                     <v-col>
                       <div>
                         {{ $auth.user.firstname }}
+                      </div>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <div>Middlename:</div>
+                    </v-col>
+                    <v-col>
+                      <div>
+                        {{ $auth.user.middlename }}
                       </div>
                     </v-col>
                   </v-row>
@@ -360,6 +396,16 @@
             </v-row>
             <v-row>
               <v-col>
+                <div>Sex:</div>
+              </v-col>
+              <v-col>
+                <div>
+                  {{ $auth.user.gender }}
+                </div>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
                 <div>Address:</div>
               </v-col>
               <v-col>
@@ -409,6 +455,42 @@
                 </v-row>
               </div>
             </div>
+            <div class="pt-10"></div>
+            <v-divider class="pt-5"></v-divider>
+            <div>
+              Educational Background
+            </div>
+            <v-row>
+              <v-col>
+                <div>Course</div>
+              </v-col>
+              <v-col>
+                <div>
+                  {{ $auth.user.course }}
+                </div>
+              </v-col>
+            </v-row>
+            <v-row>
+                <v-col>
+                  <div>Skills</div>
+                </v-col>
+                <v-col>
+                  <v-icon @click="addSkill">mdi-plus</v-icon>
+                </v-col>
+              </v-row>
+              <div v-for="x in skills_data" :key="x">
+                <v-divider></v-divider>
+                <v-row>
+                  <v-col cols="12">
+                    <div align="end">
+                      <v-icon @click="editSkills(x)"> mdi-pencil </v-icon>
+                      <v-icon @click="deleteSkills(x.id)"> mdi-delete </v-icon>
+                    </div>
+                    <div>Skill : {{ x.skill }}</div>
+                    <div>Proficiency : {{ x.proficiency }}</div>
+                  </v-col>
+                </v-row>
+              </div>
           </v-card>
         </v-col>
       </v-row>
@@ -423,6 +505,7 @@ var cloneDeep = require("lodash.clonedeep");
 export default {
   computed: {
     ...mapState("work", ["work_data"]),
+    ...mapState("skills", ["skills_data"]),
     calculateAge: function () {
       let currentDate = new Date();
       let birthDate = new Date(`${this.$auth.user.birthdate}`);
@@ -433,10 +516,36 @@ export default {
   },
   created() {
     this.$store.dispatch("work/work");
+    this.$store.dispatch("skills/getByUserID")
   },
   methods: {
+    submitHandlerSkills(){
+       let data = {
+        user_id: this.$auth.user.id,
+        proficiency: this.register.proficiency,
+        skill: this.register.skill
+       }
+       if(this.isEditSkill){
+        data['id'] = this.register.id
+        this.$store.dispatch('skills/edit',data)
+       }
+       else{
+        this.$store.dispatch('skills/add',data)
+       }
+       window.location.reload()
+        
+    },
+    addSkill(){
+      this.isAddSkill = true
+    },
     deleteWork(x) {
       this.$store.dispatch("work/delete", x).then((res) => {
+        alert("Successfully Deleted");
+        location.reload();  
+      });
+    },
+    deleteSkills(x) {
+      this.$store.dispatch("skills/delete", x).then((res) => {
         alert("Successfully Deleted");
         location.reload();
       });
@@ -471,6 +580,11 @@ export default {
       this.register = cloneDeep(item);
       this.isAdd = true;
       this.isEditWork = true;
+    },
+    editSkills(item) {
+      this.register = cloneDeep(item);
+      this.isAddSkill = true;
+      this.isEditSkill = true;
     },
     formatDate(item) {
       return moment(item).format("LL");
@@ -552,6 +666,8 @@ export default {
   },
   data() {
     return {
+      isEditSkill:false,
+      isAddSkill:false,
       departMenu: false,
       isEditPassword: false,
       isEditWork: false,

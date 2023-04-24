@@ -116,7 +116,10 @@
         >
       </div>
       <div class="">
-        <v-avatar>
+        <v-avatar v-if="$auth.user.image=='https://ust-fedesk.s3.amazonaws.com/uploads/users_placeholder.png'">
+          <img src="/placeholder.gif" />
+        </v-avatar>
+        <v-avatar v-else>
           <img :src="$auth.user.image" alt="No Image" />
         </v-avatar>
       </div>

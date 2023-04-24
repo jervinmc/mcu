@@ -34,6 +34,13 @@ const actions = {
       );
       response.customer = customer;
     },
+    async validate_user({ commit },  data ) {
+      const response = await this.$axios.$post(
+        `/validate-user/`,
+        data
+      );
+      return response
+    },
     async approval_otp({ commit },  customer ) {
       const response = await this.$axios.$post(
         `/approval-otp/`,

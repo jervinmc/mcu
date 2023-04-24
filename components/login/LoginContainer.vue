@@ -43,9 +43,7 @@
           enhance the then-current services on this Website shall also be
           subject to these Terms of Service. This Terms of Service was created
           by
-          <a href="https://www.termsservicetemplate.com/"
-            >Terms Service Template Generator</a
-          >.
+          <a href="https://www.termsservicetemplate.com/">Terms Service Template Generator</a>.
         </p>
         <p>Conduct on Website</p>
         <p>
@@ -220,25 +218,13 @@
         </p>
         <v-row>
           <v-col align="end">
-            <v-btn
-              depressed
-              color="black"
-              dark
-              @click="cancelTerm"
-              :loading="isLoaded"
-            >
+            <v-btn depressed color="black" dark @click="cancelTerm" :loading="isLoaded">
               Cancel
             </v-btn>
           </v-col>
           <v-col>
             <div>
-              <v-btn
-                depressed
-                color="#7c0ba0"
-                dark
-                @click="submitHandlerRegister"
-                :loading="isLoaded"
-              >
+              <v-btn depressed color="#7c0ba0" dark @click="submitHandlerRegister" :loading="isLoaded">
                 Submit
               </v-btn>
             </div>
@@ -246,15 +232,7 @@
         </v-row>
       </v-card>
     </v-dialog>
-    <v-snackbar
-      top
-      absolute
-      bottom
-      color="error"
-      outlined
-      centered
-      v-model="snackbar"
-    >
+    <v-snackbar top absolute bottom color="error" outlined centered v-model="snackbar">
       Wrong Credentials
       <template v-slot:action="{ attrs }">
         <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
@@ -262,49 +240,21 @@
         </v-btn>
       </template>
     </v-snackbar>
-    <v-snackbar
-      top
-      absolute
-      bottom
-      color="error"
-      outlined
-      centered
-      v-model="snackbarisVerified"
-    >
+    <v-snackbar top absolute bottom color="error" outlined centered v-model="snackbarisVerified">
       Not yet verified. Please check your email. Thank you!
       <template v-slot:action="{ attrs }">
-        <v-btn
-          color="red"
-          text
-          v-bind="attrs"
-          @click="snackbarisVerified = false"
-        >
+        <v-btn color="red" text v-bind="attrs" @click="snackbarisVerified = false">
           Close
         </v-btn>
       </template>
     </v-snackbar>
 
-    <v-card
-      height="700"
-      :style="category == 'register' ? 'overflow:scroll' : ''"
-      width="700"
-      class="rounded-xl"
-      elevation="12"
-    >
-      <div
-        style="background-color: #7c0ba0; color: white"
-        align="center"
-        class="pa-5"
-      >
+    <v-card height="700" :style="category == 'register' ? 'overflow:scroll' : ''" width="700" class="rounded-xl"
+      elevation="12">
+      <div style="background-color: #7c0ba0; color: white" align="center" class="pa-5">
         Login Form
       </div>
-      <div
-        align="start"
-        class="pa-5"
-        v-if="category != 'login'"
-        @click="category = 'login'"
-        style="cursor: pointer"
-      >
+      <div align="start" class="pa-5" v-if="category != 'login'" @click="category = 'login'" style="cursor: pointer">
         <v-icon color="black">mdi-arrow-left</v-icon>
       </div>
       <div class="pt-5">
@@ -324,68 +274,48 @@
           <v-col v-if="!isOTP">
             <div>Email</div>
             <div>
-              <v-text-field
-                hide-details=""
-                append-icon="mdi-account"
-                outlined
-                v-model="register.email"
-              ></v-text-field>
+              <v-text-field hide-details="" append-icon="mdi-account" outlined v-model="register.email"></v-text-field>
             </div>
           </v-col>
           <v-col cols="12" v-if="category == 'register'">
             <div>Student Number</div>
             <div>
-              <v-text-field
-                hide-details=""
-                append-icon="mdi-account"
-                outlined
-                v-model="register.student_number"
-              ></v-text-field>
+              <v-text-field hide-details="" append-icon="mdi-account" outlined
+                v-model="register.student_number"></v-text-field>
             </div>
           </v-col>
           <v-col cols="12" v-if="category == 'register'">
             <div>Firstname</div>
             <div>
-              <v-text-field
-                hide-details=""
-                append-icon="mdi-account"
-                outlined
-                v-model="register.firstname"
-              ></v-text-field>
+              <v-text-field hide-details="" append-icon="mdi-account" outlined
+                v-model="register.firstname"></v-text-field>
             </div>
           </v-col>
           <v-col cols="12" v-if="category == 'register'">
             <div>Lastname</div>
             <div>
-              <v-text-field
-                hide-details=""
-                append-icon="mdi-account"
-                outlined
-                v-model="register.lastname"
-              ></v-text-field>
+              <v-text-field hide-details="" append-icon="mdi-account" outlined v-model="register.lastname"></v-text-field>
             </div>
           </v-col>
           <v-col cols="12" v-if="category == 'register'">
             <div>Middle Initial</div>
             <div>
-              <v-text-field
-                hide-details=""
-                append-icon="mdi-account"
-                outlined
-                v-model="register.middlename"
-              ></v-text-field>
+              <v-text-field hide-details="" append-icon="mdi-account" outlined
+                v-model="register.middlename"></v-text-field>
             </div>
           </v-col>
           <v-col cols="12" v-if="category == 'register'">
             <div>Year Graduated</div>
             <div>
-              <v-text-field
-                hide-details=""
-                type="number"
-                append-icon="mdi-account"
-                outlined
-                v-model="register.last_attended"
-              ></v-text-field>
+              <v-text-field hide-details="" type="number" append-icon="mdi-account" outlined
+                v-model="register.last_attended"></v-text-field>
+            </div>
+          </v-col>
+          <v-col cols="12" v-if="category == 'register'">
+            <div>Course</div>
+            <div>
+              <v-text-field hide-details="" append-icon="mdi-account" outlined
+                v-model="register.course"></v-text-field>
             </div>
           </v-col>
           <v-col cols="12" v-if="category == 'register'">
@@ -394,87 +324,73 @@
               <v-row>
                 <v-col cols="auto" class="pr-0">
                   <div style="width: 120px">
-                    <v-select
-                      outlined
-                      dense
-                      hide-details=""
-                      v-model="register.country_code"
-                      :items="[
-                        '+63',
-                        '+93',
-                        '+355',
-                        '+213',
-                        '+1684',
-                        '+376',
-                        '+244',
-                        '+1264',
-                        '+672',
-                        '+64',
-                        '+1268',
-                        '+54',
-                        '+374',
-                        '+297',
-                        '+247',
-                        '+61',
-                        '+43',
-                        '+994',
-                        '+1242',
-                        '+973',
-                        '+880',
-                        '+1246',
-                        '+375',
-                        '+32',
-                        '+501',
-                        '+229',
-                        '+1441',
-                        '+975',
-                        '+591',
-                        '+387',
-                        '+267',
-                        '+55',
-                        '+1284',
-                        '+673',
-                        '+359',
-                        '+226',
-                        '+95',
-                        '+257',
-                        '+855',
-                        '+237',
-                        '+1',
-                        '+238',
-                        '+1345',
-                        '+236',
-                        '+235',
-                        '+56',
-                        '+86',
-                        '+61',
-                        '+57',
-                        '+269',
-                        '+242',
-                        '+682',
-                      ]"
-                    >
+                    <v-select outlined dense hide-details="" v-model="register.country_code" :items="[
+                      '+63',
+                      '+93',
+                      '+355',
+                      '+213',
+                      '+1684',
+                      '+376',
+                      '+244',
+                      '+1264',
+                      '+672',
+                      '+64',
+                      '+1268',
+                      '+54',
+                      '+374',
+                      '+297',
+                      '+247',
+                      '+61',
+                      '+43',
+                      '+994',
+                      '+1242',
+                      '+973',
+                      '+880',
+                      '+1246',
+                      '+375',
+                      '+32',
+                      '+501',
+                      '+229',
+                      '+1441',
+                      '+975',
+                      '+591',
+                      '+387',
+                      '+267',
+                      '+55',
+                      '+1284',
+                      '+673',
+                      '+359',
+                      '+226',
+                      '+95',
+                      '+257',
+                      '+855',
+                      '+237',
+                      '+1',
+                      '+238',
+                      '+1345',
+                      '+236',
+                      '+235',
+                      '+56',
+                      '+86',
+                      '+61',
+                      '+57',
+                      '+269',
+                      '+242',
+                      '+682',
+                    ]">
                     </v-select>
                   </div>
                 </v-col>
                 <v-col>
-                  <v-text-field
-                    outlined
-                    type="number"
-                    placeholder=""
-                    dense
-                    v-model="register.mobile_number"
-                  ></v-text-field>
+                  <v-text-field outlined type="number" maxLength="5" placeholder="" dense
+                    v-model="register.mobile_number"></v-text-field>
                 </v-col>
               </v-row>
             </div>
           </v-col>
 
           <div class="pl-4" v-if="category == 'register'">Working Status</div>
-          <v-radio-group
-            v-model="register.work_status"
-            v-if="category == 'register'"
-          >
+          <v-radio-group v-model="register.work_status" v-if="category == 'register'">
             <v-radio label="Employed" value="Employed"></v-radio>
             <v-radio label="Unemployed" value="Unemployed"></v-radio>
             <v-radio label="Self Employed" value="Self Employed"></v-radio>
@@ -488,26 +404,16 @@
           <v-col cols="12" v-else-if="category != 'forgot-password'">
             <div>Password</div>
             <div>
-              <v-text-field
-                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                @click:append="show1 = !show1"
-                outlined
-                v-model="register.password"
-                :type="show1 ? 'text' : 'password'"
-              ></v-text-field>
+              <v-text-field :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" @click:append="show1 = !show1" outlined
+                v-model="register.password" :type="show1 ? 'text' : 'password'"></v-text-field>
             </div>
             <div>
               <v-row v-if="category == 'login'">
                 <v-col>
                   <b style="cursor: pointer" @click="category = 'register'">
-                    Register Now</b
-                  >
+                    Register Now</b>
                 </v-col>
-                <v-col
-                  @click="category = 'forgot-password'"
-                  align-self="center"
-                  align="end"
-                >
+                <v-col @click="category = 'forgot-password'" align-self="center" align="end">
                   <b style="cursor: pointer"> Forgot Password?</b>
                 </v-col>
               </v-row>
@@ -516,36 +422,18 @@
         </v-row>
 
         <div align="center" class="pt-10" v-if="category == 'login'">
-          <v-btn
-            depressed
-            color="#7c0ba0"
-            dark
-            @click="submitHandler"
-            :loading="isLoaded"
-          >
+          <v-btn depressed color="#7c0ba0" dark @click="submitHandler" :loading="isLoaded">
             Login
           </v-btn>
         </div>
         <div v-if="category == 'forgot-password'" align="center" class="pt-10">
-          <v-btn
-            depressed
-            color="#7c0ba0"
-            dark
-            @click="resetPass"
-            :loading="isLoaded"
-          >
+          <v-btn depressed color="#7c0ba0" dark @click="resetPass" :loading="isLoaded">
             Send
           </v-btn>
         </div>
         <!-- <div @click="isTerms = true" class="pointer">Terms and Conditions</div> -->
         <div v-if="category == 'register'" align="center" class="pt-10">
-          <v-btn
-            depressed
-            color="#7c0ba0"
-            dark
-            @click="isTerms = true"
-            :loading="isLoaded"
-          >
+          <v-btn depressed color="#7c0ba0" dark @click="isTerms = true" :loading="isLoaded">
             Submit
           </v-btn>
         </div>
@@ -581,12 +469,20 @@ export default {
       this.isTerms = false
       // location.reload();
     },
-    resetPass() {
-      this.$store
-        .dispatch("reset/add", { email: this.register.email })
-        .then((res) => {
-          alert("Successfully Sent!");
-        });
+    async resetPass() {
+
+      const res = await this.$store.dispatch("users/validate_user", { email: this.register.email })
+      if (res.message=='User account type is not alumni.') {
+        alert(res.message)
+      }
+      else {
+        this.$store
+          .dispatch("reset/add", { email: this.register.email })
+          .then((res) => {
+            alert("Successfully Sent!");
+          });
+      }
+
     },
     sendOtp() {
       if (this.isOTP) {
@@ -800,5 +696,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
