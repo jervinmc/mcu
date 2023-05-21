@@ -249,7 +249,7 @@
       </template>
     </v-snackbar>
 
-    <v-card height="700" :style="category == 'register' ? 'overflow:scroll' : ''" width="700" class="rounded-xl"
+    <v-card height="800" :style="category == 'register' ? 'overflow:scroll' : ''" width="700" class="rounded-xl"
       elevation="12">
       <div style="background-color: #7c0ba0; color: white" align="center" class="pa-5">
         Login Form
@@ -258,7 +258,12 @@
         <v-icon color="black">mdi-arrow-left</v-icon>
       </div>
       <div class="pt-5">
-        <v-img src="/mcu_sealed.png" height="150" width="150" contain> </v-img>
+        <v-img
+          src="https://mcu.edu.ph/assets/images/MCU-logo@2x.png?fbclid=IwAR3hjl7RSc-Ia-n8KoPVbf4d3-w1uCq5c5qIpudKqw2gz2fcE8KsvC1Ep4c"
+          height="190" width="250" contain> </v-img>
+        <div class="text-h6 py-5">
+          Information Management Portal for Alumni of CAS-IT /CS: A Tracking System
+        </div>
         <div align="center" v-if="category == 'forgot-password'">
           To reset your password,submit your email address below.
         </div>
@@ -274,48 +279,43 @@
           <v-col v-if="!isOTP">
             <div>Email</div>
             <div>
-              <v-text-field hide-details="" append-icon="mdi-account" outlined v-model="register.email"></v-text-field>
+              <v-text-field hide-details="" outlined v-model="register.email"></v-text-field>
             </div>
           </v-col>
           <v-col cols="12" v-if="category == 'register'">
             <div>Student Number</div>
             <div>
-              <v-text-field hide-details="" append-icon="mdi-account" outlined
-                v-model="register.student_number"></v-text-field>
+              <v-text-field hide-details="" outlined v-model="register.student_number"></v-text-field>
             </div>
           </v-col>
           <v-col cols="12" v-if="category == 'register'">
             <div>Firstname</div>
             <div>
-              <v-text-field hide-details="" append-icon="mdi-account" outlined
-                v-model="register.firstname"></v-text-field>
+              <v-text-field hide-details="" outlined v-model="register.firstname"></v-text-field>
             </div>
           </v-col>
           <v-col cols="12" v-if="category == 'register'">
             <div>Lastname</div>
             <div>
-              <v-text-field hide-details="" append-icon="mdi-account" outlined v-model="register.lastname"></v-text-field>
+              <v-text-field hide-details="" outlined v-model="register.lastname"></v-text-field>
             </div>
           </v-col>
           <v-col cols="12" v-if="category == 'register'">
             <div>Middle Initial</div>
             <div>
-              <v-text-field hide-details="" append-icon="mdi-account" outlined
-                v-model="register.middlename"></v-text-field>
+              <v-text-field hide-details="" outlined v-model="register.middlename"></v-text-field>
             </div>
           </v-col>
           <v-col cols="12" v-if="category == 'register'">
             <div>Year Graduated</div>
             <div>
-              <v-text-field hide-details="" type="number" append-icon="mdi-account" outlined
-                v-model="register.last_attended"></v-text-field>
+              <v-text-field hide-details="" type="number" outlined v-model="register.last_attended"></v-text-field>
             </div>
           </v-col>
           <v-col cols="12" v-if="category == 'register'">
             <div>Course</div>
             <div>
-              <v-text-field hide-details="" append-icon="mdi-account" outlined
-                v-model="register.course"></v-text-field>
+              <v-text-field hide-details="" outlined v-model="register.course"></v-text-field>
             </div>
           </v-col>
           <v-col cols="12" v-if="category == 'register'">
@@ -438,7 +438,7 @@
           </v-btn>
         </div>
         <div v-if="category == 'register'" align="center" class="py-10">
-          Please wait for Program head approval on your account
+          <!-- Please wait for Program head approval on your account -->
         </div>
       </div>
     </v-card>
@@ -472,7 +472,7 @@ export default {
     async resetPass() {
 
       const res = await this.$store.dispatch("users/validate_user", { email: this.register.email })
-      if (res.message=='User account type is not alumni.') {
+      if (res.message == 'User account type is not alumni.') {
         alert(res.message)
       }
       else {
@@ -506,7 +506,18 @@ export default {
           });
       }
     },
+    validateNumber(input) {
+      const regex = /^\d{10}$/;
+      return regex.test(input);
+    },
+
     async submitHandlerRegister() {
+      let validateMobile = this.validateNumber(this.register.mobile_number)
+      if(!validateMobile){
+        alert("Only accept 11 numbers")
+        return
+      }
+
       if (this.register.email == "" || this.register.email == undefined) {
         alert("Email field is required.");
         return;
@@ -566,7 +577,7 @@ export default {
         this.register.account_type = "Student";
         this.register.is_active = false;
         await this.$store.dispatch("users/add", this.register);
-        alert("Successful !");
+        alert("Successfully registered. Please wait for Program head approval on your account");
         location = "/login";
       } catch (error) {
         alert(

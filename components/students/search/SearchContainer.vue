@@ -152,7 +152,7 @@ export default {
         { text: "Date Registered", value: "date_joined" },
         { text: "Firstname", value: "firstname" },
         { text: "Lastname", value: "lastname" },
-        { text: "Email", value: "email" },
+        // { text: "Email", value: "email" },
         { text: "Actions", value: "opt" },
 
         ,

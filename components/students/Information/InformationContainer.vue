@@ -274,7 +274,7 @@
             <div align="center">
               <div class="">
                 <v-avatar
-                  size="100"
+                  size="100" 
                   color="grey"
                   class="white--text pointer"
                   @click="$refs.file.click()"
