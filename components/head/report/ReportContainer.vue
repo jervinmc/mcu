@@ -219,6 +219,17 @@
           {{ formatPrice(item.price) }}
         </div>
       </template>
+      <template #[`item.is_active`]="{ item }">
+        <div>
+         {{ item.is_active ? 'Yes' : 'No' }}
+        </div>
+      </template>
+      <template #[`item.last_login`]="{ item }">
+        <div>
+         {{ formatDate(item.last_login) }}
+         <!-- {{item.last_login }} -->
+        </div>
+      </template>
       <template v-slot:loading>
         <v-skeleton-loader
           v-for="n in 5"
@@ -281,6 +292,7 @@ export default {
         { text: "Address", value: "address" },
         { text: "Lastname", value: "lastname" },
         { text: "Active?", value: "is_active" },
+        { text: "Last Login", value: "last_login" },
         { text: "Email", value: "email" },
         { text: "Actions", value: "opt" },
         ,
@@ -293,8 +305,26 @@ export default {
       this.isView = true;
     },
     formatDate(item) {
-      return moment(item).format("LL");
+      return moment(item).format("MM/DD/YYYY HH:MM:SS");
     },
+     calculateMinutesBetweenDates(startDate, endDate) {
+        const diffMilliseconds = Math.abs(endDate - startDate);
+        const minutes = Math.floor(diffMilliseconds / (1000 * 60));
+        return minutes;
+      },
+    formatDateTime(item1) {
+      const date1 = this.formatDate(item1)
+      const startDateTime = new Date(date1);
+      const today = new Date();
+      const now = new Date();
+      const options = { timeZone: 'Asia/Manila', hour12: false };
+      const dateTimeString = now.toLocaleString('en-US', options);
+      const endDateTime = new Date(dateTimeString);
+      alert(startDateTime)
+      const minutes = this.calculateMinutesBetweenDates(startDateTime, endDateTime);
+      return minutes;
+    },
+    
   },
 };
 </script>

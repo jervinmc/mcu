@@ -313,6 +313,12 @@
             </div>
           </v-col>
           <v-col cols="12" v-if="category == 'register'">
+            <div>Gender</div>
+            <div>
+              <v-text-field hide-details="" type="number" outlined v-model="register.gender"></v-text-field>
+            </div>
+          </v-col>
+          <v-col cols="12" v-if="category == 'register'">
             <div>Course</div>
             <div>
               <v-text-field hide-details="" outlined v-model="register.course"></v-text-field>
@@ -594,6 +600,10 @@ export default {
         const response = await this.$auth.loginWith("local", {
           data: this.register,
         });
+        this.$store.dispatch("users/edit",{
+          last_login:new Date(),
+          id: this.$auth.user.id
+        })
       } catch (error) {
         alert("Wrong credentials");
         location.reload();

@@ -89,6 +89,7 @@
                 <v-date-picker
                   v-model="register.date_joined"
                   no-title
+                  
                   scrollable
                 >
                   <v-spacer></v-spacer>
@@ -195,6 +196,14 @@
             v-model="register.last_attended"
           ></v-text-field>
         </div>
+        <div>
+          <div>Sex</div>
+          <v-text-field
+            outlined
+            dense
+            v-model="register.gender"
+          ></v-text-field>
+        </div>
         <!-- <div>
           <div>Age</div>
           <v-text-field
@@ -227,7 +236,9 @@
                     v-on="on"
                   ></v-text-field>
                 </template>
-                <v-date-picker v-model="register.birthdate" no-title scrollable>
+                <v-date-picker v-model="register.birthdate"
+                :max="new Date().toISOString().split('T')[0]"
+                no-title scrollable>
                   <v-spacer></v-spacer>
                   <v-btn text color="primary" @click="departMenu = false">
                     Cancel
@@ -591,7 +602,7 @@ export default {
     },
     submitHandlerWork() {
       if (this.isEditWork) {
-        this.$storez
+        this.$store
           .dispatch("work/edit", {
             user_id: this.$auth.user.id,
             company_name: this.register.company_name,
