@@ -197,7 +197,7 @@
           ></v-text-field>
         </div>
         <div>
-          <div>Sex</div>
+          <div>Gender</div>
           <v-text-field
             outlined
             dense
@@ -663,6 +663,10 @@ export default {
       this.isEdit = true;
     },
     submitHandler() {
+        if(this.register.last_attended > 2023){
+          alert('Not valid year.')
+          return
+        }
       this.register.id = this.$auth.user.id;
       if(this.register.birthdate==''){
          delete this.register.birthdate

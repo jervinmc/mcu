@@ -98,7 +98,13 @@
     >
       <!-- <v-img src="/mcu_sealed.png" contain height="50" width="50" alignb></v-img> -->
       <div></div>
-      <v-app-bar-nav-icon dark @click.stop="drawer = !drawer" />
+      <div v-for="x in $auth.user.account_type == 'Admin'? items_admin : $auth.user.account_type == 'Head' ? items : items_student" class="px-10" >
+        <v-icon color="white" @click="gotoRoute(x.to)" 
+          router>
+          {{ x.icon }}
+        </v-icon>
+      </div>
+      <!-- <v-app-bar-nav-icon dark @click.stop="drawer = !drawer" /> -->
       <v-spacer></v-spacer>
       <div class="pr-4 white--text">
         {{today}}
@@ -123,6 +129,7 @@
           <img :src="$auth.user.image" alt="No Image" />
         </v-avatar>
       </div>
+          <v-icon class="pr-2" color="white" @click="isOpenLogout = true">mdi-logout</v-icon>
     </v-app-bar>
     <v-main>
       <v-container fluid class="pa-0">
@@ -163,7 +170,7 @@ export default {
   },
   data() {
     return {
-      drawer:true,
+      drawer:false,
       isEdit: false,
       register: {},
       account_type: "",
@@ -293,6 +300,9 @@ export default {
     };
   },
   methods: {
+    gotoRoute(item){
+      window.location = item
+    },
     submitHandler() {
       if (this.settings_data.length > 0) {
         this.$store.dispatch("settings/edit", {

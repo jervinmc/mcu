@@ -148,8 +148,8 @@ export default {
       search: "",
       isView: false,
       headers: [
-        { text: "Student Number", value: "student_number" },
-        { text: "Date Registered", value: "date_joined" },
+        // { text: "Student Number", value: "student_number" },
+        // { text: "Date Registered", value: "date_joined" },
         { text: "Firstname", value: "firstname" },
         { text: "Lastname", value: "lastname" },
         // { text: "Email", value: "email" },

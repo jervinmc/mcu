@@ -248,206 +248,211 @@
         </v-btn>
       </template>
     </v-snackbar>
-
-    <v-card height="800" :style="category == 'register' ? 'overflow:scroll' : ''" width="700" class="rounded-xl"
-      elevation="12">
-      <div style="background-color: #7c0ba0; color: white" align="center" class="pa-5">
-        Login Form
-      </div>
-      <div align="start" class="pa-5" v-if="category != 'login'" @click="category = 'login'" style="cursor: pointer">
-        <v-icon color="black">mdi-arrow-left</v-icon>
-      </div>
-      <div class="pt-5">
-        <v-img
-          src="https://mcu.edu.ph/assets/images/MCU-logo@2x.png?fbclid=IwAR3hjl7RSc-Ia-n8KoPVbf4d3-w1uCq5c5qIpudKqw2gz2fcE8KsvC1Ep4c"
-          height="190" width="250" contain> </v-img>
-        <div class="text-h6 py-5">
-          Information Management Portal for Alumni of CAS-IT /CS: A Tracking System
-        </div>
-        <div align="center" v-if="category == 'forgot-password'">
-          To reset your password,submit your email address below.
-        </div>
-      </div>
-      <div class="pa-5" align="start">
-        <div v-if="category == 'register'" class="pb-10">
-          To continue with your registration, kindly complete the form.
-          <div class="text-h6 pt-5">
-            <b> Search by email address</b>
-          </div>
-        </div>
-        <v-row>
-          <v-col v-if="!isOTP">
-            <div>Email</div>
-            <div>
-              <v-text-field hide-details="" outlined v-model="register.email"></v-text-field>
+    <div>
+      <v-row>
+        <v-spacer></v-spacer>
+        <v-col>
+          <v-card height="800" :style="category == 'register' ? 'overflow:scroll' : ''" width="500" class="rounded-xl"
+            elevation="12">
+            <div style="background-color: #7c0ba0; color: white" align="center" class="pa-5">
+              Login Form
             </div>
-          </v-col>
-          <v-col cols="12" v-if="category == 'register'">
-            <div>Student Number</div>
-            <div>
-              <v-text-field hide-details="" outlined v-model="register.student_number"></v-text-field>
+            <div align="start" class="pa-5" v-if="category != 'login'" @click="category = 'login'"
+              style="cursor: pointer">
+              <v-icon color="black">mdi-arrow-left</v-icon>
             </div>
-          </v-col>
-          <v-col cols="12" v-if="category == 'register'">
-            <div>Firstname</div>
-            <div>
-              <v-text-field hide-details="" outlined v-model="register.firstname"></v-text-field>
+            <div class="pt-5">
+              <v-img
+                src="https://mcu.edu.ph/assets/images/MCU-logo@2x.png?fbclid=IwAR3hjl7RSc-Ia-n8KoPVbf4d3-w1uCq5c5qIpudKqw2gz2fcE8KsvC1Ep4c"
+                height="190" width="250" contain> </v-img>
+              <div class="text-h6 py-5">
+                Information Management Portal for Alumni of CAS-IT /CS: A Tracking System
+              </div>
+              <div align="center" v-if="category == 'forgot-password'">
+                To reset your password,submit your email address below.
+              </div>
             </div>
-          </v-col>
-          <v-col cols="12" v-if="category == 'register'">
-            <div>Lastname</div>
-            <div>
-              <v-text-field hide-details="" outlined v-model="register.lastname"></v-text-field>
-            </div>
-          </v-col>
-          <v-col cols="12" v-if="category == 'register'">
-            <div>Middle Initial</div>
-            <div>
-              <v-text-field hide-details="" outlined v-model="register.middlename"></v-text-field>
-            </div>
-          </v-col>
-          <v-col cols="12" v-if="category == 'register'">
-            <div>Year Graduated</div>
-            <div>
-              <v-text-field hide-details="" type="number" outlined v-model="register.last_attended"></v-text-field>
-            </div>
-          </v-col>
-          <v-col cols="12" v-if="category == 'register'">
-            <div>Gender</div>
-            <div>
-              <v-text-field hide-details="" type="number" outlined v-model="register.gender"></v-text-field>
-            </div>
-          </v-col>
-          <v-col cols="12" v-if="category == 'register'">
-            <div>Course</div>
-            <div>
-              <v-text-field hide-details="" outlined v-model="register.course"></v-text-field>
-            </div>
-          </v-col>
-          <v-col cols="12" v-if="category == 'register'">
-            <div>Mobile Number</div>
-            <div>
+            <div class="pa-5" align="start">
+              <div v-if="category == 'register'" class="pb-10">
+                To continue with your registration, kindly complete the form.
+                <div class="text-h6 pt-5">
+                  <b> Search by email address</b>
+                </div>
+              </div>
               <v-row>
-                <v-col cols="auto" class="pr-0">
-                  <div style="width: 120px">
-                    <v-select outlined dense hide-details="" v-model="register.country_code" :items="[
-                      '+63',
-                      '+93',
-                      '+355',
-                      '+213',
-                      '+1684',
-                      '+376',
-                      '+244',
-                      '+1264',
-                      '+672',
-                      '+64',
-                      '+1268',
-                      '+54',
-                      '+374',
-                      '+297',
-                      '+247',
-                      '+61',
-                      '+43',
-                      '+994',
-                      '+1242',
-                      '+973',
-                      '+880',
-                      '+1246',
-                      '+375',
-                      '+32',
-                      '+501',
-                      '+229',
-                      '+1441',
-                      '+975',
-                      '+591',
-                      '+387',
-                      '+267',
-                      '+55',
-                      '+1284',
-                      '+673',
-                      '+359',
-                      '+226',
-                      '+95',
-                      '+257',
-                      '+855',
-                      '+237',
-                      '+1',
-                      '+238',
-                      '+1345',
-                      '+236',
-                      '+235',
-                      '+56',
-                      '+86',
-                      '+61',
-                      '+57',
-                      '+269',
-                      '+242',
-                      '+682',
-                    ]">
-                    </v-select>
+                <v-col v-if="!isOTP">
+                  <div>Email</div>
+                  <div>
+                    <v-text-field hide-details="" outlined v-model="register.email"></v-text-field>
                   </div>
                 </v-col>
-                <v-col>
-                  <v-text-field outlined type="number" maxLength="5" placeholder="" dense
-                    v-model="register.mobile_number"></v-text-field>
+                <v-col cols="12" v-if="category == 'register'">
+                  <div>Student Number</div>
+                  <div>
+                    <v-text-field hide-details="" outlined v-model="register.student_number"></v-text-field>
+                  </div>
+                </v-col>
+                <v-col cols="12" v-if="category == 'register'">
+                  <div>Firstname</div>
+                  <div>
+                    <v-text-field hide-details="" outlined v-model="register.firstname"></v-text-field>
+                  </div>
+                </v-col>
+                <v-col cols="12" v-if="category == 'register'">
+                  <div>Lastname</div>
+                  <div>
+                    <v-text-field hide-details="" outlined v-model="register.lastname"></v-text-field>
+                  </div>
+                </v-col>
+                <v-col cols="12" v-if="category == 'register'">
+                  <div>Middle Initial</div>
+                  <div>
+                    <v-text-field hide-details="" outlined v-model="register.middlename"></v-text-field>
+                  </div>
+                </v-col>
+                <v-col cols="12" v-if="category == 'register'">
+                  <div>Year Graduated</div>
+                  <div>
+                    <v-text-field hide-details="" type="number" outlined v-model="register.last_attended"></v-text-field>
+                  </div>
+                </v-col>
+                <v-col cols="12" v-if="category == 'register'">
+                  <div>Gender</div>
+                  <v-select :items="['Male', 'Female']" outlined dense v-model="register.gender"></v-select>
+                </v-col>
+                <v-col cols="12" v-if="category == 'register'">
+                  <div>Course</div>
+                  <div>
+                    <v-text-field hide-details="" outlined v-model="register.course"></v-text-field>
+                  </div>
+                </v-col>
+                <v-col cols="12" v-if="category == 'register'">
+                  <div>Mobile Number</div>
+                  <div>
+                    <v-row>
+                      <v-col cols="auto" class="pr-0">
+                        <div style="width: 120px">
+                          <v-select outlined dense hide-details="" v-model="register.country_code" :items="[
+                            '+63',
+                            '+93',
+                            '+355',
+                            '+213',
+                            '+1684',
+                            '+376',
+                            '+244',
+                            '+1264',
+                            '+672',
+                            '+64',
+                            '+1268',
+                            '+54',
+                            '+374',
+                            '+297',
+                            '+247',
+                            '+61',
+                            '+43',
+                            '+994',
+                            '+1242',
+                            '+973',
+                            '+880',
+                            '+1246',
+                            '+375',
+                            '+32',
+                            '+501',
+                            '+229',
+                            '+1441',
+                            '+975',
+                            '+591',
+                            '+387',
+                            '+267',
+                            '+55',
+                            '+1284',
+                            '+673',
+                            '+359',
+                            '+226',
+                            '+95',
+                            '+257',
+                            '+855',
+                            '+237',
+                            '+1',
+                            '+238',
+                            '+1345',
+                            '+236',
+                            '+235',
+                            '+56',
+                            '+86',
+                            '+61',
+                            '+57',
+                            '+269',
+                            '+242',
+                            '+682',
+                          ]">
+                          </v-select>
+                        </div>
+                      </v-col>
+                      <v-col>
+                        <v-text-field outlined type="number" maxLength="5" placeholder="" dense
+                          v-model="register.mobile_number"></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </div>
+                </v-col>
+
+                <div class="pl-4" v-if="category == 'register'">Working Status</div>
+                <v-radio-group v-model="register.work_status" v-if="category == 'register'">
+                  <v-radio label="Employed" value="Employed"></v-radio>
+                  <v-radio label="Unemployed" value="Unemployed"></v-radio>
+                  <v-radio label="Self Employed" value="Self Employed"></v-radio>
+                </v-radio-group>
+                <v-col cols="12" v-if="isOTP">
+                  <div>OTP</div>
+                  <div>
+                    <v-text-field outlined v-model="register.otp"></v-text-field>
+                  </div>
+                </v-col>
+                <v-col cols="12" v-else-if="category != 'forgot-password'">
+                  <div>Password</div>
+                  <div>
+                    <v-text-field :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" @click:append="show1 = !show1" outlined
+                      v-model="register.password" :type="show1 ? 'text' : 'password'"></v-text-field>
+                  </div>
+                  <div>
+                    <v-row v-if="category == 'login'">
+                      <v-col>
+                        <b style="cursor: pointer" @click="category = 'register'">
+                          Register Now</b>
+                      </v-col>
+                      <v-col @click="category = 'forgot-password'" align-self="center" align="end">
+                        <b style="cursor: pointer"> Forgot Password?</b>
+                      </v-col>
+                    </v-row>
+                  </div>
                 </v-col>
               </v-row>
-            </div>
-          </v-col>
 
-          <div class="pl-4" v-if="category == 'register'">Working Status</div>
-          <v-radio-group v-model="register.work_status" v-if="category == 'register'">
-            <v-radio label="Employed" value="Employed"></v-radio>
-            <v-radio label="Unemployed" value="Unemployed"></v-radio>
-            <v-radio label="Self Employed" value="Self Employed"></v-radio>
-          </v-radio-group>
-          <v-col cols="12" v-if="isOTP">
-            <div>OTP</div>
-            <div>
-              <v-text-field outlined v-model="register.otp"></v-text-field>
+              <div align="center" class="pt-10" v-if="category == 'login'">
+                <v-btn depressed color="#7c0ba0" dark @click="submitHandler" :loading="isLoaded">
+                  Login
+                </v-btn>
+              </div>
+              <div v-if="category == 'forgot-password'" align="center" class="pt-10">
+                <v-btn depressed color="#7c0ba0" dark @click="resetPass" :loading="isLoaded">
+                  Send
+                </v-btn>
+              </div>
+              <!-- <div @click="isTerms = true" class="pointer">Terms and Conditions</div> -->
+              <div v-if="category == 'register'" align="center" class="pt-10">
+                <v-btn depressed color="#7c0ba0" dark @click="isTerms = true" :loading="isLoaded">
+                  Submit
+                </v-btn>
+              </div>
+              <div v-if="category == 'register'" align="center" class="py-10">
+                <!-- Please wait for Program head approval on your account -->
+              </div>
             </div>
-          </v-col>
-          <v-col cols="12" v-else-if="category != 'forgot-password'">
-            <div>Password</div>
-            <div>
-              <v-text-field :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" @click:append="show1 = !show1" outlined
-                v-model="register.password" :type="show1 ? 'text' : 'password'"></v-text-field>
-            </div>
-            <div>
-              <v-row v-if="category == 'login'">
-                <v-col>
-                  <b style="cursor: pointer" @click="category = 'register'">
-                    Register Now</b>
-                </v-col>
-                <v-col @click="category = 'forgot-password'" align-self="center" align="end">
-                  <b style="cursor: pointer"> Forgot Password?</b>
-                </v-col>
-              </v-row>
-            </div>
-          </v-col>
-        </v-row>
-
-        <div align="center" class="pt-10" v-if="category == 'login'">
-          <v-btn depressed color="#7c0ba0" dark @click="submitHandler" :loading="isLoaded">
-            Login
-          </v-btn>
-        </div>
-        <div v-if="category == 'forgot-password'" align="center" class="pt-10">
-          <v-btn depressed color="#7c0ba0" dark @click="resetPass" :loading="isLoaded">
-            Send
-          </v-btn>
-        </div>
-        <!-- <div @click="isTerms = true" class="pointer">Terms and Conditions</div> -->
-        <div v-if="category == 'register'" align="center" class="pt-10">
-          <v-btn depressed color="#7c0ba0" dark @click="isTerms = true" :loading="isLoaded">
-            Submit
-          </v-btn>
-        </div>
-        <div v-if="category == 'register'" align="center" class="py-10">
-          <!-- Please wait for Program head approval on your account -->
-        </div>
-      </div>
-    </v-card>
+          </v-card>
+        </v-col>
+      </v-row>
+    </div>
   </div>
 </template>
 
@@ -518,8 +523,12 @@ export default {
     },
 
     async submitHandlerRegister() {
+      if (this.register.last_attended > 2023) {
+        alert('Not valid year.')
+        return
+      }
       let validateMobile = this.validateNumber(this.register.mobile_number)
-      if(!validateMobile){
+      if (!validateMobile) {
         alert("Only accept 11 numbers")
         return
       }
@@ -600,8 +609,8 @@ export default {
         const response = await this.$auth.loginWith("local", {
           data: this.register,
         });
-        this.$store.dispatch("users/edit",{
-          last_login:new Date(),
+        this.$store.dispatch("users/edit", {
+          last_login: new Date(),
           id: this.$auth.user.id
         })
       } catch (error) {

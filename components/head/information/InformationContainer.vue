@@ -197,12 +197,13 @@
           ></v-text-field>
         </div> -->
         <div>
-          <div>Sex</div>
-          <v-text-field
+          <div>Gender</div>
+          <v-select
+            :items="['Male','Female']"
             outlined
             dense
             v-model="register.gender"
-          ></v-text-field>
+          ></v-select>
         </div>
         <!-- <div>
           <div>Age</div>
