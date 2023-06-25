@@ -103,6 +103,9 @@
           router>
           {{ x.icon }}
         </v-icon>
+        <div class="white--text">
+          {{ x.title }}
+        </div>
       </div>
       <!-- <v-app-bar-nav-icon dark @click.stop="drawer = !drawer" /> -->
       <v-spacer></v-spacer>
