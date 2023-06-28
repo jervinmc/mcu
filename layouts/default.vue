@@ -41,7 +41,7 @@
       </v-card>
     </v-dialog>
     <!-- v-model="drawer" -->
-    <v-navigation-drawer
+    <!-- <v-navigation-drawer
       v-if="$route.name != 'login' && $auth.loggedIn"
       :mini-variant="miniVariant"
       :clipped="clipped"
@@ -52,7 +52,7 @@
       color="primary"
     >
       <v-list v-if="this.$auth.loggedIn">
-        <!--eslint-disable-->
+        eslint-disable
         <v-list-item
           v-for="(item, i) in $auth.user.account_type == 'Admin'
             ? items_admin
@@ -67,14 +67,6 @@
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
-            <!-- <div v-if="item.title =='Announcement' ? $auth.user.notification_announcement!=0 : item.title =='Job Posting' ? $auth.user.notification_job!=0 : $auth.user.notification_event!=0   ">
-              <v-badge  :content="item.title =='Announcement' ? $auth.user.notification_announcement : item.title == 'Events' ? $auth.user.notification_event : $auth.user.notification_job" color="red" overlap v-if="item.to=='/student/announcement' || item.to=='/student/events' || item.to=='/student/job_posting'">
-              {{item.title}}
-            </v-badge>
-            </div>
-            <div v-else>
-              {{item.title}}
-            </div> -->
             <div>
               {{item.title}}
             </div>
@@ -88,7 +80,7 @@
           <v-list-item-title style="color: white">Logout</v-list-item-title>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
     <v-app-bar
       color="primary"
       v-if="$route.name != 'login' && $auth.loggedIn"
@@ -132,7 +124,9 @@
           <img :src="$auth.user.image" alt="No Image" />
         </v-avatar>
       </div>
-          <v-icon class="pr-2" color="white" @click="isOpenLogout = true">mdi-logout</v-icon>
+          <div class="pl-10">
+            <v-icon class="pr-2" color="white" @click="isOpenLogout = true">mdi-logout</v-icon>
+          </div>
     </v-app-bar>
     <v-main>
       <v-container fluid class="pa-0">

@@ -161,6 +161,10 @@ export default {
   },
   methods: {
     view(item) {
+      if(item.is_locked){
+        alert('Account is private')
+        return
+      }
       this.selectedItem = item;
       this.isView = true;
     },

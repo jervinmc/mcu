@@ -266,7 +266,10 @@
                 src="https://mcu.edu.ph/assets/images/MCU-logo@2x.png?fbclid=IwAR3hjl7RSc-Ia-n8KoPVbf4d3-w1uCq5c5qIpudKqw2gz2fcE8KsvC1Ep4c"
                 height="190" width="250" contain> </v-img>
               <div class="text-h6 py-5">
-                Information Management Portal for Alumni of CAS-IT /CS: A Tracking System
+                Information Management Portal
+                <div>
+                  for Alumni of CAS-IT /CS: A Tracking System
+                </div>
               </div>
               <div align="center" v-if="category == 'forgot-password'">
                 To reset your password,submit your email address below.

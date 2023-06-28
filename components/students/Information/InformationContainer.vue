@@ -89,7 +89,7 @@
                 <v-date-picker
                   v-model="register.date_joined"
                   no-title
-                  
+                  :max="new Date().toISOString().split('T')[0]"
                   scrollable
                 >
                   <v-spacer></v-spacer>
@@ -270,6 +270,13 @@
             :items="['Employed', 'Unemployed', 'Self Employed']"
           ></v-select>
         </div>
+        <div>
+          <div>Profile Locked</div>
+          <v-select
+            v-model="register.is_locked"
+            :items="['Yes','No']"
+          ></v-select>
+        </div>
         <div align="center">
           <v-btn color="primary" @click="submitHandler">Save Changes</v-btn>
         </div>
@@ -303,6 +310,9 @@
                 <div>{{ $auth.user.firstname }} {{ $auth.user.lastname }}</div>
                 <div @click="isEditPassword = true" class="pointer">
                   Edit Password
+                </div>
+                <div>
+                  {{ $auth.user.is_locked ? 'Your account is private.' : '' }}
                 </div>
                 <!-- <div>
                     BSIT 4-1
@@ -658,11 +668,19 @@ export default {
     },
     editItem() {
       this.register = cloneDeep(this.$auth.user);
+      this.register.is_locked = cloneDeep(this.register.is_locked ? 'Yes' : 'No');
       this.register.birthdate = ''
       delete this.register.image;
       this.isEdit = true;
     },
     submitHandler() {
+      if(this.register.is_locked == 'Yes'){
+        this.register.is_locked = true
+      }
+      else{
+        this.register.is_locked = false
+      }
+
         if(this.register.last_attended > 2023){
           alert('Not valid year.')
           return
