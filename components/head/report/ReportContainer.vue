@@ -260,6 +260,20 @@
               </v-list-item-content>
             </v-list-item>
           </v-list>
+          <v-list dense>
+            <v-list-item @click.stop="setStatus(item,true)">
+              <v-list-item-content>
+                <v-list-item-title>Set as Active</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+          <v-list dense>
+            <v-list-item @click.stop="setStatus(item,false)">
+              <v-list-item-content>
+                <v-list-item-title>Set as In Active</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
         </v-menu>
       </template>
     </v-data-table>
@@ -300,6 +314,16 @@ export default {
     };
   },
   methods: {
+    setStatus(item,status){
+      const data = {
+        is_active:status,
+        id:item.id
+      }
+      this.$store.dispatch('users/edit',data).then(()=>{
+        window.location.reload()
+      })
+      
+    },
     view(item) {
       this.selectedItem = item;
       this.isView = true;
