@@ -91,13 +91,17 @@
       <!-- <v-img src="/mcu_sealed.png" contain height="50" width="50" alignb></v-img> -->
       <div></div>
       <div v-for="x in $auth.user.account_type == 'Admin'? items_admin : $auth.user.account_type == 'Head' ? items : items_student" class="px-10" >
-        <v-icon color="white" @click="gotoRoute(x.to)" 
+        <v-row>
+          <v-col>
+            <v-icon color="white" @click="gotoRoute(x.to)" 
           router>
           {{ x.icon }}
         </v-icon>
         <div class="white--text">
           {{ x.title }}
         </div>
+          </v-col>
+        </v-row>
       </div>
       <!-- <v-app-bar-nav-icon dark @click.stop="drawer = !drawer" /> -->
       <v-spacer></v-spacer>

@@ -150,6 +150,14 @@
           ></v-text-field>
         </div>
         <div>
+          <div>Middlename</div>
+          <v-text-field
+            outlined
+            dense
+            v-model="register.middlename"
+          ></v-text-field>
+        </div>
+        <div>
           <div>Lastname</div>
           <v-text-field
             outlined

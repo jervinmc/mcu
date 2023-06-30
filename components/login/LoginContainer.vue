@@ -286,7 +286,7 @@
                 <v-col v-if="!isOTP">
                   <div>Email</div>
                   <div>
-                    <v-text-field hide-details="" outlined v-model="register.email"></v-text-field>
+                    <v-text-field hide-details="" @keyup.enter="submitHandler" outlined v-model="register.email"></v-text-field>
                   </div>
                 </v-col>
                 <v-col cols="12" v-if="category == 'register'">
@@ -412,11 +412,11 @@
                     <v-text-field outlined v-model="register.otp"></v-text-field>
                   </div>
                 </v-col>
-                <v-col cols="12" v-else-if="category != 'forgot-password'">
+                <v-col cols="12"  v-else-if="category != 'forgot-password'">
                   <div>Password</div>
                   <div>
-                    <v-text-field :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" @click:append="show1 = !show1" outlined
-                      v-model="register.password" :type="show1 ? 'text' : 'password'"></v-text-field>
+                    <v-text-field @keyup.enter="submitHandler" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" @click:append="show1 = !show1" outlined
+                      v-model="register.password" :type="show1 ? 'text' : 'password'" ></v-text-field>
                   </div>
                   <div>
                     <v-row v-if="category == 'login'">
