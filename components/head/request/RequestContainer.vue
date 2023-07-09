@@ -79,7 +79,6 @@ export default {
         { text: "Firstname", value: "firstname" },
         { text: "Middlename", value: "middlename" },
         { text: "Lastname", value: "lastname" },
-        { text: "Student Number", value: "student_number" },
         { text: "Email", value: "email" },
         { text: "Actions", value: "opt" },
         ,
