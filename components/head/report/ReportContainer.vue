@@ -4,7 +4,7 @@
       <v-card class="pa-10">
         <v-data-table class="pa-5"
           :headers="(category == 'event_views' || category == 'announcement_views' || category == 'job_views') ? post_header : headers"
-          :items="category == 'view_users' ? users : category == 'active_members' ? active_members : category == 'event_views' ? event_data : category == 'announcement_views' ? announcement_data : job_posting_data"
+          :items="category == 'view_users' ? users : category == 'active_members' ? active_members : category == 'event_views' ? report_data.filter(data=>data.category=='Event') : category == 'announcement_views' ? report_data.filter(data=>data.category=='Announcement') : report_data.filter(data=>data.category=='Post')"
           :loading="isLoading">
           <template v-slot:[`item.status`]="{ item }">
             <div>
@@ -193,7 +193,7 @@
                 <v-col align="end" align-self="center">
                   <div class="text-h4 white--text">
                     <b>
-                      {{ report_data[0].event_views }}
+                      {{ report_data.filter(data => data.category=='Event').length }}
                     </b>
                   </div>
                 </v-col>
@@ -210,7 +210,7 @@
                 <v-col align="end">
                   <div class="text-h4 white--text">
                     <b>
-                      {{ report_data[0].announcement_views }}
+                      {{ report_data.filter(data => data.category=='Announcement').length }}
                     </b>
                   </div>
                 </v-col>
@@ -226,7 +226,7 @@
                 <v-col align="end">
                   <div class="text-h4 white--text">
                     <b>
-                      {{ report_data[0].posting_views }}
+                      {{ report_data.filter(data => data.category=='Post').length }}
                     </b>
                   </div>
                 </v-col>
@@ -372,9 +372,10 @@ export default {
       ],
       post_header: [
         { text: "ID", value: "id" },
-        { text: "Content", value: "content" },
-        { text: "Description", value: "description" },
-        { text: "Date Created", value: "date_created" },
+        { text: "Firstname", value: "users.firstname" },
+        { text: "Middlename", value: "users.middlename" },
+        { text: "Lastname", value: "users.lastname" },
+        { text: "Student Number", value: "users.student_number" },
         ,
       ],
     };

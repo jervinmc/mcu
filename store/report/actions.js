@@ -8,22 +8,31 @@ const actions = {
     },
     async announcement_view({ commit },  data ) {
         const response = await this.$axios.$post(
-          "/announcement-view/",
-          {}
+          "/report/",
+          {
+          "user_id":this.$auth.user.id,
+          "category":"Announcement"
+          }
         );
         response.data = data;
       },
       async event_view({ commit },  data ) {
         const response = await this.$axios.$post(
-          "/event-view/",
-          {}
+          "/report/",
+          {
+            "user_id":this.$auth.user.id,
+            "category":"Event"
+            }
         );
         response.data = data;
       },
       async posting_view({ commit },  data ) {
         const response = await this.$axios.$post(
-          "/posting-view/",
-          {}
+          "/report/",
+          {
+            "user_id":this.$auth.user.id,
+            "category":"Post"
+            }
         );
         response.data = data;
       },
