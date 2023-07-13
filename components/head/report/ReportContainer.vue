@@ -3,7 +3,7 @@
     <v-dialog v-model="isViewMembers" max-width="500">
       <v-card class="pa-10">
         <v-data-table class="pa-5"
-          :headers="(category == 'event_views' || category == 'announcement_views' || category == 'job_views') ? post_header : headers"
+          :headers="(category == 'event_views' || category == 'announcement_views' || category == 'job_views') ? post_header : active_headers"
           :items="category == 'view_users' ? users : category == 'active_members' ? active_members : category == 'event_views' ? report_data.filter(data=>data.category=='Event') : category == 'announcement_views' ? report_data.filter(data=>data.category=='Announcement') : report_data.filter(data=>data.category=='Post')"
           :loading="isLoading">
           <template v-slot:[`item.status`]="{ item }">
@@ -151,7 +151,7 @@
       <v-col>
         <v-row>
           <v-col cols="12">
-            <v-card @click="viewMember('total_members')" color="#4747a1" height="70" class="rounded-xl pa-5"
+            <v-card color="#4747a1" height="70" class="rounded-xl pa-5"
               elevation="5">
               <v-row>
                 <v-col>
@@ -368,6 +368,13 @@ export default {
         { text: "Active Status", value: "active_status" },
         { text: "Email", value: "email" },
         { text: "Actions", value: "opt" },
+        ,
+      ],
+      active_headers: [
+        { text: "Student Number", value: "student_number" },
+        { text: "Firstname", value: "firstname" },
+        { text: "Lastname", value: "lastname" },
+        { text: "Lastname", value: "lastname" },
         ,
       ],
       post_header: [
