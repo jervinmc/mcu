@@ -4,7 +4,7 @@
       <v-card class="pa-10">
         <v-data-table class="pa-5"
           :headers="(category == 'event_views' || category == 'announcement_views' || category == 'job_views') ? post_header : active_headers"
-          :items="category == 'view_users' ? users : category == 'active_members' ? active_members : category == 'event_views' ? report_data.filter(data=>data.category=='Event') : category == 'announcement_views' ? report_data.filter(data=>data.category=='Announcement') : report_data.filter(data=>data.category=='Post')"
+          :items="category == 'view_users' ? users : category == 'active_members' ? active_members  : category == 'in_active_members' ? users.filter(data=> !data.is_active) : category == 'event_views' ? report_data.filter(data=>data.category=='Event') : category == 'announcement_views' ? report_data.filter(data=>data.category=='Announcement') : report_data.filter(data=>data.category=='Post')"
           :loading="isLoading">
           <template v-slot:[`item.status`]="{ item }">
             <div>
@@ -178,6 +178,23 @@
                   <div class="text-h4 white--text">
                     <b>
                       {{ users.filter((data) => data.is_active).length }}
+                    </b>
+                  </div>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col>
+          <v-col cols="12" class="pt-0">
+            <v-card @click="viewMember('in_active_members')" color="#4747a1" height="70" class="rounded-xl pa-5"
+              elevation="5">
+              <v-row>
+                <v-col>
+                  <div class="pb-5 white--text">In Active Members</div>
+                </v-col>
+                <v-col class="pt-2" align="end">
+                  <div class="text-h4 white--text">
+                    <b>
+                      {{ users.filter((data) => !data.is_active).length }}
                     </b>
                   </div>
                 </v-col>

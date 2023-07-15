@@ -317,7 +317,7 @@
                     BSIT 4-1
                 </div> -->
                 <div align="start" class="pt-5">
-                  <v-row>
+                  <!-- <v-row>
                     <v-col>
                       <div>Student Number:</div>
                     </v-col>
@@ -326,7 +326,7 @@
                         {{ $auth.user.student_number }}
                       </div>
                     </v-col>
-                  </v-row>
+                  </v-row> -->
                   <v-row>
                     <v-col>
                       <div>Email:</div>
