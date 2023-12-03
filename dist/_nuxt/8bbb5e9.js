@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[42],{788:function(n,o,t){"use strict";t.r(o);var e={components:{JobContainer:t(768).default}},c=t(102),component=Object(c.a)(e,(function(){var n=this._self._c;return n("div",[n("job-container")],1)}),[],!1,null,null,null);o.default=component.exports}}]);
